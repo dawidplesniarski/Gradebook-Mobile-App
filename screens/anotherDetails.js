@@ -6,7 +6,7 @@ import Button from '../components/Button';
 export default function({navigation}) {
     return(
         <View>
-            <Text>Details Screen</Text>
+            <Text>Another details Screen</Text>
         </View>
     );
 }
