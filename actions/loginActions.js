@@ -29,7 +29,7 @@ const loginFailed = error => {
 export const loginFunction = (login, password) => async dispatch => {
     dispatch(loginStart());
     try{
-        const { data } = axios.post('https://node-app-4fun.herokuapp.com/users/login',{login, password});
+        const { data } = await axios.post('https://node-app-4fun.herokuapp.com/users/login',{login, password});
         dispatch(loginSuccess(data));
     }catch(error){
         dispatch(loginFailed(error));

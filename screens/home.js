@@ -49,7 +49,9 @@ const Home = ({ navigation, loginFunction, loginData }) => {
                 <TextInput style={styles.textInput} placeholder={'Password'} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button text={'Login'} isButtonDark={true} onPress={loginUser}/>
             </View>
-            {loginData && <Text>{loginData.name}</Text>}
+            {loginData && <Text>redux{loginData.name}</Text>}
+            {loginData && <Text>redux {loginData.lastName}</Text>}
+            {loginData && <Text>redux {loginData.albumNo}</Text>}
         </View>
     )
 }
@@ -101,4 +103,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
-//export default Home;
