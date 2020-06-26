@@ -8,13 +8,3 @@ import {name as appName} from './app.json';
 
 
 AppRegistry.registerComponent(appName, () => App);
-//
-// const AppWithStore = () => (
-//     <Provider store={store}>
-//         <App />
-//     </Provider>
-// );
-//
-// registerRootComponent(AppWithStore);
-
-

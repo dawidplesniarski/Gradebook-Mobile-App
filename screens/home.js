@@ -21,23 +21,24 @@ const Home = ({ navigation, loginFunction, loginData }) => {
             login: login,
             password: password
         }
+
         loginFunction(login,password);
-        await axios.post('https://node-app-4fun.herokuapp.com/users/login', params)
-            .then(res => {
-                if(res.data._id===undefined){
-                    setLogged(false);
-                }else{
-                    setLogged(true);
-                    setUserId(res.data._id);
-                    setUserName(res.data.name);
-                    setUserLastName(res.data.lastName);
-                    setAlbumNo(res.data.albumNo);
-                    navigation.navigate('AnotherDetails');
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            });
+        // await axios.post('https://node-app-4fun.herokuapp.com/users/login', params)
+        //     .then(res => {
+        //         if(res.data._id===undefined){
+        //             setLogged(false);
+        //         }else{
+        //             setLogged(true);
+        //             setUserId(res.data._id);
+        //             setUserName(res.data.name);
+        //             setUserLastName(res.data.lastName);
+        //             setAlbumNo(res.data.albumNo);
+        //             navigation.navigate('AnotherDetails');
+        //         }
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //     });
     }
 
     return(
@@ -48,9 +49,7 @@ const Home = ({ navigation, loginFunction, loginData }) => {
                 <TextInput style={styles.textInput} placeholder={'Password'} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button text={'Login'} isButtonDark={true} onPress={loginUser}/>
             </View>
-            {/*<Button text={'Register'} isButtonDark={true} onPress={()=> navigation.navigate('Details')}/>*/}
-            {/*<Button text={'Details Screen'} isButtonDark={true} onPress={()=> navigation.navigate('AnotherDetails')}/>*/}
-            {/*<Text>id: {`${userId}`}</Text>*/}
+            {loginData && <Text>{loginData.name}</Text>}
         </View>
     )
 }
@@ -91,15 +90,15 @@ const styles = StyleSheet.create({
 })
 
 
-// const mapStateToProps = ({ loginReducer: { loginData }}) => {
-//     return { loginData };
-// };
-//
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         loginFunction: (login, password) => dispatch(loginFunction(login, password)),
-//     };
-// };
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(Home);
-export default Home;
+const mapStateToProps = ({ loginReducer: { loginData }}) => {
+    return { loginData };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loginFunction: (login, password) => dispatch(loginFunction(login, password))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
+//export default Home;

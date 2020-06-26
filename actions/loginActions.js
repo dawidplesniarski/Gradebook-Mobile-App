@@ -28,7 +28,6 @@ const loginFailed = error => {
 
 export const loginFunction = (login, password) => async dispatch => {
     dispatch(loginStart());
-    console.log('Login function launch');
     try{
         const { data } = axios.post('https://node-app-4fun.herokuapp.com/users/login',{login, password});
         dispatch(loginSuccess(data));
