@@ -2,8 +2,11 @@ import React, {Component, useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 import Button from '../components/Button';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import {loginFunction} from '../actions/loginActions';
 
-export default function Home({ navigation }) {
+
+const Home = ({ navigation, loginFunction, loginData }) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
@@ -18,7 +21,7 @@ export default function Home({ navigation }) {
             login: login,
             password: password
         }
-
+        loginFunction(login,password);
         await axios.post('https://node-app-4fun.herokuapp.com/users/login', params)
             .then(res => {
                 if(res.data._id===undefined){
@@ -45,9 +48,9 @@ export default function Home({ navigation }) {
                 <TextInput style={styles.textInput} placeholder={'Password'} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button text={'Login'} isButtonDark={true} onPress={loginUser}/>
             </View>
-            <Button text={'Register'} isButtonDark={true} onPress={()=> navigation.navigate('Details')}/>
-            <Button text={'Details Screen'} isButtonDark={true} onPress={()=> navigation.navigate('AnotherDetails')}/>
-            <Text>id: {`${userId}`}</Text>
+            {/*<Button text={'Register'} isButtonDark={true} onPress={()=> navigation.navigate('Details')}/>*/}
+            {/*<Button text={'Details Screen'} isButtonDark={true} onPress={()=> navigation.navigate('AnotherDetails')}/>*/}
+            {/*<Text>id: {`${userId}`}</Text>*/}
         </View>
     )
 }
@@ -56,7 +59,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         width:'100%',
-        justifyContent:'flex-start',
+        justifyContent:'center',
         alignItems: 'center',
         borderWidth:1
     },
@@ -83,6 +86,20 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontFamily: 'Futura',
         textAlign: 'center',
-        marginTop:10,
+        marginTop: '-40%',
     }
 })
+
+
+// const mapStateToProps = ({ loginReducer: { loginData }}) => {
+//     return { loginData };
+// };
+//
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         loginFunction: (login, password) => dispatch(loginFunction(login, password)),
+//     };
+// };
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
