@@ -11,15 +11,15 @@ const Home = ({ navigation, loginFunction, loginReducer }) => {
 
     let loginUser = async () => {
         await loginFunction(login,password);
-       navigation.navigate('AnotherDetails');
+        navigation.navigate('AnotherDetails');
     }
 
     return(
         <View navigation={navigation} style={styles.container}>
             <Text style={styles.title}>Gradebook</Text>
             <View style={styles.loginArea}>
-                <TextInput style={styles.textInput} placeholder={'Login'} onChangeText={text=> setLogin(text)}/>
-                <TextInput style={styles.textInput} placeholder={'Password'} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
+                <TextInput style={styles.textInput} placeholder={'Login'} autoCapitalize = 'none' onChangeText={text=> setLogin(text)}/>
+                <TextInput style={styles.textInput} placeholder={'Password'} autoCapitalize= 'none' secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button text={'Login'} isButtonDark={true} onPress={loginUser}/>
             </View>
         </View>

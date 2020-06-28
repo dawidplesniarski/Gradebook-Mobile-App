@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
     userInfoText:{
+        marginTop: 10,
         fontSize:15,
         fontFamily:'Futura',
     }
