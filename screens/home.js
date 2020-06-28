@@ -1,44 +1,17 @@
 import React, {Component, useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 import Button from '../components/Button';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import {loginFunction} from '../actions/loginActions';
 
 
-const Home = ({ navigation, loginFunction, loginData }) => {
+const Home = ({ navigation, loginFunction, loginReducer }) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
-    const [userId, setUserId] = useState(0);
-    const [userName, setUserName] = useState('');
-    const [userLastName, setUserLastName] = useState('');
-    const [userAlbumNo, setAlbumNo] = useState('');
-    const [isUserLogged, setLogged] = useState(false);
-
     let loginUser = async () => {
-        const params = {
-            login: login,
-            password: password
-        }
-
-        loginFunction(login,password);
-        // await axios.post('https://node-app-4fun.herokuapp.com/users/login', params)
-        //     .then(res => {
-        //         if(res.data._id===undefined){
-        //             setLogged(false);
-        //         }else{
-        //             setLogged(true);
-        //             setUserId(res.data._id);
-        //             setUserName(res.data.name);
-        //             setUserLastName(res.data.lastName);
-        //             setAlbumNo(res.data.albumNo);
-        //             navigation.navigate('AnotherDetails');
-        //         }
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     });
+        await loginFunction(login,password);
+       navigation.navigate('AnotherDetails');
     }
 
     return(
@@ -49,9 +22,10 @@ const Home = ({ navigation, loginFunction, loginData }) => {
                 <TextInput style={styles.textInput} placeholder={'Password'} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button text={'Login'} isButtonDark={true} onPress={loginUser}/>
             </View>
-            {loginData && <Text>redux{loginData.name}</Text>}
-            {loginData && <Text>redux {loginData.lastName}</Text>}
-            {loginData && <Text>redux {loginData.albumNo}</Text>}
+            {loginReducer.loginData && <Text>redux {loginReducer.loginData.name}</Text>}
+            {loginReducer.loginData && <Text>redux {loginReducer.loginData.lastName}</Text>}
+            {loginReducer.loginData && <Text>redux {loginReducer.loginData.albumNo}</Text>}
+            {loginReducer.loginData && <Text>redux {loginReducer.loginData._id}</Text>}
         </View>
     )
 }
@@ -92,8 +66,8 @@ const styles = StyleSheet.create({
 })
 
 
-const mapStateToProps = ({ loginReducer: { loginData }}) => {
-    return { loginData };
+const mapStateToProps = ({ loginReducer}) => {
+    return { loginReducer };
 };
 
 const mapDispatchToProps = (dispatch) => {
