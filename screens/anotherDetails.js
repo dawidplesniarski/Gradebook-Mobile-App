@@ -20,6 +20,11 @@ const AnotherDetails = ({navigation, loginReducer}) => {
 
     return(
         <View style={styles.container}>
+            <View style={styles.userInfoBox}>
+                {loginReducer.loginData && <Text style={styles.userInfoText}>Imie: {loginReducer.loginData.name}</Text>}
+                {loginReducer.loginData && <Text style={styles.userInfoText}>Nazwisko: {loginReducer.loginData.lastName}</Text>}
+                {loginReducer.loginData && <Text style={styles.userInfoText}>Album: {loginReducer.loginData.albumNo}</Text>}
+            </View>
             <FlatList
                 style={styles.flatList}
                 data={data}
@@ -33,7 +38,7 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                             <Text style={styles.flatListText}>Przedmiot:: {item.subject}</Text>
                         </View>
                         <View style={styles.flatListView}>
-                            <Text style={styles.flatListText}>Data wystawienia: {item.date}</Text>
+                            <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0,9)}</Text>
                         </View>
                     </View>
                 )}
@@ -67,6 +72,15 @@ const styles = StyleSheet.create({
         fontSize:14,
         fontFamily: 'Futura',
         paddingRight: 20,
+    },
+    userInfoBox:{
+        width:'100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    userInfoText:{
+        fontSize:15,
+        fontFamily:'Futura',
     }
 });
 

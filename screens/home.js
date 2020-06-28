@@ -22,10 +22,6 @@ const Home = ({ navigation, loginFunction, loginReducer }) => {
                 <TextInput style={styles.textInput} placeholder={'Password'} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button text={'Login'} isButtonDark={true} onPress={loginUser}/>
             </View>
-            {loginReducer.loginData && <Text>redux {loginReducer.loginData.name}</Text>}
-            {loginReducer.loginData && <Text>redux {loginReducer.loginData.lastName}</Text>}
-            {loginReducer.loginData && <Text>redux {loginReducer.loginData.albumNo}</Text>}
-            {loginReducer.loginData && <Text>redux {loginReducer.loginData._id}</Text>}
         </View>
     )
 }
