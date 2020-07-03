@@ -8,10 +8,21 @@ import Button from '../components/Button';
 const Quiz = ({navigation}) => {
     const [data, setData] = useState([]);
     const [questionIndex, setIndex] = useState(0);
+    const [userScore, setUserScore] = useState(0);
 
     const incrementIndex = () => {
-        setIndex(questionIndex+1);
+        if(questionIndex < data.length-1){
+            setIndex(questionIndex+1);
+        }
     }
+
+    const checkIfCorrectAnswer = (answerIndex) =>{
+        if(data[questionIndex].correct_answer === data[questionIndex].answers[answerIndex]){
+            setUserScore(userScore+1);
+        }
+    }
+
+
 
     async function fetchQuiz(){
         await axios.get('https://quiztai.herokuapp.com/api/quiz')
@@ -34,18 +45,27 @@ const Quiz = ({navigation}) => {
         else{
             return (
                 <View style={styles.container}>
+                    <Text>Scores: {userScore}</Text>
                     <Text style={styles.questionText}>Question: {data[questionIndex].question}</Text>
                     <Text style={styles.questionText}>Answers:</Text>
                     <View style={styles.answersContainer}>
-                        <TouchableOpacity>
+
+                        <TouchableOpacity onPress={checkIfCorrectAnswer}>
                             <Text style={styles.answersText}>A: {data[questionIndex].answers[0]}</Text>
-                        </TouchableOpacity><TouchableOpacity>
-                        <Text style={styles.answersText}>B: {data[questionIndex].answers[1]}</Text>
-                    </TouchableOpacity><TouchableOpacity>
-                        <Text style={styles.answersText}>C: {data[questionIndex].answers[2]}</Text>
-                    </TouchableOpacity><TouchableOpacity>
-                        <Text style={styles.answersText}>D: {data[questionIndex].answers[3]}</Text>
-                    </TouchableOpacity>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity>
+                            <Text style={styles.answersText}>B: {data[questionIndex].answers[1]}</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity>
+                            <Text style={styles.answersText}>C: {data[questionIndex].answers[2]}</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity>
+                            <Text style={styles.answersText}>D: {data[questionIndex].answers[3]}</Text>
+                        </TouchableOpacity>
+
                     </View>
                     <Button text={'Next'} isButtonDark={true} onPress={incrementIndex}/>
                 </View>
