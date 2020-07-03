@@ -11,7 +11,7 @@ const Home = ({ navigation, loginFunction, loginReducer }) => {
 
     let loginUser = async () => {
         await loginFunction(login,password);
-        navigation.navigate('AnotherDetails');
+            navigation.navigate('AnotherDetails');
     }
 
     return(
@@ -22,6 +22,7 @@ const Home = ({ navigation, loginFunction, loginReducer }) => {
                 <TextInput style={styles.textInput} placeholder={'Password'} autoCapitalize= 'none' secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button text={'Login'} isButtonDark={true} onPress={loginUser}/>
             </View>
+            <Button isButtonDark={true} text={'Quiz'} onPress={() => navigation.navigate('Quiz')}/>
         </View>
     )
 }
@@ -31,8 +32,7 @@ const styles = StyleSheet.create({
         flex:1,
         width:'100%',
         justifyContent:'center',
-        alignItems: 'center',
-        borderWidth:1
+        alignItems: 'center'
     },
     textInput:{
         borderWidth: 1,

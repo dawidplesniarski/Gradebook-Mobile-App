@@ -1,12 +1,14 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import Button from '../components/Button';
+import Screen from './Screen';
 
 
 export default function({navigation}) {
     return(
-        <View>
-            <Text>Details Screen</Text>
-        </View>
+        <Screen navigation={navigation} theme={'light'}>
+            <View>
+                <Text>Details Screen</Text>
+            </View>
+        </Screen>
     );
 }

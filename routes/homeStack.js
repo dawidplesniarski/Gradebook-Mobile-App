@@ -3,15 +3,22 @@ import { createAppContainer } from 'react-navigation';
 import Home from '../screens/home';
 import Details from '../screens/details'
 import AnotherDetails from '../screens/anotherDetails'
+import Quiz from '../screens/quiz';
 const screens = {
     Home:{
-        screen: Home
+        screen: Home,
+        navigationOptions:{
+            headerShown: false
+        }
     },
     Details:{
         screen: Details
     },
     AnotherDetails:{
         screen: AnotherDetails
+    },
+    Quiz:{
+        screen: Quiz
     }
 }
 
