@@ -47,7 +47,7 @@ const Quiz = ({navigation}) => {
                         <Text style={styles.answersText}>D: {data[questionIndex].answers[3]}</Text>
                     </TouchableOpacity>
                     </View>
-                    <Button text={'Next'} isButtonDark={true}/>
+                    <Button text={'Next'} isButtonDark={true} onPress={incrementIndex}/>
                 </View>
             );
         }
