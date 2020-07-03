@@ -3,12 +3,14 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Screen from './Screen';
 import axios from 'axios';
 import Button from '../components/Button';
+import {async} from 'rxjs';
 
 
 const Quiz = ({navigation}) => {
     const [data, setData] = useState([]);
     const [questionIndex, setIndex] = useState(0);
     const [userScore, setUserScore] = useState(0);
+    const [correctAnswer, setCorrectAnswer] = useState('');
 
     const incrementIndex = () => {
         if(questionIndex < data.length-1){
@@ -46,23 +48,24 @@ const Quiz = ({navigation}) => {
             return (
                 <View style={styles.container}>
                     <Text>Scores: {userScore}</Text>
+                    <Text>{correctAnswer}</Text>
                     <Text style={styles.questionText}>Question: {data[questionIndex].question}</Text>
                     <Text style={styles.questionText}>Answers:</Text>
                     <View style={styles.answersContainer}>
 
-                        <TouchableOpacity onPress={checkIfCorrectAnswer}>
+                        <TouchableOpacity onPress={() => checkIfCorrectAnswer(0)}>
                             <Text style={styles.answersText}>A: {data[questionIndex].answers[0]}</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => checkIfCorrectAnswer(1)}>
                             <Text style={styles.answersText}>B: {data[questionIndex].answers[1]}</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => checkIfCorrectAnswer(2)}>
                             <Text style={styles.answersText}>C: {data[questionIndex].answers[2]}</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => checkIfCorrectAnswer(3)}>
                             <Text style={styles.answersText}>D: {data[questionIndex].answers[3]}</Text>
                         </TouchableOpacity>
 
