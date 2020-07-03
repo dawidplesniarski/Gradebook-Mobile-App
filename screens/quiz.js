@@ -13,34 +13,44 @@ const Quiz = ({navigation}) => {
         setIndex(questionIndex+1);
     }
 
-    useEffect(() => {
-        axios.get('https://quiztai.herokuapp.com/api/quiz')
-            .then(res =>{
+    async function fetchQuiz(){
+        await axios.get('https://quiztai.herokuapp.com/api/quiz')
+            .then(res => {
                 setData(res.data)
             })
-            .catch(err=>{
+            .catch(err => {
                 console.log(err);
             });
+    }
+
+    useEffect(() => {
+        fetchQuiz();
     },[]);
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.questionText}>Question: {data[0].question}</Text>
-            <Text style={styles.questionText}>Answers:</Text>
-            <View style={styles.answersContainer}>
-                <TouchableOpacity>
-                    <Text style={styles.answersText}>A: {data[0].answers[0]}</Text>
-                </TouchableOpacity><TouchableOpacity>
-                <Text style={styles.answersText}>B: {data[0].answers[1]}</Text>
-            </TouchableOpacity><TouchableOpacity>
-                <Text style={styles.answersText}>C: {data[0].answers[2]}</Text>
-            </TouchableOpacity><TouchableOpacity>
-                <Text style={styles.answersText}>D: {data[0].answers[3]}</Text>
-            </TouchableOpacity>
-            </View>
-            <Button text={'Next'} isButtonDark={true}/>
-        </View>
-    );
+    if(data.length ===0){
+        return(
+            <View/>
+        )}
+        else{
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.questionText}>Question: {data[questionIndex].question}</Text>
+                    <Text style={styles.questionText}>Answers:</Text>
+                    <View style={styles.answersContainer}>
+                        <TouchableOpacity>
+                            <Text style={styles.answersText}>A: {data[questionIndex].answers[0]}</Text>
+                        </TouchableOpacity><TouchableOpacity>
+                        <Text style={styles.answersText}>B: {data[questionIndex].answers[1]}</Text>
+                    </TouchableOpacity><TouchableOpacity>
+                        <Text style={styles.answersText}>C: {data[questionIndex].answers[2]}</Text>
+                    </TouchableOpacity><TouchableOpacity>
+                        <Text style={styles.answersText}>D: {data[questionIndex].answers[3]}</Text>
+                    </TouchableOpacity>
+                    </View>
+                    <Button text={'Next'} isButtonDark={true}/>
+                </View>
+            );
+        }
 }
 
 const styles = StyleSheet.create({
