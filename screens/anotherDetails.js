@@ -1,32 +1,30 @@
 import React,{useEffect, useState} from 'react';
 import {View, Text, FlatList, StyleSheet} from 'react-native';
 import axios from 'axios';
-import set from '@babel/runtime/helpers/esm/set';
+import {loginFunction} from '../actions/loginActions';
+import {connect} from 'react-redux';
 
-export default function({navigation}) {
-
+const AnotherDetails = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('https://node-app-4fun.herokuapp.com/users/findAll')
+        axios.get(`https://node-app-4fun.herokuapp.com/grades/findByStudentId/${loginReducer.loginData._id}`)
             .then( res =>{
                 setData(res.data)
-        })
+            })
             .catch(err =>{
                 console.log(err)
             });
     },[]);
 
-     let renderItem = ({item, index})=>{
-        <View>
-            <Text>
-                {item.name}
-            </Text>
-        </View>
-    }
 
     return(
         <View style={styles.container}>
+            <View style={styles.userInfoBox}>
+                {loginReducer.loginData && <Text style={styles.userInfoText}>Imie: {loginReducer.loginData.name}</Text>}
+                {loginReducer.loginData && <Text style={styles.userInfoText}>Nazwisko: {loginReducer.loginData.lastName}</Text>}
+                {loginReducer.loginData && <Text style={styles.userInfoText}>Album: {loginReducer.loginData.albumNo}</Text>}
+            </View>
             <FlatList
                 style={styles.flatList}
                 data={data}
@@ -34,14 +32,13 @@ export default function({navigation}) {
                 renderItem={({item})=>(
                     <View style={styles.flatListContainer}>
                         <View style={styles.flatListView}>
-                            <Text style={styles.flatListText}>Imie: {item.name}</Text>
-                            <Text style={styles.flatListText}>Nazwisko: {item.lastName}</Text>
+                            <Text style={styles.flatListText}>Ocena: {item.grade}</Text>
                         </View>
                         <View style={styles.flatListView}>
-                            <Text style={styles.flatListText}>Numer albumu: {item.name}</Text>
+                            <Text style={styles.flatListText}>Przedmiot:: {item.subject}</Text>
                         </View>
                         <View style={styles.flatListView}>
-                            <Text style={styles.flatListText}>Uczelnia: {item.university}</Text>
+                            <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0,9)}</Text>
                         </View>
                     </View>
                 )}
@@ -49,6 +46,7 @@ export default function({navigation}) {
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     container:{
@@ -74,5 +72,27 @@ const styles = StyleSheet.create({
         fontSize:14,
         fontFamily: 'Futura',
         paddingRight: 20,
+    },
+    userInfoBox:{
+        width:'100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    userInfoText:{
+        marginTop: 10,
+        fontSize:15,
+        fontFamily:'Futura',
     }
 });
+
+const mapStateToProps = ({ loginReducer}) => {
+    return { loginReducer };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loginFunction: (login, password) => dispatch(loginFunction(login, password))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AnotherDetails);
