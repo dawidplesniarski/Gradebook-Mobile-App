@@ -2,17 +2,26 @@ import React, {Component, useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 import Button from '../components/Button';
 import { connect } from 'react-redux';
-import {loginFunction} from '../actions/loginActions';
+import {loginFunction, logoutFunction} from '../actions/loginActions';
 
 
-const Home = ({ navigation, loginFunction, loginReducer }) => {
+const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoggedLabelInfo, setIsLoggedLabelInfo] = useState('');
 
     let loginUser = async () => {
         await loginFunction(login,password);
+        if(loginReducer.isLogged === true){
             navigation.navigate('AnotherDetails');
+        } else {
+            setIsLoggedLabelInfo('Incorrect login or password!');
+        }
     }
+
+    // useEffect(() => {
+    //     logoutFunction();
+    // },[]);
 
     return(
         <View navigation={navigation} style={styles.container}>
@@ -22,6 +31,7 @@ const Home = ({ navigation, loginFunction, loginReducer }) => {
                 <TextInput style={styles.textInput} placeholder={'Password'} autoCapitalize= 'none' secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button text={'Login'} isButtonDark={true} onPress={loginUser}/>
             </View>
+            <Text>{isLoggedLabelInfo}</Text>
             <Button isButtonDark={true} text={'Quiz'} onPress={() => navigation.navigate('Quiz')}/>
         </View>
     )
@@ -68,7 +78,8 @@ const mapStateToProps = ({ loginReducer}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginFunction: (login, password) => dispatch(loginFunction(login, password))
+        loginFunction: (login, password) => dispatch(loginFunction(login, password)),
+        logoutFunction: () => dispatch(logoutFunction())
     };
 };
 
