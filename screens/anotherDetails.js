@@ -1,11 +1,13 @@
 import React,{useEffect, useState} from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {View, Text, FlatList, StyleSheet, Picker} from 'react-native';
 import axios from 'axios';
 import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
+import Button from '../components/Button';
 
 const AnotherDetails = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
+    const [selectedValue, setSelectedValue] = useState('');
 
     useEffect(() => {
         axios.get(`https://node-app-4fun.herokuapp.com/grades/findByStudentId/${loginReducer.loginData._id}`)
@@ -43,6 +45,9 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                     </View>
                 )}
             />
+            <View>
+                <Button text={'Go to quiz'} isButtonDark={true} onPress={() => {navigation.navigate('ChooseQuiz')}}/>
+            </View>
         </View>
     );
 }

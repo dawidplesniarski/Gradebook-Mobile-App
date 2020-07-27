@@ -4,6 +4,7 @@ import Home from '../screens/home';
 import Details from '../screens/details'
 import AnotherDetails from '../screens/anotherDetails'
 import Quiz from '../screens/quiz';
+import ChooseQuiz from '../screens/chooseQuiz';
 const screens = {
     Home:{
         screen: Home,
@@ -19,6 +20,9 @@ const screens = {
     },
     Quiz:{
         screen: Quiz
+    },
+    ChooseQuiz:{
+        screen: ChooseQuiz
     }
 }
 
