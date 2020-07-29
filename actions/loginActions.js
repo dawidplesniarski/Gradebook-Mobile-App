@@ -32,11 +32,12 @@ const logout = () => {
     }
 }
 
-export const loginFunction = (login, password) => async dispatch => {
+export const loginFunction = (login, password, successCallback) => async dispatch => {
     dispatch(loginStart());
     try{
         const { data } = await axios.post('https://node-app-4fun.herokuapp.com/users/login',{login, password});
         dispatch(loginSuccess(data));
+        successCallback();
     }catch(error){
         console.log(error);
         dispatch(loginFailed(error));

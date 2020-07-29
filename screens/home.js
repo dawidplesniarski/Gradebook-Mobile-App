@@ -10,14 +10,15 @@ const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
     const [password, setPassword] = useState('');
     const [isLoggedLabelInfo, setIsLoggedLabelInfo] = useState('');
 
-    let loginUser = async () => {
-        await loginFunction(login,password);
-        if(loginReducer.isLogged === true){
-            navigation.navigate('AnotherDetails');
-        } else {
-            setIsLoggedLabelInfo('Incorrect login or password!');
-        }
-    }
+    // let loginUser = async () => {
+    //     await loginFunction(login,password);
+    //
+    //     if(loginReducer.isLogged === true){
+    //         navigation.navigate('AnotherDetails');
+    //     } else {
+    //         setIsLoggedLabelInfo('Incorrect login or password!');
+    //     }
+    // }
 
     // useEffect(() => {
     //     logoutFunction();
@@ -29,9 +30,12 @@ const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
             <View style={styles.loginArea}>
                 <TextInput style={styles.textInput} placeholder={'Login'} autoCapitalize = 'none' onChangeText={text=> setLogin(text)}/>
                 <TextInput style={styles.textInput} placeholder={'Password'} autoCapitalize= 'none' secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
-                <Button text={'Login'} isButtonDark={true} onPress={loginUser}/>
+                <Button text={'Login'} isButtonDark={true} onPress={()=>{
+                    loginFunction(login, password,()=>{navigation.navigate('AnotherDetails')})}
+                }
+                />
             </View>
-            <Text>{isLoggedLabelInfo}</Text>
+            {loginReducer.loginFailed && <Text>{'Login or password incorrect!'}</Text>}
             <Button isButtonDark={true} text={'Quiz'} onPress={() => navigation.navigate('Quiz')}/>
         </View>
     )
@@ -78,7 +82,7 @@ const mapStateToProps = ({ loginReducer}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginFunction: (login, password) => dispatch(loginFunction(login, password)),
+        loginFunction: (login, password, successCallback) => dispatch(loginFunction(login, password, successCallback)),
         logoutFunction: () => dispatch(logoutFunction())
     };
 };
