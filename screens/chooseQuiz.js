@@ -6,10 +6,11 @@ import axios from 'axios';
 
 const ChooseQuiz = ({navigation}) => {
     const [data, setData] = useState([]);
+    const [selectedItem, setSelectedItem] = useState('');
 
 
     async function getCategories(){
-        await axios.get('https://node-app-4fun.herokuapp.com/test/findAllTestsCategory')
+        await axios.get('https://node-app-4fun.herokuapp.com/test/findAllCategories')
             .then(res => {
                 setData(res.data)
             })
@@ -29,8 +30,11 @@ const ChooseQuiz = ({navigation}) => {
     else{
         return (
             <View style={styles.container}>
-                <Picker selectedValue = {'test'} >
-                    {data.map((value)=><Picker.Item label={value} value={value}/>)}
+
+                <Picker
+                    selectedValue={selectedItem}
+                    onValueChange={value => {setSelectedItem(value)}}>
+                    {data.map((value, index)=><Picker.Item label={`${value}`} value={`${value}`} key={index}/>)}
                 </Picker>
             </View>
         );

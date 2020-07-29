@@ -30,7 +30,7 @@ const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
             <View style={styles.loginArea}>
                 <TextInput style={styles.textInput} placeholder={'Login'} autoCapitalize = 'none' onChangeText={text=> setLogin(text)}/>
                 <TextInput style={styles.textInput} placeholder={'Password'} autoCapitalize= 'none' secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
-                <Button text={'Login'} isButtonDark={true} onPress={()=>{
+                <Button disabled={login==='' || password ===''} text={'Login'} isButtonDark={true} onPress={()=>{
                     loginFunction(login, password,()=>{navigation.navigate('AnotherDetails')})}
                 }
                 />
