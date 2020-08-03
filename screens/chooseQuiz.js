@@ -8,7 +8,10 @@ import {connect} from 'react-redux';
 const ChooseQuiz = ({loginReducer, navigation}) => {
     const [data, setData] = useState([]);
     const [selectedItem, setSelectedItem] = useState('');
-    const [includesAlbum, setIncludesAlbum] = useState('false');
+    const [includesAlbum, setIncludesAlbum] = useState(false);
+    const [test, setTest] = useState({
+        title: 'testowwy', subtitle: 'testowy2'
+    })
 
 
     async function getCategories(){
@@ -22,11 +25,10 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
     }
 
     const checkPermission = async () => {
+        setIncludesAlbum(false);
         const {data} = await axios.get(`https://node-app-4fun.herokuapp.com/permission/findByCategory/${selectedItem}`);
         if(data[0].userAlbums.includes(loginReducer.loginData.albumNo)){
-            setIncludesAlbum('true')
-        }else{
-            setIncludesAlbum('false');
+            setIncludesAlbum(true);
         }
     }
 
@@ -40,7 +42,7 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
         )}
     else{
         return (
-            <View style={styles.container}>
+            <View>
                 <Text style={styles.titleText}>Wybierz temat testu:</Text>
                 <Picker
                     style={styles.datePicker}
@@ -48,8 +50,11 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
                     onValueChange={value => {setSelectedItem(value)}}>
                     {data.map((value, index)=><Picker.Item label={`${value}`} value={`${value}`} key={index}/>)}
                 </Picker>
-                <Button text={'Start test!'} isButtonDark={true} onPress={() => checkPermission()}/>
-                <Text>{includesAlbum}</Text>
+                <View style={{paddingLeft:'25%'}}>
+                    <Button text={'Start test!'} isButtonDark={true} onPress={() => checkPermission()}/>
+                    <Button text={'Test data pass'} isButtonDark={true} onPress={() => navigation.navigate('QuizScreen', {name:'shaun'})}/>
+                </View>
+                <Text style={styles.titleText}>{`${includesAlbum}`}</Text>
             </View>
         );
     }
@@ -68,7 +73,10 @@ const styles = StyleSheet.create({
         margin:10,
     },
     container:{
-        display:'flex',
+        flex:1,
+    },
+    button:{
+        justifyContent:'center'
     }
 
 });

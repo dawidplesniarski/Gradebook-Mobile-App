@@ -5,6 +5,8 @@ import Details from '../screens/details'
 import AnotherDetails from '../screens/anotherDetails'
 import Quiz from '../screens/quiz';
 import ChooseQuiz from '../screens/chooseQuiz';
+import QuizScreen from '../screens/quizScreen';
+
 const screens = {
     Home:{
         screen: Home,
@@ -23,6 +25,9 @@ const screens = {
     },
     ChooseQuiz:{
         screen: ChooseQuiz
+    },
+    QuizScreen:{
+        screen: QuizScreen
     }
 }
 
