@@ -21,15 +21,16 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
             });
     }
 
-    const checkPermission = async () => {
+    const checkPermission = async (successCallback) => {
         setIncludesAlbum(false);
         try{
             const {data} = await axios.get(`https://node-app-4fun.herokuapp.com/permission/findByCategory/${selectedItem}`);
             if(data[0].userAlbums.includes(loginReducer.loginData.albumNo)){
                 setIncludesAlbum(true);
+                successCallback();
+            } else {
             }
         } catch (err) {
-
         }
     }
 
@@ -52,7 +53,7 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
                     {data.map((value, index)=><Picker.Item label={`${value}`} value={`${value}`} key={index}/>)}
                 </Picker>
                 <View style={{paddingLeft:'25%'}}>
-                    <Button text={'Start test!'} isButtonDark={true} onPress={() => checkPermission()}/>
+                    <Button text={'Start test!'} isButtonDark={true} onPress={() => checkPermission(() => navigation.navigate('QuizScreen', {name: selectedItem}))}/>
                     <Button text={'Test data pass'} isButtonDark={true} onPress={() => navigation.navigate('QuizScreen', {name: selectedItem})}/>
                 </View>
                 <Text style={styles.titleText}>{`${includesAlbum}`}</Text>
