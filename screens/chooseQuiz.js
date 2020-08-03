@@ -9,9 +9,6 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
     const [data, setData] = useState([]);
     const [selectedItem, setSelectedItem] = useState('');
     const [includesAlbum, setIncludesAlbum] = useState(false);
-    const [test, setTest] = useState({
-        title: 'testowwy', subtitle: 'testowy2'
-    })
 
 
     async function getCategories(){
@@ -26,9 +23,13 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
 
     const checkPermission = async () => {
         setIncludesAlbum(false);
-        const {data} = await axios.get(`https://node-app-4fun.herokuapp.com/permission/findByCategory/${selectedItem}`);
-        if(data[0].userAlbums.includes(loginReducer.loginData.albumNo)){
-            setIncludesAlbum(true);
+        try{
+            const {data} = await axios.get(`https://node-app-4fun.herokuapp.com/permission/findByCategory/${selectedItem}`);
+            if(data[0].userAlbums.includes(loginReducer.loginData.albumNo)){
+                setIncludesAlbum(true);
+            }
+        } catch (err) {
+
         }
     }
 
@@ -52,7 +53,7 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
                 </Picker>
                 <View style={{paddingLeft:'25%'}}>
                     <Button text={'Start test!'} isButtonDark={true} onPress={() => checkPermission()}/>
-                    <Button text={'Test data pass'} isButtonDark={true} onPress={() => navigation.navigate('QuizScreen', {name:'shaun'})}/>
+                    <Button text={'Test data pass'} isButtonDark={true} onPress={() => navigation.navigate('QuizScreen', {name: selectedItem})}/>
                 </View>
                 <Text style={styles.titleText}>{`${includesAlbum}`}</Text>
             </View>

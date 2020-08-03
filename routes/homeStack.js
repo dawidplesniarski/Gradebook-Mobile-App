@@ -27,7 +27,8 @@ const screens = {
         screen: ChooseQuiz
     },
     QuizScreen:{
-        screen: QuizScreen
+        screen: QuizScreen,
+        headerShown: false
     }
 }
 

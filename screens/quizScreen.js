@@ -12,6 +12,7 @@ const QuizScreen = ({navigation}) => {
     return (
         <View>
             <Text> {navigation.getParam('name')} </Text>
+            <Button text={'Zakończ test'} isButtonDark={true} onPress={() => navigation.navigate('ChooseQuiz')}/>
         </View>
     )
 }
