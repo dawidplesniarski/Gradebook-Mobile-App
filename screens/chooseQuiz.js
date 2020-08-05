@@ -53,8 +53,7 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
                     {data.map((value, index)=><Picker.Item label={`${value}`} value={`${value}`} key={index}/>)}
                 </Picker>
                 <View style={{paddingLeft:'25%'}}>
-                    <Button text={'Start test!'} isButtonDark={true} onPress={() => checkPermission(() => navigation.navigate('QuizScreen', {name: selectedItem}))}/>
-                    <Button text={'Test data pass'} isButtonDark={true} onPress={() => navigation.navigate('QuizScreen', {name: selectedItem})}/>
+                    <Button text={'Start test!'} isButtonDark={true} onPress={() => checkPermission(() => navigation.navigate('QuizScreen', {testCategory: selectedItem}))}/>
                 </View>
                 <Text style={styles.titleText}>{`${includesAlbum}`}</Text>
             </View>

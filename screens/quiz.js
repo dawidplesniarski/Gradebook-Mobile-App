@@ -47,7 +47,6 @@ const Quiz = ({navigation}) => {
         else{
             return (
                 <View style={styles.container}>
-                    <Text>{navigation.getParam()}</Text>
                     <Text>Scores: {userScore}</Text>
                     <Text>{correctAnswer}</Text>
                     <Text style={styles.questionText}>Question: {data[questionIndex].question}</Text>
