@@ -36,7 +36,6 @@ const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
                 />
             </View>
             {loginReducer.loginFailed && <Text>{'Login or password incorrect!'}</Text>}
-            <Button isButtonDark={true} text={'Quiz'} onPress={() => navigation.navigate('Quiz')}/>
         </View>
     )
 }

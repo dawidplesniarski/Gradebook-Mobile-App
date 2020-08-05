@@ -25,11 +25,13 @@ const QuizScreen = ({navigation}) => {
         if(questionIndex < data.length - 1){
             setQuestionIndex(questionIndex + 1);
         }
-    }
+    };
 
-    // const checkIfCorrectAnswer = (answerIndex) => {
-    //     if(data[questionIndex])
-    // }
+    const checkIfCorrectAnswer = (answerIndex) => {
+        if (data[questionIndex].correctAnswer === data[questionIndex].answers[answerIndex]) {
+            setUserScore(userScore + 1);
+        }
+    };
 
     useEffect(() => {
         fetchQuiz();
@@ -41,10 +43,31 @@ const QuizScreen = ({navigation}) => {
         );
     } else{
         return (
-            <View>
+            <View style={styles.container}>
                 <Text>Punkty: {userScore}</Text>
                 <Text style={styles.questionText}>Pytanie: {data[questionIndex].question}</Text>
-                <Text style={styles.questionText}></Text>
+                <Text style={styles.questionText}>Odpowiedzi:</Text>
+                <View style={styles.answersContainer}>
+                    <TouchableOpacity onPress={() => checkIfCorrectAnswer(0)}>
+                        <Text style={styles.answersText}>A: {data[questionIndex].answers[0]}</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => checkIfCorrectAnswer(1)}>
+                        <Text style={styles.answersText}>B: {data[questionIndex].answers[1]}</Text>
+                    </TouchableOpacity>
+                    { data && data[questionIndex].answers[2] &&
+                    <TouchableOpacity onPress={() => checkIfCorrectAnswer(2)}>
+                        <Text style={styles.answersText}>C: {data[questionIndex].answers[2]}</Text>
+                    </TouchableOpacity>
+                    }
+                    { data && data[questionIndex].answers[3] &&
+                    <TouchableOpacity onPress={() => checkIfCorrectAnswer(3)}>
+                        <Text style={styles.answersText}>D: {data[questionIndex].answers[3]}</Text>
+                    </TouchableOpacity>
+                    }
+
+                </View>
+                <Button text={'Następne pytanie'} isButtonDark={true} onPress={() => incrementIndex()}/>
             </View>
         );
     }
