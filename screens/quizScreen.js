@@ -9,6 +9,7 @@ const QuizScreen = ({navigation}) => {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [userScore, setUserScore] = useState(0);
     const [correctAnswer, setCorrectAnswer] = useState('');
+    const [answersDisabled, setAnswersDisabled] = useState(false);
     const testCategory = navigation.getParam('testCategory');
 
     async function fetchQuiz() {
@@ -22,12 +23,14 @@ const QuizScreen = ({navigation}) => {
     }
 
     const incrementIndex = () => {
+        setAnswersDisabled(false);
         if(questionIndex < data.length - 1){
             setQuestionIndex(questionIndex + 1);
         }
     };
 
     const checkIfCorrectAnswer = (answerIndex) => {
+        setAnswersDisabled(true);
         if (data[questionIndex].correctAnswer === data[questionIndex].answers[answerIndex]) {
             setUserScore(userScore + 1);
         }
@@ -48,24 +51,25 @@ const QuizScreen = ({navigation}) => {
                 <Text style={styles.questionText}>Pytanie: {data[questionIndex].question}</Text>
                 <Text style={styles.questionText}>Odpowiedzi:</Text>
                 <View style={styles.answersContainer}>
-                    <TouchableOpacity onPress={() => checkIfCorrectAnswer(0)}>
+                    <TouchableOpacity disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(0)}>
                         <Text style={styles.answersText}>A: {data[questionIndex].answers[0]}</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => checkIfCorrectAnswer(1)}>
+                    <TouchableOpacity disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(1)}>
                         <Text style={styles.answersText}>B: {data[questionIndex].answers[1]}</Text>
                     </TouchableOpacity>
+
                     { data && data[questionIndex].answers[2] &&
-                    <TouchableOpacity onPress={() => checkIfCorrectAnswer(2)}>
+                    <TouchableOpacity disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(2)}>
                         <Text style={styles.answersText}>C: {data[questionIndex].answers[2]}</Text>
                     </TouchableOpacity>
                     }
+
                     { data && data[questionIndex].answers[3] &&
-                    <TouchableOpacity onPress={() => checkIfCorrectAnswer(3)}>
+                    <TouchableOpacity disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(3)}>
                         <Text style={styles.answersText}>D: {data[questionIndex].answers[3]}</Text>
                     </TouchableOpacity>
                     }
-
                 </View>
                 <Button text={'Następne pytanie'} isButtonDark={true} onPress={() => incrementIndex()}/>
             </View>

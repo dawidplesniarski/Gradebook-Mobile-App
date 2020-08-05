@@ -7,14 +7,15 @@ import {connect} from 'react-redux';
 
 const ChooseQuiz = ({loginReducer, navigation}) => {
     const [data, setData] = useState([]);
-    const [selectedItem, setSelectedItem] = useState('');
+    const [selectedItem, setSelectedItem] = useState('programowanie');
     const [includesAlbum, setIncludesAlbum] = useState(false);
 
 
-    async function getCategories(){
+    const getCategories = async (successCallback) => {
         await axios.get('https://node-app-4fun.herokuapp.com/test/findAllCategories')
             .then(res => {
                 setData(res.data)
+                successCallback();
             })
             .catch(err => {
                 console.log(err);
