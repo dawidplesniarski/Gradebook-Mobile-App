@@ -1,5 +1,5 @@
 import React, {Component, useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
+import {View, Text, ActivityIndicator, StyleSheet, TextInput} from 'react-native';
 import Button from '../components/Button';
 import { connect } from 'react-redux';
 import {loginFunction, logoutFunction} from '../actions/loginActions';
@@ -28,6 +28,7 @@ const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
         <View navigation={navigation} style={styles.container}>
             <Text style={styles.title}>Gradebook</Text>
             <View style={styles.loginArea}>
+                {loginReducer.isLoading && <ActivityIndicator/>}
                 <TextInput style={styles.textInput} placeholder={'Login'} autoCapitalize = 'none' onChangeText={text=> setLogin(text)}/>
                 <TextInput style={styles.textInput} placeholder={'Password'} autoCapitalize= 'none' secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button disabled={login==='' || password ===''} text={'Login'} isButtonDark={true} onPress={()=>{

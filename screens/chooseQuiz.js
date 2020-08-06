@@ -11,11 +11,10 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
     const [includesAlbum, setIncludesAlbum] = useState(false);
 
 
-    const getCategories = async (successCallback) => {
+    const getCategories = async () => {
         await axios.get('https://node-app-4fun.herokuapp.com/test/findAllCategories')
             .then(res => {
                 setData(res.data)
-                successCallback();
             })
             .catch(err => {
                 console.log(err);
