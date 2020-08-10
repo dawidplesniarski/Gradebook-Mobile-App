@@ -10,7 +10,7 @@ const AnotherDetails = ({navigation, loginReducer}) => {
     const [selectedValue, setSelectedValue] = useState('');
 
     useEffect(() => {
-        axios.get(`https://node-app-4fun.herokuapp.com/grades/findByStudentId/${loginReducer.loginData._id}`)
+        axios.get(`https://node-app-4fun.herokuapp.com/grades/findByStudentId/${loginReducer.loginData.user._id}`)
             .then( res =>{
                 setData(res.data)
             })
@@ -23,9 +23,9 @@ const AnotherDetails = ({navigation, loginReducer}) => {
     return(
         <View style={styles.container}>
             <View style={styles.userInfoBox}>
-                {loginReducer.loginData && <Text style={styles.userInfoText}>Imie: {loginReducer.loginData.name}</Text>}
-                {loginReducer.loginData && <Text style={styles.userInfoText}>Nazwisko: {loginReducer.loginData.lastName}</Text>}
-                {loginReducer.loginData && <Text style={styles.userInfoText}>Album: {loginReducer.loginData.albumNo}</Text>}
+                {loginReducer.loginData && <Text style={styles.userInfoText}>Imie: {loginReducer.loginData.user.name}</Text>}
+                {loginReducer.loginData && <Text style={styles.userInfoText}>Nazwisko: {loginReducer.loginData.user.lastName}</Text>}
+                {loginReducer.loginData && <Text style={styles.userInfoText}>Album: {loginReducer.loginData.user.albumNo}</Text>}
             </View>
             <FlatList
                 style={styles.flatList}

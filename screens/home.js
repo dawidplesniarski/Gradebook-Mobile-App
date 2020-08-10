@@ -10,20 +10,6 @@ const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
     const [password, setPassword] = useState('');
     const [isLoggedLabelInfo, setIsLoggedLabelInfo] = useState('');
 
-    // let loginUser = async () => {
-    //     await loginFunction(login,password);
-    //
-    //     if(loginReducer.isLogged === true){
-    //         navigation.navigate('AnotherDetails');
-    //     } else {
-    //         setIsLoggedLabelInfo('Incorrect login or password!');
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     logoutFunction();
-    // },[]);
-
     return(
         <View navigation={navigation} style={styles.container}>
             <Text style={styles.title}>Gradebook</Text>

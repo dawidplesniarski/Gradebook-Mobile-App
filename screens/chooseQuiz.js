@@ -25,7 +25,7 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
         setIncludesAlbum(false);
         try{
             const {data} = await axios.get(`https://node-app-4fun.herokuapp.com/permission/findByCategory/${selectedItem}`);
-            if(data[0].userAlbums.includes(loginReducer.loginData.albumNo)){
+            if(data[0].userAlbums.includes(loginReducer.loginData.user.albumNo)){
                 setIncludesAlbum(true);
                 successCallback();
             } else {
