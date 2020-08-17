@@ -18,7 +18,10 @@ const screens = {
         screen: Details
     },
     AnotherDetails:{
-        screen: AnotherDetails
+        screen: AnotherDetails,
+        navigationOptions: {
+            headerShown: false
+        }
     },
     Quiz:{
         screen: Quiz

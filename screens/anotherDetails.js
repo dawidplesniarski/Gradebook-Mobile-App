@@ -1,9 +1,12 @@
 import React,{useEffect, useState} from 'react';
-import {View, Text, FlatList, StyleSheet, Picker} from 'react-native';
+import {View, Text, FlatList, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import axios from 'axios';
 import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import Button from '../components/Button';
+import HamburgerIcon from '../assets/open-menu.png';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 
 const AnotherDetails = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
@@ -19,34 +22,57 @@ const AnotherDetails = ({navigation, loginReducer}) => {
             });
     },[]);
 
+    // const Drawer = createDrawerNavigator();
+    //
+    // const Draw = () =>{
+    //     return(
+    //       <NavigationContainer>
+    //           <Drawer.Navigator initialRouteName="Home">
+    //
+    //           </Drawer.Navigator>
+    //       </NavigationContainer>
+    //     );
+    // }
+
+    // const OpenDrawer = () => {
+    //     navigation.openDrawer();
+    // }
+
 
     return(
-        <View style={styles.container}>
-            <View style={styles.userInfoBox}>
-                {loginReducer.loginData && <Text style={styles.userInfoText}>Imie: {loginReducer.loginData.user.name}</Text>}
-                {loginReducer.loginData && <Text style={styles.userInfoText}>Nazwisko: {loginReducer.loginData.user.lastName}</Text>}
-                {loginReducer.loginData && <Text style={styles.userInfoText}>Album: {loginReducer.loginData.user.albumNo}</Text>}
-            </View>
-            <FlatList
-                style={styles.flatList}
-                data={data}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({item})=>(
-                    <View style={styles.flatListContainer}>
-                        <View style={styles.flatListView}>
-                            <Text style={styles.flatListText}>Ocena: {item.grade}</Text>
+        <View style={styles.mainContainer}>
+            <TouchableOpacity styles={styles.hamburgerIcon}>
+                <Image
+                    source={HamburgerIcon}
+                />
+            </TouchableOpacity>
+            <View style={styles.container}>
+                <View style={styles.userInfoBox}>
+                    {loginReducer.loginData && <Text style={styles.userInfoText}>Imie: {loginReducer.loginData.user.name}</Text>}
+                    {loginReducer.loginData && <Text style={styles.userInfoText}>Nazwisko: {loginReducer.loginData.user.lastName}</Text>}
+                    {loginReducer.loginData && <Text style={styles.userInfoText}>Album: {loginReducer.loginData.user.albumNo}</Text>}
+                </View>
+                <FlatList
+                    style={styles.flatList}
+                    data={data}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({item})=>(
+                        <View style={styles.flatListContainer}>
+                            <View style={styles.flatListView}>
+                                <Text style={styles.flatListText}>Ocena: {item.grade}</Text>
+                            </View>
+                            <View style={styles.flatListView}>
+                                <Text style={styles.flatListText}>Przedmiot:: {item.subject}</Text>
+                            </View>
+                            <View style={styles.flatListView}>
+                                <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0,9)}</Text>
+                            </View>
                         </View>
-                        <View style={styles.flatListView}>
-                            <Text style={styles.flatListText}>Przedmiot:: {item.subject}</Text>
-                        </View>
-                        <View style={styles.flatListView}>
-                            <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0,9)}</Text>
-                        </View>
-                    </View>
-                )}
-            />
-            <View>
-                <Button text={'Go to quiz'} isButtonDark={true} onPress={() => {navigation.navigate('ChooseQuiz')}}/>
+                    )}
+                />
+                <View>
+                    <Button text={'Go to quiz'} isButtonDark={true} onPress={() => {navigation.navigate('ChooseQuiz')}}/>
+                </View>
             </View>
         </View>
     );
@@ -54,9 +80,13 @@ const AnotherDetails = ({navigation, loginReducer}) => {
 
 
 const styles = StyleSheet.create({
-    container:{
+    mainContainer:{
         flex:1,
-        alignItems: 'center'
+        marginTop: 50
+    },
+    container:{
+        //flex:1,
+        alignItems: 'center',
     },
     flatList:{
         width:'90%',
@@ -87,6 +117,9 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontSize:15,
         fontFamily:'Futura',
+    },
+    hamburgerIcon:{
+        paddingLeft: '5%'
     }
 });
 
