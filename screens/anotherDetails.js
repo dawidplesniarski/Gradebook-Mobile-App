@@ -5,8 +5,6 @@ import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import Button from '../components/Button';
 import HamburgerIcon from '../assets/open-menu.png';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
 
 const AnotherDetails = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
@@ -22,21 +20,6 @@ const AnotherDetails = ({navigation, loginReducer}) => {
             });
     },[]);
 
-    // const Drawer = createDrawerNavigator();
-    //
-    // const Draw = () =>{
-    //     return(
-    //       <NavigationContainer>
-    //           <Drawer.Navigator initialRouteName="Home">
-    //
-    //           </Drawer.Navigator>
-    //       </NavigationContainer>
-    //     );
-    // }
-
-    // const OpenDrawer = () => {
-    //     navigation.openDrawer();
-    // }
 
 
     return(
@@ -82,7 +65,7 @@ const AnotherDetails = ({navigation, loginReducer}) => {
 const styles = StyleSheet.create({
     mainContainer:{
         flex:1,
-        marginTop: 50
+        paddingTop: 50
     },
     container:{
         //flex:1,
@@ -119,7 +102,7 @@ const styles = StyleSheet.create({
         fontFamily:'Futura',
     },
     hamburgerIcon:{
-        paddingLeft: '5%'
+        marginLeft: 20
     }
 });
 
