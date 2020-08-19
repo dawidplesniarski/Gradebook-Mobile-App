@@ -9,6 +9,7 @@ import HamburgerIcon from '../assets/open-menu.png';
 const AnotherDetails = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
     const [selectedValue, setSelectedValue] = useState('');
+    const [isMenuOpened, setIsMenuOpened] = useState(false);
 
     useEffect(() => {
         axios.get(`https://node-app-4fun.herokuapp.com/grades/findByStudentId/${loginReducer.loginData.user._id}`)
@@ -20,15 +21,26 @@ const AnotherDetails = ({navigation, loginReducer}) => {
             });
     },[]);
 
-
-
+    const openMenu = () => {
+        if(isMenuOpened === false) {
+            setIsMenuOpened(true);
+        } else {
+            setIsMenuOpened(false);
+        }
+    }
     return(
         <View style={styles.mainContainer}>
-            <TouchableOpacity styles={styles.hamburgerIcon}>
-                <Image
-                    source={HamburgerIcon}
-                />
-            </TouchableOpacity>
+            <View style={styles.iconsContainer}>
+                <TouchableOpacity
+                    styles={{width:'auto'}}
+                    onPress={() => openMenu()}
+                >
+                    <Image
+                        style={styles.hamburgerIcon}
+                        source={HamburgerIcon}
+                    />
+                </TouchableOpacity>
+            </View>
             <View style={styles.container}>
                 <View style={styles.userInfoBox}>
                     {loginReducer.loginData && <Text style={styles.userInfoText}>Imie: {loginReducer.loginData.user.name}</Text>}
@@ -102,7 +114,10 @@ const styles = StyleSheet.create({
         fontFamily:'Futura',
     },
     hamburgerIcon:{
-        marginLeft: 20
+        marginLeft: 15
+    },
+    iconsContainer:{
+        flexDirection: 'row'
     }
 });
 
