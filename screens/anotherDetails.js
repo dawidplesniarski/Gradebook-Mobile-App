@@ -5,6 +5,7 @@ import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import Button from '../components/Button';
 import HamburgerIcon from '../assets/open-menu.png';
+import {DrawerActions} from '@react-navigation/native';
 
 const AnotherDetails = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
@@ -33,7 +34,7 @@ const AnotherDetails = ({navigation, loginReducer}) => {
             <View style={styles.iconsContainer}>
                 <TouchableOpacity
                     styles={{width:'auto'}}
-                    onPress={() => openMenu()}
+                    onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
                 >
                     <Image
                         style={styles.hamburgerIcon}

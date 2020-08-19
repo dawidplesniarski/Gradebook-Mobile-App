@@ -4,13 +4,15 @@ import axios from 'axios';
 import Button from '../components/Button';
 
 
-const QuizScreen = ({navigation}) => {
+const QuizScreen = ({navigation, route}) => {
     const [data, setData] = useState([]);
     const [questionIndex, setQuestionIndex] = useState(0);
     const [userScore, setUserScore] = useState(0);
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [answersDisabled, setAnswersDisabled] = useState(false);
-    const testCategory = navigation.getParam('testCategory');
+
+     const testCategory = navigation.getParam('testCategory');
+    //const { testCategory } = route.params;
 
     async function fetchQuiz() {
         await axios.get(`https://node-app-4fun.herokuapp.com/test/findByCategory/${testCategory}`)
@@ -72,6 +74,8 @@ const QuizScreen = ({navigation}) => {
                     }
                 </View>
                 <Button text={'Następne pytanie'} isButtonDark={true} onPress={() => incrementIndex()}/>
+                <Text>{`${testCategory}`}</Text>
+                <Button text={'back'} isButtonDark={true} onPress={()=> navigation.navigate('ChooseQuiz')}/>
             </View>
         );
     }

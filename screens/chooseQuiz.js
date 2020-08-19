@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 
 const ChooseQuiz = ({loginReducer, navigation}) => {
     const [data, setData] = useState([]);
-    const [selectedItem, setSelectedItem] = useState('programowanie');
+    const [selectedItem, setSelectedItem] = useState('matematyka');
     const [includesAlbum, setIncludesAlbum] = useState(false);
 
 
@@ -44,7 +44,7 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
         )}
     else{
         return (
-            <View>
+            <View style={styles.container}>
                 <Text style={styles.titleText}>Wybierz temat testu:</Text>
                 <Picker
                     style={styles.datePicker}
@@ -53,7 +53,10 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
                     {data.map((value, index)=><Picker.Item label={`${value}`} value={`${value}`} key={index}/>)}
                 </Picker>
                 <View style={{paddingLeft:'25%'}}>
-                    <Button text={'Start test!'} isButtonDark={true} onPress={() => checkPermission(() => navigation.navigate('QuizScreen', {testCategory: selectedItem}))}/>
+                    <Button text={'Start test!'} isButtonDark={true}
+                            onPress={() =>
+                            checkPermission(() => navigation.navigate('QuizScreen', {testCategory: selectedItem}))}
+                    />
                 </View>
                 <Text style={styles.titleText}>{`${includesAlbum}`}</Text>
             </View>
@@ -75,6 +78,7 @@ const styles = StyleSheet.create({
     },
     container:{
         flex:1,
+        paddingTop: 30
     },
     button:{
         justifyContent:'center'
