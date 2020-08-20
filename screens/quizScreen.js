@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import axios from 'axios';
 import Button from '../components/Button';
+import {NavigationActions} from 'react-navigation';
 
 
 const QuizScreen = ({navigation, route}) => {
@@ -13,6 +14,7 @@ const QuizScreen = ({navigation, route}) => {
 
      const testCategory = navigation.getParam('testCategory');
     //const { testCategory } = route.params;
+
 
     async function fetchQuiz() {
         await axios.get(`https://node-app-4fun.herokuapp.com/test/findByCategory/${testCategory}`)
@@ -75,7 +77,7 @@ const QuizScreen = ({navigation, route}) => {
                 </View>
                 <Button text={'Następne pytanie'} isButtonDark={true} onPress={() => incrementIndex()}/>
                 <Text>{`${testCategory}`}</Text>
-                <Button text={'back'} isButtonDark={true} onPress={()=> navigation.navigate('ChooseQuiz')}/>
+                {/*<Button text={'back'} isButtonDark={true} onPress={()=> navigation.navigate('ChooseQuiz')}/>*/}
             </View>
         );
     }

@@ -1,16 +1,22 @@
 import React,{useEffect, useState} from 'react';
-import {View, Text, FlatList, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {View, Text, FlatList, StyleSheet, TouchableOpacity, Image, AppRegistry} from 'react-native';
 import axios from 'axios';
 import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import Button from '../components/Button';
-import HamburgerIcon from '../assets/open-menu.png';
-import {DrawerActions} from '@react-navigation/native';
+
+import ExamIcon from '../assets/exam.png';
+import HomeIcon from '../assets/home.png';
+import QuizIcon from '../assets/quiz.png';
+import SettingsIcon from '../assets/settings.png';
+
+// import {DrawerActions} from '@react-navigation/native';
 
 const AnotherDetails = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
     const [selectedValue, setSelectedValue] = useState('');
     const [isMenuOpened, setIsMenuOpened] = useState(false);
+    let ImageUri = {uri: 'https://image.freepik.com/darmowe-zdjecie/przystojny-biznesowy-mezczyzna-pozuje-frontowego-widok_23-2148336822.jpg'};
 
     useEffect(() => {
         axios.get(`https://node-app-4fun.herokuapp.com/grades/findByStudentId/${loginReducer.loginData.user._id}`)
@@ -32,16 +38,55 @@ const AnotherDetails = ({navigation, loginReducer}) => {
     return(
         <View style={styles.mainContainer}>
             <View style={styles.iconsContainer}>
+
+                {/*<TouchableOpacity*/}
+                {/*    styles={{width:'auto'}}*/}
+                {/*    onPress={() => navigation.dispatch(DrawerActions.openDrawer())}*/}
+                {/*>*/}
+                {/*    <Image*/}
+                {/*        style={styles.topBarIcons}*/}
+                {/*        source={HamburgerIcon}*/}
+                {/*    />*/}
+                {/*</TouchableOpacity>*/}
+
                 <TouchableOpacity
                     styles={{width:'auto'}}
-                    onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
                 >
                     <Image
-                        style={styles.hamburgerIcon}
-                        source={HamburgerIcon}
+                        style={styles.topBarIcons}
+                        source={HomeIcon}
                     />
                 </TouchableOpacity>
+
+                <TouchableOpacity
+                    styles={{width:'auto'}}
+                >
+                    <Image
+                        style={styles.topBarIcons}
+                        source={ExamIcon}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    styles={{width:'auto'}}
+                    onPress={() => {navigation.navigate('ChooseQuiz')}}
+                >
+                    <Image
+                        style={styles.topBarIcons}
+                        source={QuizIcon}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    styles={{width:'auto'}}
+                    onPress={() => {navigation.navigate('ChooseQuiz')}}
+                >
+                    <Image
+                        style={styles.topBarIcons}
+                        source={SettingsIcon}
+                    />
+                </TouchableOpacity>
+
             </View>
+
             <View style={styles.container}>
                 <View style={styles.userInfoBox}>
                     {loginReducer.loginData && <Text style={styles.userInfoText}>Imie: {loginReducer.loginData.user.name}</Text>}
@@ -67,7 +112,6 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                     )}
                 />
                 <View>
-                    <Button text={'Go to quiz'} isButtonDark={true} onPress={() => {navigation.navigate('ChooseQuiz')}}/>
                 </View>
             </View>
         </View>
@@ -78,7 +122,6 @@ const AnotherDetails = ({navigation, loginReducer}) => {
 const styles = StyleSheet.create({
     mainContainer:{
         flex:1,
-        paddingTop: 50
     },
     container:{
         //flex:1,
@@ -114,11 +157,16 @@ const styles = StyleSheet.create({
         fontSize:15,
         fontFamily:'Futura',
     },
-    hamburgerIcon:{
-        marginLeft: 15
+    topBarIcons:{
+
     },
     iconsContainer:{
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: '#BCD995',
+        paddingTop: 50,
+        paddingBottom: 15,
+        justifyContent: 'space-around',
+        borderRadius: 10
     }
 });
 

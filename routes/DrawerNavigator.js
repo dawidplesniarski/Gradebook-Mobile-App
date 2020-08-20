@@ -2,7 +2,6 @@ import React from "react";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { MainStackNavigator } from "./StackNavigator";
 import Home from '../screens/home';
 import AnotherDetails from '../screens/anotherDetails';
 import ChooseQuiz from '../screens/chooseQuiz';
@@ -13,7 +12,7 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
     return (
-        <Drawer.Navigator>
+        <Drawer.Navigator edgeWidth={0}>
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="AnotherDetails" component={AnotherDetails} />
             <Drawer.Screen name="ChooseQuiz" component={ChooseQuiz} />

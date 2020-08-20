@@ -26,6 +26,16 @@ const MainStackNavigator = () => {
         </Stack.Navigator>
     );
 }
+// const ContactStackNavigator = () => {
+//     return (
+//         <Stack.Navigator screenOptions={screenOptionStyle}>
+//             <Stack.Screen name="Home" component={Home} />
+//             <Stack.Screen name="AnotherDetails" component={AnotherDetails} />
+//             <Stack.Screen name="ChooseQuiz" component={ChooseQuiz} />
+//             <Stack.Screen name="QuizScreen" component={QuizScreen} />
+//         </Stack.Navigator>
+//     );
+// }
 
 
 export { MainStackNavigator };

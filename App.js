@@ -6,23 +6,23 @@ import DrawerNavigator from './routes/DrawerNavigator';
 import {isDisabled, setDisabled} from 'react-native/Libraries/LogBox/Data/LogBoxData';
 
 
-const App = () => {
-        return (
-            <NavigationContainer>
-                    <DrawerNavigator/>
-            </NavigationContainer>
-        );
-}
-export default App;
-
-
-// TODO: - Tutaj wersja aplikacji tylko na StackNavigator
-// function App() {
+// const App = () => {
 //         return (
 //             <NavigationContainer>
-//                     <Navigator/>
+//                     <DrawerNavigator/>
 //             </NavigationContainer>
 //         );
 // }
-//
 // export default App;
+
+
+// TODO: - Tutaj wersja aplikacji tylko na StackNavigator
+function App() {
+        return (
+            <NavigationContainer>
+                    <Navigator/>
+            </NavigationContainer>
+        );
+}
+
+export default App;
