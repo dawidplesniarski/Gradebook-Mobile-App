@@ -8,7 +8,7 @@ import ExamIcon from '../assets/exam.png';
 import HomeIcon from '../assets/home.png';
 import QuizIcon from '../assets/quiz.png';
 import SettingsIcon from '../assets/settings.png';
-
+import SearchIcon from '../assets/search.png'
 // import {DrawerActions} from '@react-navigation/native';
 
 const AnotherDetails = ({navigation, loginReducer}) => {
@@ -33,6 +33,16 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                     {loginReducer.loginData && <Text style={styles.userInfoText}>Nazwisko: {loginReducer.loginData.user.lastName}</Text>}
                     {loginReducer.loginData && <Text style={styles.userInfoText}>Album: {loginReducer.loginData.user.albumNo}</Text>}
                 </View>
+                <View style={styles.searchBarContainer}>
+                    <TextInput
+                        placeholder={'Wyszukaj przedmiot'}
+                        placeholderTextColor={'#25221E'}
+                        style={{width: '80%'}}
+                    />
+                    <TouchableOpacity>
+                        <Image source={SearchIcon}/>
+                    </TouchableOpacity>
+                </View>
                 <FlatList
                     style={styles.flatList}
                     data={data}
@@ -55,16 +65,6 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                 </View>
             </View>
             <View style={styles.iconsContainer}>
-
-                {/*<TouchableOpacity*/}
-                {/*    styles={{width:'auto'}}*/}
-                {/*    onPress={() => navigation.dispatch(DrawerActions.openDrawer())}*/}
-                {/*>*/}
-                {/*    <Image*/}
-                {/*        style={styles.topBarIcons}*/}
-                {/*        source={HamburgerIcon}*/}
-                {/*    />*/}
-                {/*</TouchableOpacity>*/}
 
                 <TouchableOpacity
                     styles={{width:'auto'}}
@@ -101,7 +101,6 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                         source={SettingsIcon}
                     />
                 </TouchableOpacity>
-
             </View>
         </View>
     );
@@ -126,7 +125,6 @@ const styles = StyleSheet.create({
         borderRadius:12,
         marginBottom: 20,
         backgroundColor:'#D3E1D8'
-
     },
     flatListView:{
         flexDirection: 'row',
@@ -153,9 +151,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#FFAC95',
         paddingTop: 20,
-        paddingBottom: 40,
+        paddingBottom: 30,
         justifyContent: 'space-around',
-        borderRadius: 15
+        borderRadius: 15,
+    },
+    searchBarContainer:{
+        width: '90%',
+        backgroundColor: '#dadada',
+        height: 40,
+        margin: 8,
+        marginTop:10,
+        borderRadius: 15,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding:5
     }
 });
 
