@@ -13,7 +13,13 @@ import SearchIcon from '../assets/search.png'
 
 const AnotherDetails = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
-    const [selectedValue, setSelectedValue] = useState('');
+    const [typedSubject, setTypedSubject] = useState([]);
+    const [filteredArray, setFilteredArray] = useState([]);
+
+    function filterArray(selected) {
+        let filtered = data.filter(({subject}) => subject === selected);
+        setData(filtered);
+    }
 
     useEffect(() => {
         axios.get(`https://node-app-4fun.herokuapp.com/grades/findByStudentId/${loginReducer.loginData.user._id}`)
@@ -38,9 +44,10 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                         placeholder={'Wyszukaj przedmiot'}
                         placeholderTextColor={'#25221E'}
                         style={{width: '80%'}}
+                        onChangeText={(text) => setTypedSubject(text)}
                     />
-                    <TouchableOpacity>
-                        <Image source={SearchIcon}/>
+                    <TouchableOpacity onPress={()=> filterArray(typedSubject)}>
+                        <Image source={SearchIcon} style={{marginRight:5}}/>
                     </TouchableOpacity>
                 </View>
                 <FlatList
