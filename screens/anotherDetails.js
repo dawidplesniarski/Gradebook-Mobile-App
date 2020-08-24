@@ -1,9 +1,8 @@
 import React,{useEffect, useState} from 'react';
-import {View, Text, FlatList, StyleSheet, TouchableOpacity, Image, AppRegistry} from 'react-native';
+import {View, Text, FlatList, StyleSheet, TouchableOpacity, Image, TextInput} from 'react-native';
 import axios from 'axios';
 import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
-import Button from '../components/Button';
 
 import ExamIcon from '../assets/exam.png';
 import HomeIcon from '../assets/home.png';
@@ -15,7 +14,6 @@ import SettingsIcon from '../assets/settings.png';
 const AnotherDetails = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
     const [selectedValue, setSelectedValue] = useState('');
-    const [isMenuOpened, setIsMenuOpened] = useState(false);
 
     useEffect(() => {
         axios.get(`https://node-app-4fun.herokuapp.com/grades/findByStudentId/${loginReducer.loginData.user._id}`)
@@ -27,13 +25,6 @@ const AnotherDetails = ({navigation, loginReducer}) => {
             });
     },[]);
 
-    const openMenu = () => {
-        if(isMenuOpened === false) {
-            setIsMenuOpened(true);
-        } else {
-            setIsMenuOpened(false);
-        }
-    }
     return(
         <View style={styles.mainContainer}>
             <View style={styles.container}>
@@ -52,7 +43,7 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                                 <Text style={styles.flatListText}>Ocena: {item.grade}</Text>
                             </View>
                             <View style={styles.flatListView}>
-                                <Text style={styles.flatListText}>Przedmiot:: {item.subject}</Text>
+                                <Text style={styles.flatListText}>Przedmiot: {item.subject}</Text>
                             </View>
                             <View style={styles.flatListView}>
                                 <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0,9)}</Text>
@@ -120,10 +111,10 @@ const AnotherDetails = ({navigation, loginReducer}) => {
 const styles = StyleSheet.create({
     mainContainer:{
         flex:1,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        paddingTop: 40,
     },
     container:{
-        //flex:1,
         alignItems: 'center',
     },
     flatList:{
@@ -131,9 +122,11 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     flatListContainer:{
-        borderWidth:1,
-        borderRadius:7,
+        //borderWidth:1,
+        borderRadius:12,
         marginBottom: 20,
+        backgroundColor:'#D3E1D8'
+
     },
     flatListView:{
         flexDirection: 'row',
@@ -156,16 +149,13 @@ const styles = StyleSheet.create({
         fontSize:15,
         fontFamily:'Futura',
     },
-    topBarIcons:{
-
-    },
     iconsContainer:{
         flexDirection: 'row',
-        backgroundColor: '#BCD995',
+        backgroundColor: '#FFAC95',
         paddingTop: 20,
         paddingBottom: 40,
         justifyContent: 'space-around',
-        borderRadius: 10
+        borderRadius: 15
     }
 });
 
