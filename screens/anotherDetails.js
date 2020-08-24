@@ -16,7 +16,6 @@ const AnotherDetails = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
     const [selectedValue, setSelectedValue] = useState('');
     const [isMenuOpened, setIsMenuOpened] = useState(false);
-    let ImageUri = {uri: 'https://image.freepik.com/darmowe-zdjecie/przystojny-biznesowy-mezczyzna-pozuje-frontowego-widok_23-2148336822.jpg'};
 
     useEffect(() => {
         axios.get(`https://node-app-4fun.herokuapp.com/grades/findByStudentId/${loginReducer.loginData.user._id}`)
@@ -37,6 +36,33 @@ const AnotherDetails = ({navigation, loginReducer}) => {
     }
     return(
         <View style={styles.mainContainer}>
+            <View style={styles.container}>
+                <View style={styles.userInfoBox}>
+                    {loginReducer.loginData && <Text style={styles.userInfoText}>Imie: {loginReducer.loginData.user.name}</Text>}
+                    {loginReducer.loginData && <Text style={styles.userInfoText}>Nazwisko: {loginReducer.loginData.user.lastName}</Text>}
+                    {loginReducer.loginData && <Text style={styles.userInfoText}>Album: {loginReducer.loginData.user.albumNo}</Text>}
+                </View>
+                <FlatList
+                    style={styles.flatList}
+                    data={data}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({item})=>(
+                        <View style={styles.flatListContainer}>
+                            <View style={styles.flatListView}>
+                                <Text style={styles.flatListText}>Ocena: {item.grade}</Text>
+                            </View>
+                            <View style={styles.flatListView}>
+                                <Text style={styles.flatListText}>Przedmiot:: {item.subject}</Text>
+                            </View>
+                            <View style={styles.flatListView}>
+                                <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0,9)}</Text>
+                            </View>
+                        </View>
+                    )}
+                />
+                <View>
+                </View>
+            </View>
             <View style={styles.iconsContainer}>
 
                 {/*<TouchableOpacity*/}
@@ -86,34 +112,6 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                 </TouchableOpacity>
 
             </View>
-
-            <View style={styles.container}>
-                <View style={styles.userInfoBox}>
-                    {loginReducer.loginData && <Text style={styles.userInfoText}>Imie: {loginReducer.loginData.user.name}</Text>}
-                    {loginReducer.loginData && <Text style={styles.userInfoText}>Nazwisko: {loginReducer.loginData.user.lastName}</Text>}
-                    {loginReducer.loginData && <Text style={styles.userInfoText}>Album: {loginReducer.loginData.user.albumNo}</Text>}
-                </View>
-                <FlatList
-                    style={styles.flatList}
-                    data={data}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({item})=>(
-                        <View style={styles.flatListContainer}>
-                            <View style={styles.flatListView}>
-                                <Text style={styles.flatListText}>Ocena: {item.grade}</Text>
-                            </View>
-                            <View style={styles.flatListView}>
-                                <Text style={styles.flatListText}>Przedmiot:: {item.subject}</Text>
-                            </View>
-                            <View style={styles.flatListView}>
-                                <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0,9)}</Text>
-                            </View>
-                        </View>
-                    )}
-                />
-                <View>
-                </View>
-            </View>
         </View>
     );
 }
@@ -122,6 +120,7 @@ const AnotherDetails = ({navigation, loginReducer}) => {
 const styles = StyleSheet.create({
     mainContainer:{
         flex:1,
+        justifyContent: 'space-between'
     },
     container:{
         //flex:1,
@@ -163,8 +162,8 @@ const styles = StyleSheet.create({
     iconsContainer:{
         flexDirection: 'row',
         backgroundColor: '#BCD995',
-        paddingTop: 50,
-        paddingBottom: 15,
+        paddingTop: 20,
+        paddingBottom: 40,
         justifyContent: 'space-around',
         borderRadius: 10
     }

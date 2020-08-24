@@ -5,7 +5,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import DrawerNavigator from './routes/DrawerNavigator';
 import {isDisabled, setDisabled} from 'react-native/Libraries/LogBox/Data/LogBoxData';
 
-
 // const App = () => {
 //         return (
 //             <NavigationContainer>
@@ -19,9 +18,7 @@ import {isDisabled, setDisabled} from 'react-native/Libraries/LogBox/Data/LogBox
 // TODO: - Tutaj wersja aplikacji tylko na StackNavigator
 function App() {
         return (
-            <NavigationContainer>
-                    <Navigator/>
-            </NavigationContainer>
+            <Navigator/>
         );
 }
 
