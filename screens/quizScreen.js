@@ -11,9 +11,12 @@ const QuizScreen = ({navigation, route}) => {
     const [userScore, setUserScore] = useState(0);
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [answersDisabled, setAnswersDisabled] = useState(false);
+    const [firstAnswerCorrect, setFirstAnswerCorrect] = useState(false);
+    const [secondAnswerCorrect, setSecondAnswerCorrect] = useState(false);
+    const [thirdAnswerCorrect, setThirdAnswerCorrect] = useState(false);
+    const [fourthAnswerCorrect, setFourthAnswerCorrect] = useState(false);
 
      const testCategory = navigation.getParam('testCategory');
-    //const { testCategory } = route.params;
 
 
     async function fetchQuiz() {
@@ -28,6 +31,10 @@ const QuizScreen = ({navigation, route}) => {
 
     const incrementIndex = () => {
         setAnswersDisabled(false);
+        setFirstAnswerCorrect(false);
+        setSecondAnswerCorrect(false);
+        setThirdAnswerCorrect(false);
+        setFourthAnswerCorrect(false);
         if(questionIndex < data.length - 1){
             setQuestionIndex(questionIndex + 1);
         }
@@ -36,6 +43,15 @@ const QuizScreen = ({navigation, route}) => {
     const checkIfCorrectAnswer = (answerIndex) => {
         setAnswersDisabled(true);
         if (data[questionIndex].correctAnswer === data[questionIndex].answers[answerIndex]) {
+            if(answerIndex === 0){
+                setFirstAnswerCorrect(true);
+            } else if(answerIndex === 1){
+                setSecondAnswerCorrect(true);
+            } else if(answerIndex === 2){
+                setThirdAnswerCorrect(true);
+            } else {
+                setFourthAnswerCorrect(true);
+            }
             setUserScore(userScore + 1);
         }
     };
@@ -55,22 +71,34 @@ const QuizScreen = ({navigation, route}) => {
                 <Text style={styles.questionText}>Pytanie: {data[questionIndex].question}</Text>
                 <Text style={styles.questionText}>Odpowiedzi:</Text>
                 <View style={styles.answersContainer}>
-                    <TouchableOpacity disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(0)}>
+                    <TouchableOpacity
+                        disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(0)}
+                        style={firstAnswerCorrect ? styles.correctAnswerButton : styles.none}
+                    >
                         <Text style={styles.answersText}>A: {data[questionIndex].answers[0]}</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(1)}>
+                    <TouchableOpacity
+                        disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(1)}
+                        style={secondAnswerCorrect ? styles.correctAnswerButton : styles.none}
+                    >
                         <Text style={styles.answersText}>B: {data[questionIndex].answers[1]}</Text>
                     </TouchableOpacity>
 
                     { data && data[questionIndex].answers[2] &&
-                    <TouchableOpacity disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(2)}>
+                    <TouchableOpacity
+                        disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(2)}
+                        style={thirdAnswerCorrect ? styles.correctAnswerButton : styles.none}
+                    >
                         <Text style={styles.answersText}>C: {data[questionIndex].answers[2]}</Text>
                     </TouchableOpacity>
                     }
 
                     { data && data[questionIndex].answers[3] &&
-                    <TouchableOpacity disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(3)}>
+                    <TouchableOpacity
+                        disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(3)}
+                        style={fourthAnswerCorrect ? styles.correctAnswerButton : styles.none}
+                    >
                         <Text style={styles.answersText}>D: {data[questionIndex].answers[3]}</Text>
                     </TouchableOpacity>
                     }
@@ -104,6 +132,11 @@ const styles = StyleSheet.create({
         fontSize:15,
         fontFamily:'Futura'
     },
+    correctAnswerButton:{
+       backgroundColor : '#CAF5C6'
+    },
+    none:{
+    }
 });
 
 export default QuizScreen;
