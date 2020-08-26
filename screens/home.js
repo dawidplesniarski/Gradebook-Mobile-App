@@ -21,8 +21,8 @@ const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
                     loginFunction(login, password,()=>{navigation.navigate('AnotherDetails')})}
                 }
                 />
+                {loginReducer.loginData && <Text style={styles.userInfoText}>Album: {loginReducer.loginData.user.albumNo}</Text>}
             </View>
-            {loginReducer.loginFailed && <Text>{'Login or password incorrect!'}</Text>}
         </View>
     )
 }
@@ -69,7 +69,6 @@ const mapStateToProps = ({ loginReducer}) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         loginFunction: (login, password, successCallback) => dispatch(loginFunction(login, password, successCallback)),
-        logoutFunction: () => dispatch(logoutFunction())
     };
 };
 
