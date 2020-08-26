@@ -3,20 +3,33 @@ import {View, Text, StyleSheet, TextInput} from 'react-native';
 import Button from '../components/Button';
 import { connect } from 'react-redux';
 import {logoutFunction} from '../actions/loginActions';
+import axios from 'axios';
 
 
-const Home = ({ navigation, loginReducer, logoutFunction }) => {
-    const [login, setLogin] = useState('');
+const Settings = ({ navigation, logoutFunction, loginReducer }) => {
+    const [oldPassword, setOldPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const changePassword = () => {
+
+        axios.put(`https://node-app-4fun.herokuapp.com/users/changePassword/${loginReducer.loginData.user._id}`,
+            {
+                password: oldPassword,
+                newPassword: newPassword,
+                confirmPassword: confirmPassword,
+            });
+    };
 
     return(
         <View style={styles.container}>
             <View style={styles.changePasswordContainer}>
-                <TextInput style={styles.textInput} placeholder={'Stare hasło'}/>
-                <TextInput style={styles.textInput} placeholder={'Nowe hasło'}/>
-                <TextInput style={styles.textInput} placeholder={'Potwierdź nowe hasło'}/>
-                <Button text={'Zmień hasło'} isButtonDark={true}/>
+                <TextInput style={styles.textInput} autoCapitalize='none' onChangeText={(text) => setOldPassword(text)} placeholder={'Stare hasło'}/>
+                <TextInput style={styles.textInput} autoCapitalize='none' onChangeText={(text) => setNewPassword(text)} placeholder={'Nowe hasło'}/>
+                <TextInput style={styles.textInput} autoCapitalize='none' onChangeText={(text) => setConfirmPassword(text)} placeholder={'Potwierdź nowe hasło'}/>
+                <Button text={'Zmień hasło'} disabled={oldPassword === '' || newPassword === ''|| confirmPassword === ''} isButtonDark={true} onPress={changePassword}/>
             </View>
-            <Button isButtonDark={true} text={'Wyloguj'} onPress={() => {logoutFunction(() => {navigation.navigate('Home')})}}/>
+            <Button isButtonDark={true} text={'Wyloguj'}  onPress={() => {logoutFunction(() => {navigation.navigate('Home')})}}/>
         </View>
     )
 }
@@ -49,4 +62,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);
