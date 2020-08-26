@@ -103,7 +103,7 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     styles={{width:'auto'}}
-                    onPress={() => {navigation.navigate('ChooseQuiz')}}
+                    onPress={() => {navigation.navigate('Settings')}}
                 >
                     <Image
                         style={styles.topBarIcons}

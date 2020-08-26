@@ -104,8 +104,6 @@ const QuizScreen = ({navigation, route}) => {
                     }
                 </View>
                 <Button text={'Następne pytanie'} isButtonDark={true} onPress={() => incrementIndex()}/>
-                <Text>{`${testCategory}`}</Text>
-                {/*<Button text={'back'} isButtonDark={true} onPress={()=> navigation.navigate('ChooseQuiz')}/>*/}
             </View>
         );
     }
@@ -114,8 +112,8 @@ const QuizScreen = ({navigation, route}) => {
 
 const styles = StyleSheet.create({
    container: {
-       display: 'flex',
-       height: '50%',
+       flex:1,
+       paddingBottom:'20%',
        alignItems: 'center',
        justifyContent: 'space-around'
    },
@@ -127,9 +125,12 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderRadius:10,
         width:'90%',
+        height:'40%',
+        justifyContent: 'space-around',
+        paddingLeft: 5
     },
     answersText:{
-        fontSize:15,
+        fontSize:20,
         fontFamily:'Futura'
     },
     correctAnswerButton:{
