@@ -21,7 +21,7 @@ const AnotherDetails = ({navigation, loginReducer}) => {
         setData(filtered);
     }
 
-    useEffect(() => {
+    const fetchData = () => {
         axios.get(`https://node-app-4fun.herokuapp.com/grades/findByStudentId/${loginReducer.loginData.user._id}`)
             .then( res =>{
                 setData(res.data)
@@ -29,6 +29,10 @@ const AnotherDetails = ({navigation, loginReducer}) => {
             .catch(err =>{
                 console.log(err)
             });
+    }
+
+    useEffect(() => {
+        fetchData();
     },[]);
 
     return(
@@ -46,16 +50,14 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                         style={{width: '80%'}}
                         onChangeText={(text) => setTypedSubject(text)}
                     />
-                    <TouchableOpacity onPress={()=> filterArray(typedSubject)}>
                         <Image source={SearchIcon} style={{marginRight:5}}/>
-                    </TouchableOpacity>
                 </View>
                 <FlatList
                     style={styles.flatList}
-                    data={data}
+                    data={data.filter(({subject}) => subject.includes(typedSubject))}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({item})=>(
-                        <View style={styles.flatListContainer}>
+                        <View style={item.grade === 3 || item.grade === 3.5 || item.grade === 4  ? styles.flatListContainerYellow : item.grade===4.5 || item.grade === 5 ? styles.flatListContainerGreen : styles.flatListContainerRed}>
                             <View style={styles.flatListView}>
                                 <Text style={styles.flatListText}>Ocena: {item.grade}</Text>
                             </View>
@@ -101,7 +103,7 @@ const AnotherDetails = ({navigation, loginReducer}) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     styles={{width:'auto'}}
-                    onPress={() => {navigation.navigate('ChooseQuiz')}}
+                    onPress={() => {navigation.navigate('Settings')}}
                 >
                     <Image
                         style={styles.topBarIcons}
@@ -126,12 +128,22 @@ const styles = StyleSheet.create({
     flatList:{
         width:'90%',
         marginTop: 10,
+        height:'78%'
     },
-    flatListContainer:{
-        //borderWidth:1,
+    flatListContainerGreen:{
         borderRadius:12,
         marginBottom: 20,
         backgroundColor:'#D3E1D8'
+    },
+    flatListContainerRed:{
+        borderRadius:12,
+        marginBottom: 20,
+        backgroundColor:'#F5C9C7'
+    },
+    flatListContainerYellow:{
+        borderRadius:12,
+        marginBottom: 20,
+        backgroundColor:'#F5F3A8'
     },
     flatListView:{
         flexDirection: 'row',
@@ -156,7 +168,8 @@ const styles = StyleSheet.create({
     },
     iconsContainer:{
         flexDirection: 'row',
-        backgroundColor: '#FFAC95',
+        // backgroundColor: '#FFAC95',
+        backgroundColor: '#d3d3d3',
         paddingTop: 20,
         paddingBottom: 30,
         justifyContent: 'space-around',
