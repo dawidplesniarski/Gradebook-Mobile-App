@@ -10,7 +10,13 @@ const Home = ({ navigation, loginReducer, logoutFunction }) => {
 
     return(
         <View style={styles.container}>
-            <Button isButtonDark={true} text={'Wyloguj'} onPress={()=>{navigation.navigate('Home')}}/>
+            <View style={styles.changePasswordContainer}>
+                <TextInput style={styles.textInput} placeholder={'Stare hasło'}/>
+                <TextInput style={styles.textInput} placeholder={'Nowe hasło'}/>
+                <TextInput style={styles.textInput} placeholder={'Potwierdź nowe hasło'}/>
+                <Button text={'Zmień hasło'} isButtonDark={true}/>
+            </View>
+            <Button isButtonDark={true} text={'Wyloguj'} onPress={() => {logoutFunction(() => {navigation.navigate('Home')})}}/>
         </View>
     )
 }
@@ -18,8 +24,17 @@ const Home = ({ navigation, loginReducer, logoutFunction }) => {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        justifyContent: 'space-between',
         alignItems: 'center'
+    },
+    changePasswordContainer:{
+        borderWidth: 1,
+        width: '90%',
+        height: '20%',
+        justifyContent: 'space-around',
+    },
+    textInput: {
+        backgroundColor: '#dadada',
+        height: 30
     }
 });
 
@@ -30,7 +45,7 @@ const mapStateToProps = ({ loginReducer}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        logoutFunction: () => dispatch(logoutFunction())
+        logoutFunction: (successCallback) => dispatch(logoutFunction(successCallback))
     };
 };
 
