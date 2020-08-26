@@ -10,14 +10,16 @@ const Home = ({ navigation, loginReducer, logoutFunction }) => {
 
     return(
         <View style={styles.container}>
-            <Text>Settings</Text>
+            <Button isButtonDark={true} text={'Wyloguj'} onPress={()=>{navigation.navigate('Home')}}/>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container:{
-
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center'
     }
 });
 
