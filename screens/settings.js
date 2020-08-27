@@ -10,15 +10,20 @@ const Settings = ({ navigation, logoutFunction, loginReducer }) => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const changePassword = () => {
-
         axios.put(`https://node-app-4fun.herokuapp.com/users/changePassword/${loginReducer.loginData.user._id}`,
             {
                 password: oldPassword,
                 newPassword: newPassword,
                 confirmPassword: confirmPassword,
-            });
+            })
+            .then(() => {
+                setErrorMessage('Hasło zostało pomyślnie zaktualizowane');
+            }).catch(error => {
+            setErrorMessage('Wystąpił błąd podczas zmiany hasła');
+        });
     };
 
     return(
@@ -28,6 +33,7 @@ const Settings = ({ navigation, logoutFunction, loginReducer }) => {
                 <TextInput style={styles.textInput} autoCapitalize='none' onChangeText={(text) => setNewPassword(text)} placeholder={'Nowe hasło'}/>
                 <TextInput style={styles.textInput} autoCapitalize='none' onChangeText={(text) => setConfirmPassword(text)} placeholder={'Potwierdź nowe hasło'}/>
                 <Button text={'Zmień hasło'} disabled={oldPassword === '' || newPassword === ''|| confirmPassword === ''} isButtonDark={true} onPress={changePassword}/>
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
             </View>
             <Button isButtonDark={true} text={'Wyloguj'}  onPress={() => {logoutFunction(() => {navigation.navigate('Home')})}}/>
         </View>
@@ -37,17 +43,30 @@ const Settings = ({ navigation, logoutFunction, loginReducer }) => {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop:20,
+        paddingBottom: 50,
+        justifyContent: 'space-between'
     },
     changePasswordContainer:{
-        borderWidth: 1,
         width: '90%',
-        height: '20%',
+        height: '40%',
         justifyContent: 'space-around',
+        alignItems: 'center',
     },
     textInput: {
         backgroundColor: '#dadada',
-        height: 30
+        height: 50,
+        width: '90%',
+        marginBottom: 15,
+        borderRadius: 50,
+        paddingLeft: 5,
+        fontFamily: 'Futura',
+        fontSize: 15
+    },
+    errorMessage: {
+        fontFamily: 'Futura',
+        fontSize: 15
     }
 });
 

@@ -1,8 +1,9 @@
 import React, {Component, useEffect, useState} from 'react';
-import {View, Text, ActivityIndicator, StyleSheet, TextInput} from 'react-native';
+import {View, Text, ActivityIndicator, StyleSheet, TextInput, Image} from 'react-native';
 import Button from '../components/Button';
 import { connect } from 'react-redux';
 import {loginFunction, logoutFunction} from '../actions/loginActions';
+import Logo from '../assets/logo.png'
 
 
 const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
@@ -21,7 +22,6 @@ const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
                     loginFunction(login, password,()=>{navigation.navigate('AnotherDetails')})}
                 }
                 />
-                {loginReducer.loginData && <Text style={styles.userInfoText}>Album: {loginReducer.loginData.user.albumNo}</Text>}
             </View>
         </View>
     )
@@ -35,16 +35,17 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     textInput:{
-        borderWidth: 1,
-        borderRadius:10,
         backgroundColor: '#dadada',
-        width:'90%',
-        height: 35,
+        height: 50,
+        width: '90%',
+        marginBottom: 15,
+        borderRadius: 50,
+        paddingLeft: 5,
         fontFamily: 'Futura',
+        fontSize: 15
     },
     loginArea:{
         width:'90%',
-        borderWidth:1,
         borderRadius: 12,
         flexDirection : 'column',
         justifyContent:'space-around',
