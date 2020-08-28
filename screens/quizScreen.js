@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import axios from 'axios';
 import Button from '../components/Button';
-import {NavigationActions} from 'react-navigation';
+import Pie from 'react-native-pie';
 
 
 const QuizScreen = ({navigation, route}) => {
@@ -67,10 +67,22 @@ const QuizScreen = ({navigation, route}) => {
     } else{
         return (
             <View style={styles.container}>
+                <Pie
+                    radius={80}
+                    innerRadius={75}
+                    sections={[
+                        {
+                            percentage: 60,
+                            color: '#CAF5C6',
+                        },
+                    ]}
+                    backgroundColor="#ddd"
+                />
+
                 <Text>Punkty: {userScore}</Text>
                 <Text style={styles.questionText}>Pytanie: {data[questionIndex].question}</Text>
-                <Text style={styles.questionText}>Odpowiedzi:</Text>
                 <View style={styles.answersContainer}>
+                    <Text style={styles.questionText}>Odpowiedzi:</Text>
                     <TouchableOpacity
                         disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(0)}
                         style={firstAnswerCorrect ? styles.correctAnswerButton : styles.none}
@@ -103,7 +115,7 @@ const QuizScreen = ({navigation, route}) => {
                     </TouchableOpacity>
                     }
                 </View>
-                <Button text={'Następne pytanie'} isButtonDark={true} onPress={() => incrementIndex()}/>
+                <Button text={'Następne pytanie'} disabled={!answersDisabled} isButtonDark={true} onPress={() => incrementIndex()}/>
             </View>
         );
     }
@@ -122,10 +134,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Futura'
     },
     answersContainer:{
-        borderWidth:1,
         borderRadius:10,
         width:'90%',
-        height:'40%',
         justifyContent: 'space-around',
         paddingLeft: 5
     },
@@ -134,9 +144,20 @@ const styles = StyleSheet.create({
         fontFamily:'Futura'
     },
     correctAnswerButton:{
-       backgroundColor : '#CAF5C6'
+       backgroundColor : '#CAF5C6',
+        borderRadius: 20,
+        height: 40,
+        justifyContent: 'center',
+        paddingLeft: 10,
+        marginTop: 20,
     },
     none:{
+       backgroundColor: '#BCD4DE',
+       borderRadius: 20,
+        height: 40,
+        justifyContent: 'center',
+        paddingLeft: 10,
+        marginTop: 20
     }
 });
 
