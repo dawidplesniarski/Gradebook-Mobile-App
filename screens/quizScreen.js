@@ -67,17 +67,19 @@ const QuizScreen = ({navigation, route}) => {
     } else{
         return (
             <View style={styles.container}>
-                <Pie
-                    radius={80}
-                    innerRadius={75}
-                    sections={[
-                        {
-                            percentage: 60,
-                            color: '#CAF5C6',
-                        },
-                    ]}
-                    backgroundColor="#ddd"
-                />
+                <View style={{ width: 175, alignItems: 'center' }}>
+                    <Pie
+                        radius={80}
+                        innerRadius={75}
+                        sections={[
+                            {
+                                percentage: (userScore / data.length) * 100,
+                                color: '#7FF97C',
+                            },
+                        ]}
+                        backgroundColor="#ddd"
+                    />
+                </View>
 
                 <Text>Punkty: {userScore}</Text>
                 <Text style={styles.questionText}>Pytanie: {data[questionIndex].question}</Text>
