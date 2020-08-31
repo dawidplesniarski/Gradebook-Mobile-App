@@ -26,18 +26,20 @@ export default StyleSheet.create({
     correctAnswerButton:{
         backgroundColor : '#CAF5C6',
         borderRadius: 20,
-        height: 40,
         justifyContent: 'center',
         paddingLeft: 10,
         marginTop: 20,
+        paddingTop: 7,
+        paddingBottom: 7,
     },
     none:{
         backgroundColor: '#E5E5E5',
         borderRadius: 20,
-        height: 40,
         justifyContent: 'center',
         paddingLeft: 10,
-        marginTop: 20
+        marginTop: 20,
+        paddingTop: 7,
+        paddingBottom: 7,
     },
     startTestContainer:{
         flex:1,
