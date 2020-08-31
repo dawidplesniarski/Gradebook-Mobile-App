@@ -1,20 +1,20 @@
 import {createStackNavigator} from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import Home from '../screens/home';
-import AnotherDetails from '../screens/anotherDetails'
+import LoginScreen from '../screens/loginScreen';
+import GradesScreen from '../screens/gradesScreen'
 import ChooseQuiz from '../screens/chooseQuiz';
 import QuizScreen from '../screens/quizScreen';
 import Settings from '../screens/settings';
 
 const screens = {
-    Home:{
-        screen: Home,
+    LoginScreen:{
+        screen: LoginScreen,
         navigationOptions:{
             headerShown: false
         }
     },
-    AnotherDetails:{
-        screen: AnotherDetails,
+    GradesScreen:{
+        screen: GradesScreen,
         navigationOptions: {
             headerShown: false
         }

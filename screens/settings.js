@@ -35,7 +35,7 @@ const Settings = ({ navigation, logoutFunction, loginReducer }) => {
                 <Button text={'Zmień hasło'} disabled={oldPassword === '' || newPassword === ''|| confirmPassword === ''} isButtonDark={true} onPress={changePassword}/>
                 <Text style={styles.errorMessage}>{errorMessage}</Text>
             </View>
-            <Button isButtonDark={true} text={'Wyloguj'}  onPress={() => {logoutFunction(() => {navigation.navigate('Home')})}}/>
+            <Button isButtonDark={true} text={'Wyloguj'}  onPress={() => {logoutFunction(() => {navigation.navigate('LoginScreen')})}}/>
         </View>
     )
 }

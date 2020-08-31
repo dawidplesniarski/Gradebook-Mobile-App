@@ -6,7 +6,7 @@ import {loginFunction, logoutFunction} from '../actions/loginActions';
 import Logo from '../assets/logo.png'
 
 
-const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
+const LoginScreen = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggedLabelInfo, setIsLoggedLabelInfo] = useState('');
@@ -19,7 +19,7 @@ const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
                 <TextInput style={styles.textInput} placeholder={'Login'} autoCapitalize = 'none' onChangeText={text=> setLogin(text)}/>
                 <TextInput style={styles.textInput} placeholder={'Password'} autoCapitalize= 'none' secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button disabled={login==='' || password ===''} text={'Login'} isButtonDark={true} onPress={()=>{
-                    loginFunction(login, password,()=>{navigation.navigate('AnotherDetails')})}
+                    loginFunction(login, password,()=>{navigation.navigate('GradesScreen')})}
                 }
                 />
             </View>
@@ -74,4 +74,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
