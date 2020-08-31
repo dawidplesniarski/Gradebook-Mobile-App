@@ -4,7 +4,6 @@ import axios from 'axios';
 import Button from '../components/Button';
 import Pie from 'react-native-pie';
 
-
 const QuizScreen = ({navigation, route}) => {
     const [data, setData] = useState([]);
     const [questionIndex, setQuestionIndex] = useState(0);
@@ -15,6 +14,7 @@ const QuizScreen = ({navigation, route}) => {
     const [thirdAnswerCorrect, setThirdAnswerCorrect] = useState(false);
     const [fourthAnswerCorrect, setFourthAnswerCorrect] = useState(false);
     const [testStarted, setTestStarted] = useState(false);
+    const [testEnded, setTestEnded] = useState(false);
 
 
     const testCategory = navigation.getParam('testCategory');
@@ -38,6 +38,8 @@ const QuizScreen = ({navigation, route}) => {
         setFourthAnswerCorrect(false);
         if(questionIndex < data.length - 1){
             setQuestionIndex(questionIndex + 1);
+        } else {
+            setTestEnded(true);
         }
     };
 
@@ -70,6 +72,12 @@ const QuizScreen = ({navigation, route}) => {
             return(
                 <View style={styles.container}>
                     <Button text={'Rozpocznij test'} isButtonDark={true} onPress={() => {setTestStarted(true)}}/>
+                </View>
+            );
+        } else if(testEnded) {
+            return(
+                <View>
+                    <Text>{`Zdobyłeś ${userScore} punktów`}</Text>
                 </View>
             );
         } else {

@@ -29,9 +29,9 @@ const Settings = ({ navigation, logoutFunction, loginReducer }) => {
     return(
         <View style={styles.container}>
             <View style={styles.changePasswordContainer}>
-                <TextInput style={styles.textInput} autoCapitalize='none' onChangeText={(text) => setOldPassword(text)} placeholder={'Stare hasło'}/>
-                <TextInput style={styles.textInput} autoCapitalize='none' onChangeText={(text) => setNewPassword(text)} placeholder={'Nowe hasło'}/>
-                <TextInput style={styles.textInput} autoCapitalize='none' onChangeText={(text) => setConfirmPassword(text)} placeholder={'Potwierdź nowe hasło'}/>
+                <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true} onChangeText={(text) => setOldPassword(text)} placeholder={'Stare hasło'}/>
+                <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true} onChangeText={(text) => setNewPassword(text)} placeholder={'Nowe hasło'}/>
+                <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true} onChangeText={(text) => setConfirmPassword(text)} placeholder={'Potwierdź nowe hasło'}/>
                 <Button text={'Zmień hasło'} disabled={oldPassword === '' || newPassword === ''|| confirmPassword === ''} isButtonDark={true} onPress={changePassword}/>
                 <Text style={styles.errorMessage}>{errorMessage}</Text>
             </View>
