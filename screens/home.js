@@ -23,6 +23,7 @@ const Home = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
                 }
                 />
             </View>
+            {loginReducer.loginFailed && <Text style={{fontFamily:'Futura', fontSize: 20, color: 'red'}}>{'Login or password incorrect!'}</Text>}
         </View>
     )
 }
