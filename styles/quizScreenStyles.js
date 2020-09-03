@@ -45,5 +45,23 @@ export default StyleSheet.create({
         flex:1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    resultBox:{
+        backgroundColor: '#ccecf8',
+        borderRadius: 20,
+        height: '30%',
+        justifyContent: 'space-around',
+        width: '80%',
+        alignItems: 'center'
+    },
+    testPassedText:{
+        fontSize: 20,
+        fontFamily:'Futura',
+        color:'#39c636'
+    },
+    testFailedText:{
+        fontSize: 20,
+        fontFamily:'Futura',
+        color:'#f54545'
     }
 });

@@ -4,8 +4,10 @@ import axios from 'axios';
 import Button from '../components/Button';
 import Pie from 'react-native-pie';
 import styles from '../styles/quizScreenStyles';
+import { connect } from 'react-redux';
 
-const QuizScreen = ({navigation, route}) => {
+
+const QuizScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
     const [questionIndex, setQuestionIndex] = useState(0);
     const [userScore, setUserScore] = useState(0);
@@ -31,6 +33,15 @@ const QuizScreen = ({navigation, route}) => {
             });
     }
 
+    async function postTestGrade() {
+        await axios.post('https://node-app-4fun.herokuapp.com/grades/addGrade',
+            {
+                studentId: loginReducer.loginData.user._id,
+                grade: "4.5",
+                subject: `Test ${testCategory}`,
+            });
+    }
+
     const incrementIndex = () => {
         setAnswersDisabled(false);
         setFirstAnswerCorrect(false);
@@ -41,6 +52,7 @@ const QuizScreen = ({navigation, route}) => {
             setQuestionIndex(questionIndex + 1);
         } else {
             setTestEnded(true);
+            postTestGrade();
         }
     };
 
@@ -80,10 +92,12 @@ const QuizScreen = ({navigation, route}) => {
         } else if(testEnded) {
             return(
                 <View style={styles.container}>
-                    <Text style={styles.answersText}>{`Twój wynik to ${userPercentage} %`}</Text>
-                    { userPercentage > 50 ?
-                    <Text style={{fontSize: 20, fontFamily:'Futura', color:'#7ff97c'}}>Test zaliczony</Text> :
-                    <Text style={{fontSize: 20, fontFamily:'Futura', color:'#f54545'}}>Test nie zaliczony</Text>}
+                    <View style={styles.resultBox}>
+                        <Text style={styles.answersText}>{`Twój wynik to ${userPercentage} %`}</Text>
+                        {userPercentage > 50 ?
+                            <Text style={styles.testPassedText}>Test zaliczony</Text> :
+                            <Text style={styles.testFailedText}>Test nie zaliczony</Text>}
+                    </View>
                 </View>
             );
         } else {
@@ -147,4 +161,8 @@ const QuizScreen = ({navigation, route}) => {
 
 };
 
-export default QuizScreen;
+const mapStateToProps = ({ loginReducer }) => {
+    return { loginReducer };
+};
+
+export default connect(mapStateToProps)(QuizScreen);
