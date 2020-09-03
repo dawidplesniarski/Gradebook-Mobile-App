@@ -9,7 +9,6 @@ import Logo from '../assets/logo.png'
 const LoginScreen = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoggedLabelInfo, setIsLoggedLabelInfo] = useState('');
 
     return(
         <View navigation={navigation} style={styles.container}>
@@ -60,6 +59,16 @@ const styles = StyleSheet.create({
         fontFamily: 'Futura',
         textAlign: 'center',
         marginTop: '-40%',
+    },
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
+    },
+    text: {
+        color: "grey",
+        fontSize: 30,
+        fontWeight: "bold"
     }
 })
 

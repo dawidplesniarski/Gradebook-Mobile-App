@@ -17,8 +17,8 @@ const QuizScreen = ({navigation, route}) => {
     const [testStarted, setTestStarted] = useState(false);
     const [testEnded, setTestEnded] = useState(false);
 
-
     const testCategory = navigation.getParam('testCategory');
+    let userPercentage = eval(`${userScore} / ${data.length} * 100`);
 
 
     async function fetchQuiz() {
@@ -79,8 +79,11 @@ const QuizScreen = ({navigation, route}) => {
             );
         } else if(testEnded) {
             return(
-                <View>
-                    <Text>{`Zdobyłeś ${userScore} punktów`}</Text>
+                <View style={styles.container}>
+                    <Text style={styles.answersText}>{`Twój wynik to ${userPercentage} %`}</Text>
+                    { userPercentage > 50 ?
+                    <Text style={{fontSize: 20, fontFamily:'Futura', color:'#7ff97c'}}>Test zaliczony</Text> :
+                    <Text style={{fontSize: 20, fontFamily:'Futura', color:'#f54545'}}>Test nie zaliczony</Text>}
                 </View>
             );
         } else {
