@@ -59,7 +59,7 @@ const GradesScreen = ({navigation, loginReducer}) => {
                                 <Text style={styles.flatListText}>Przedmiot: {item.subject}</Text>
                             </View>
                             <View style={styles.flatListView}>
-                                <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0,9)}</Text>
+                                <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0,10)}</Text>
                             </View>
                         </View>
                     )}

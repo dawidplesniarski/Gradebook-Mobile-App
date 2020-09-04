@@ -20,7 +20,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
     const [testEnded, setTestEnded] = useState(false);
 
     const testCategory = navigation.getParam('testCategory');
-    let userPercentage = eval(`${userScore} / ${data.length} * 100`);
+    let userPercentage = eval(`${userScore} / ${data.length} * 100`).toFixed(2);
 
 
     async function fetchQuiz() {
@@ -34,12 +34,30 @@ const QuizScreen = ({navigation, loginReducer}) => {
     }
 
     async function postTestGrade() {
+        var gradeToPost = '';
+        if(userPercentage < 50){
+            gradeToPost = '2.0';
+        } else if(userPercentage > 49 && userPercentage < 61){
+            gradeToPost = '3.0';
+        } else if(userPercentage > 60 && userPercentage < 71){
+            gradeToPost = '3.5';
+        } else if(userPercentage > 70 && userPercentage < 71){
+            gradeToPost = '4.0';
+        } else if(userPercentage > 80 && userPercentage < 91){
+            gradeToPost = '4.5';
+        } else {
+            gradeToPost = '5.0';
+        }
         await axios.post('https://node-app-4fun.herokuapp.com/grades/addGrade',
             {
                 studentId: loginReducer.loginData.user._id,
-                grade: "4.5",
+                grade: gradeToPost,
                 subject: `Test ${testCategory}`,
-            });
+            }).then(res =>{
+
+        }).catch(err =>{
+
+        });
     }
 
     const incrementIndex = () => {
@@ -52,7 +70,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
             setQuestionIndex(questionIndex + 1);
         } else {
             setTestEnded(true);
-            postTestGrade();
+            postTestGrade().then(r => console.log('Grade post'));
         }
     };
 
