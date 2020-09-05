@@ -11,6 +11,7 @@ import TabBar from '../components/TabBar';
 const GradesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
     const [typedSubject, setTypedSubject] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const fetchData = () => {
         axios.get(`${API_URL}/grades/findByStudentId/${loginReducer.loginData.user._id}`)
@@ -20,6 +21,17 @@ const GradesScreen = ({navigation, loginReducer}) => {
             .catch(err =>{
                 console.log(err)
             });
+    }
+
+    const updateList = () => {
+        try{
+            setIsLoading(true);
+            fetchData();
+        } catch(err){
+            console.log(err);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     useEffect(() => {
@@ -44,6 +56,8 @@ const GradesScreen = ({navigation, loginReducer}) => {
                         <Image source={SearchIcon} style={{marginRight:5}}/>
                 </View>
                 <FlatList
+                    refreshing={isLoading}
+                    onRefresh={() => updateList()}
                     style={styles.flatList}
                     data={data.filter(({subject}) => subject.includes(typedSubject))}
                     keyExtractor={(item, index) => index.toString()}
