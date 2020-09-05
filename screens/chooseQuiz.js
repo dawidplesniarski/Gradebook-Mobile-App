@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Picker} from 'react-native';
 import Button from '../components/Button';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import {API_URL} from '../utils/helpers';
 
 
 const ChooseQuiz = ({loginReducer, navigation}) => {
@@ -12,7 +13,7 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
 
 
     const getCategories = async () => {
-        await axios.get('https://node-app-4fun.herokuapp.com/test/findAllCategories')
+        await axios.get(`${API_URL}/test/findAllCategories`)
             .then(res => {
                 setData(res.data)
             })
@@ -24,7 +25,7 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
     const checkPermission = async (successCallback) => {
         setIncludesAlbum(false);
         try{
-            const {data} = await axios.get(`https://node-app-4fun.herokuapp.com/permission/findByCategory/${selectedItem}`);
+            const {data} = await axios.get(`${API_URL}/permission/findByCategory/${selectedItem}`);
             if(data[0].userAlbums.includes(loginReducer.loginData.user.albumNo)){
                 setIncludesAlbum(true);
                 successCallback();

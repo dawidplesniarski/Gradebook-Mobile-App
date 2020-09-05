@@ -4,6 +4,7 @@ import axios from 'axios';
 import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import styles from '../styles/gradesScreenStyles';
+import { API_URL } from '../utils/helpers';
 
 import ExamIcon from '../assets/exam.png';
 import HomeIcon from '../assets/home.png';
@@ -16,7 +17,7 @@ const GradesScreen = ({navigation, loginReducer}) => {
     const [typedSubject, setTypedSubject] = useState([]);
 
     const fetchData = () => {
-        axios.get(`https://node-app-4fun.herokuapp.com/grades/findByStudentId/${loginReducer.loginData.user._id}`)
+        axios.get(`${API_URL}/grades/findByStudentId/${loginReducer.loginData.user._id}`)
             .then( res =>{
                 setData(res.data)
             })

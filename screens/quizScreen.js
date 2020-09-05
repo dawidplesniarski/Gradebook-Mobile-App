@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import Pie from 'react-native-pie';
 import styles from '../styles/quizScreenStyles';
 import {connect} from 'react-redux';
+import {API_URL} from '../utils/helpers';
 
 
 const QuizScreen = ({navigation, loginReducer}) => {
@@ -24,7 +25,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
 
 
     async function fetchQuiz() {
-        await axios.get(`https://node-app-4fun.herokuapp.com/test/findByCategory/${testCategory}`)
+        await axios.get(`${API_URL}/test/findByCategory/${testCategory}`)
             .then(res => {
                 setData(res.data);
             })
@@ -48,7 +49,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
         } else {
             gradeToPost = '5.0';
         }
-        await axios.post('https://node-app-4fun.herokuapp.com/grades/addGrade',
+        await axios.post(`${API_URL}/grades/addGrade`,
             {
                 studentId: loginReducer.loginData.user._id,
                 grade: gradeToPost,
@@ -58,7 +59,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
 
     async function deletePermission() {
         try {
-            await axios.put('https://node-app-4fun.herokuapp.com/permission/deleteAlbum',
+            await axios.put(`${API_URL}/permission/deleteAlbum`,
                 {
                     category: testCategory,
                     album: loginReducer.loginData.user.albumNo,
@@ -79,7 +80,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
         } else {
             setTestEnded(true);
             postTestGrade().then(r => console.log('Grade post'));
-            deletePermission().then(r => console.log('Album deleted'));
+            //deletePermission().then(r => console.log('Album deleted'));
         }
     };
 
