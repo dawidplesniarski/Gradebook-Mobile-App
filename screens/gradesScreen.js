@@ -5,12 +5,8 @@ import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import styles from '../styles/gradesScreenStyles';
 import { API_URL } from '../utils/helpers';
-
-import ExamIcon from '../assets/exam.png';
-import HomeIcon from '../assets/home.png';
-import QuizIcon from '../assets/quiz.png';
-import SettingsIcon from '../assets/settings.png';
 import SearchIcon from '../assets/search.png'
+import TabBar from '../components/TabBar';
 
 const GradesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
@@ -68,44 +64,7 @@ const GradesScreen = ({navigation, loginReducer}) => {
                 <View>
                 </View>
             </View>
-            <View style={styles.iconsContainer}>
-
-                <TouchableOpacity
-                    styles={{width:'auto'}}
-                >
-                    <Image
-                        style={styles.topBarIcons}
-                        source={HomeIcon}
-                    />
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    styles={{width:'auto'}}
-                >
-                    <Image
-                        style={styles.topBarIcons}
-                        source={ExamIcon}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    styles={{width:'auto'}}
-                    onPress={() => {navigation.navigate('ChooseQuiz')}}
-                >
-                    <Image
-                        style={styles.topBarIcons}
-                        source={QuizIcon}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    styles={{width:'auto'}}
-                    onPress={() => {navigation.navigate('Settings')}}
-                >
-                    <Image
-                        style={styles.topBarIcons}
-                        source={SettingsIcon}
-                    />
-                </TouchableOpacity>
-            </View>
+            <TabBar navigation={navigation}/>
         </View>
     );
 }

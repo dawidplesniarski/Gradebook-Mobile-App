@@ -5,7 +5,6 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {API_URL} from '../utils/helpers';
 
-
 const ChooseQuiz = ({loginReducer, navigation}) => {
     const [data, setData] = useState([]);
     const [selectedItem, setSelectedItem] = useState('matematyka');
