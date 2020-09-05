@@ -4,7 +4,7 @@ import axios from 'axios';
 import Button from '../components/Button';
 import Pie from 'react-native-pie';
 import styles from '../styles/quizScreenStyles';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 
 const QuizScreen = ({navigation, loginReducer}) => {
@@ -28,22 +28,22 @@ const QuizScreen = ({navigation, loginReducer}) => {
             .then(res => {
                 setData(res.data);
             })
-            .catch(err =>{
+            .catch(err => {
                 console.log(err);
             });
     }
 
     async function postTestGrade() {
-        var gradeToPost = '';
-        if(userPercentage < 50){
+        let gradeToPost = '';
+        if (userPercentage < 50) {
             gradeToPost = '2.0';
-        } else if(userPercentage > 49 && userPercentage < 61){
+        } else if (userPercentage > 49 && userPercentage < 61) {
             gradeToPost = '3.0';
-        } else if(userPercentage > 60 && userPercentage < 71){
+        } else if (userPercentage > 60 && userPercentage < 71) {
             gradeToPost = '3.5';
-        } else if(userPercentage > 70 && userPercentage < 71){
+        } else if (userPercentage > 70 && userPercentage < 81) {
             gradeToPost = '4.0';
-        } else if(userPercentage > 80 && userPercentage < 91){
+        } else if (userPercentage > 80 && userPercentage < 91) {
             gradeToPost = '4.5';
         } else {
             gradeToPost = '5.0';
@@ -53,11 +53,19 @@ const QuizScreen = ({navigation, loginReducer}) => {
                 studentId: loginReducer.loginData.user._id,
                 grade: gradeToPost,
                 subject: `Test ${testCategory}`,
-            }).then(res =>{
+            });
+    }
 
-        }).catch(err =>{
-
-        });
+    async function deletePermission() {
+        try {
+            await axios.put('https://node-app-4fun.herokuapp.com/permission/deleteAlbum',
+                {
+                    category: testCategory,
+                    album: loginReducer.loginData.user.albumNo,
+                });
+        } catch (err) {
+            console.log('Error while album delete');
+        }
     }
 
     const incrementIndex = () => {
@@ -66,22 +74,23 @@ const QuizScreen = ({navigation, loginReducer}) => {
         setSecondAnswerCorrect(false);
         setThirdAnswerCorrect(false);
         setFourthAnswerCorrect(false);
-        if(questionIndex < data.length - 1){
+        if (questionIndex < data.length - 1) {
             setQuestionIndex(questionIndex + 1);
         } else {
             setTestEnded(true);
             postTestGrade().then(r => console.log('Grade post'));
+            deletePermission().then(r => console.log('Album deleted'));
         }
     };
 
     const checkIfCorrectAnswer = (answerIndex) => {
         setAnswersDisabled(true);
         if (data[questionIndex].correctAnswer === data[questionIndex].answers[answerIndex]) {
-            if(answerIndex === 0){
+            if (answerIndex === 0) {
                 setFirstAnswerCorrect(true);
-            } else if(answerIndex === 1){
+            } else if (answerIndex === 1) {
                 setSecondAnswerCorrect(true);
-            } else if(answerIndex === 2){
+            } else if (answerIndex === 2) {
                 setThirdAnswerCorrect(true);
             } else {
                 setFourthAnswerCorrect(true);
@@ -94,21 +103,23 @@ const QuizScreen = ({navigation, loginReducer}) => {
         fetchQuiz();
     }, []);
 
-    if(data.length === 0){
-        return(
+    if (data.length === 0) {
+        return (
             <View/>
         );
-    } else{
-        if(!testStarted){
-            return(
+    } else {
+        if (!testStarted) {
+            return (
                 <View style={styles.startTestContainer}>
                     <Text style={styles.answersText}>{`Kategoria: ${testCategory}`}</Text>
                     <Text style={styles.answersText}>{`Ilość pytań: ${data.length}`}</Text>
-                    <Button text={'Rozpocznij test'} isButtonDark={true} onPress={() => {setTestStarted(true)}}/>
+                    <Button text={'Rozpocznij test'} isButtonDark={true} onPress={() => {
+                        setTestStarted(true);
+                    }}/>
                 </View>
             );
-        } else if(testEnded) {
-            return(
+        } else if (testEnded) {
+            return (
                 <View style={styles.container}>
                     <View style={styles.resultBox}>
                         <Text style={styles.answersText}>{`Twój wynik to ${userPercentage} %`}</Text>
@@ -121,7 +132,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
         } else {
             return (
                 <View style={styles.container}>
-                    <View style={{ width: 175, alignItems: 'center' }}>
+                    <View style={{width: 175, alignItems: 'center'}}>
                         <Pie
                             radius={80}
                             innerRadius={75}
@@ -153,7 +164,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
                             <Text style={styles.answersText}>B: {data[questionIndex].answers[1]}</Text>
                         </TouchableOpacity>
 
-                        { data && data[questionIndex].answers[2] &&
+                        {data && data[questionIndex].answers[2] &&
                         <TouchableOpacity
                             disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(2)}
                             style={thirdAnswerCorrect ? styles.correctAnswerButton : styles.none}
@@ -162,7 +173,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
                         </TouchableOpacity>
                         }
 
-                        { data && data[questionIndex].answers[3] &&
+                        {data && data[questionIndex].answers[3] &&
                         <TouchableOpacity
                             disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(3)}
                             style={fourthAnswerCorrect ? styles.correctAnswerButton : styles.none}
@@ -171,7 +182,8 @@ const QuizScreen = ({navigation, loginReducer}) => {
                         </TouchableOpacity>
                         }
                     </View>
-                    <Button text={'Następne pytanie'} disabled={!answersDisabled} isButtonDark={true} onPress={() => incrementIndex()}/>
+                    <Button text={'Następne pytanie'} disabled={!answersDisabled} isButtonDark={true}
+                            onPress={() => incrementIndex()}/>
                 </View>
             );
         }
@@ -179,8 +191,8 @@ const QuizScreen = ({navigation, loginReducer}) => {
 
 };
 
-const mapStateToProps = ({ loginReducer }) => {
-    return { loginReducer };
+const mapStateToProps = ({loginReducer}) => {
+    return {loginReducer};
 };
 
 export default connect(mapStateToProps)(QuizScreen);
