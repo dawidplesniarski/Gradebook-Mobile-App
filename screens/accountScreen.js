@@ -23,11 +23,11 @@ const mapStateToProps = ({ loginReducer }) => {
     return { loginReducer };
 };
 
-const styles = StyleSheet.create = {
+const styles = StyleSheet.create({
     container:{
         flex: 1,
         alignItems: 'center',
-        paddingTop: '5%'
+        paddingTop: '20%'
     },
     userImage:{
         width:300,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create = {
     userInfoTextContainer:{
         alignItems: 'center'
     }
-}
+});
 
 export default connect(mapStateToProps)(AccountScreen);
 

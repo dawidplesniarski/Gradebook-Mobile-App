@@ -34,7 +34,8 @@ const screens = {
         screen: AccountScreen,
         navigationOptions:{
             title: '',
-            headerBackTitle: ''
+            headerBackTitle: '',
+            headerTransparent: true
         }
     }
 }
