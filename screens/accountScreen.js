@@ -9,7 +9,7 @@ const AccountScreen = ({navigation, loginReducer}) => {
                 source={{uri: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg'}}
                 style={styles.userImage}
             />
-            <View>
+            <View style={styles.userInfoTextContainer}>
                 <Text style={styles.userInfoText}>{loginReducer.loginData.user.name}</Text>
                 <Text style={styles.userInfoText}>{loginReducer.loginData.user.lastName}</Text>
                 <Text style={styles.userInfoText}>{loginReducer.loginData.user.albumNo}</Text>
@@ -37,7 +37,10 @@ const styles = StyleSheet.create = {
     },
     userInfoText:{
         fontFamily: 'Futura',
-        fontSize: 18
+        fontSize: 25
+    },
+    userInfoTextContainer:{
+        alignItems: 'center'
     }
 }
 

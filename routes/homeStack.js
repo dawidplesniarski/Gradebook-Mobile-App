@@ -31,7 +31,11 @@ const screens = {
         screen: Settings
     },
     AccountScreen:{
-        screen: AccountScreen
+        screen: AccountScreen,
+        navigationOptions:{
+            title: '',
+            headerBackTitle: ''
+        }
     }
 }
 
