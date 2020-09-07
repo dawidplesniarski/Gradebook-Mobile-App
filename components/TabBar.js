@@ -12,6 +12,7 @@ const TabBar = ({navigation}) => {
 
             <TouchableOpacity
                 styles={{width:'auto'}}
+                onPress={() => {navigation.navigate('AccountScreen')}}
             >
                 <Image
                     style={styles.topBarIcons}

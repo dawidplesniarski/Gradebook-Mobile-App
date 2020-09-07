@@ -5,6 +5,7 @@ import GradesScreen from '../screens/gradesScreen'
 import ChooseQuiz from '../screens/chooseQuiz';
 import QuizScreen from '../screens/quizScreen';
 import Settings from '../screens/settings';
+import AccountScreen from '../screens/accountScreen';
 
 const screens = {
     LoginScreen:{
@@ -28,6 +29,9 @@ const screens = {
     },
     Settings:{
         screen: Settings
+    },
+    AccountScreen:{
+        screen: AccountScreen
     }
 }
 
