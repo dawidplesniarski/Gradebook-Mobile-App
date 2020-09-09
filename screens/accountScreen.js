@@ -5,13 +5,17 @@ import {connect} from 'react-redux';
 const AccountScreen = ({navigation, loginReducer}) => {
     return(
         <View style={styles.container}>
-            <Image
-                source={{uri: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg'}}
-                style={styles.userImage}
-            />
+            <View style={styles.userImageContainer}>
+                <Image
+                    source={{uri: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg'}}
+                    style={styles.userImage}
+                />
+                <View style={styles.userInfoTextContainer}>
+                    <Text style={styles.userInfoText}>{loginReducer.loginData.user.name}</Text>
+                    <Text style={styles.userInfoText}>{loginReducer.loginData.user.lastName}</Text>
+                </View>
+            </View>
             <View style={styles.userInfoTextContainer}>
-                <Text style={styles.userInfoText}>{loginReducer.loginData.user.name}</Text>
-                <Text style={styles.userInfoText}>{loginReducer.loginData.user.lastName}</Text>
                 <Text style={styles.userInfoText}>{loginReducer.loginData.user.albumNo}</Text>
                 <Text style={styles.userInfoText}>{loginReducer.loginData.user.university}</Text>
             </View>
@@ -27,20 +31,32 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         alignItems: 'center',
-        paddingTop: '20%'
     },
     userImage:{
         width:300,
         height:300,
         borderRadius: 200,
-        borderWidth: 0.25
+        borderWidth: 0.25,
+        marginBottom: 15
     },
     userInfoText:{
-        fontFamily: 'Futura',
-        fontSize: 25
+        fontFamily: 'Helvetica-light',
+        fontSize: 20,
+        color: '#393939'
     },
     userInfoTextContainer:{
-        alignItems: 'center'
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: 200
+    },
+    userImageContainer:{
+        width: '100%',
+        height: '52%',
+        alignItems: 'center',
+        backgroundColor: '#cdf0fd',
+        paddingTop: '20%',
+        borderBottomLeftRadius: 200,
+        borderBottomRightRadius: 200
     }
 });
 

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Picker, Image} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import {Picker} from '@react-native-community/picker';
 import Button from '../components/Button';
 import axios from 'axios';
 import {connect} from 'react-redux';

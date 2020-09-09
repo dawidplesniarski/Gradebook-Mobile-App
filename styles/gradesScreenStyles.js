@@ -52,7 +52,6 @@ export default StyleSheet.create({
     },
     iconsContainer:{
         flexDirection: 'row',
-        // backgroundColor: '#FFAC95',
         backgroundColor: '#dbd9d9',
         paddingTop: 20,
         paddingBottom: 30,
