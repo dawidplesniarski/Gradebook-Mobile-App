@@ -10,14 +10,14 @@ const AccountScreen = ({navigation, loginReducer}) => {
                     source={{uri: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg'}}
                     style={styles.userImage}
                 />
-                <View style={styles.userInfoTextContainer}>
-                    <Text style={styles.userInfoText}>{loginReducer.loginData.user.name}</Text>
+                <View style={styles.userNameContainer}>
+                    <Text style={[styles.userInfoText, {marginRight: 20}]}>{loginReducer.loginData.user.name}</Text>
                     <Text style={styles.userInfoText}>{loginReducer.loginData.user.lastName}</Text>
                 </View>
             </View>
-            <View style={styles.userInfoTextContainer}>
-                <Text style={styles.userInfoText}>{loginReducer.loginData.user.albumNo}</Text>
-                <Text style={styles.userInfoText}>{loginReducer.loginData.user.university}</Text>
+            <View style={styles.userInfoContainer}>
+                <Text style={{fontFamily: 'Helvetica-bold', fontSize: 40, color: '#393939', letterSpacing: 15, paddingBottom: 20}}>{loginReducer.loginData.user.university}</Text>
+                <Text style={{fontFamily: 'Helvetica-bold', fontSize: 35, color: '#393939', letterSpacing: 12}}>{loginReducer.loginData.user.albumNo}</Text>
             </View>
         </View>
     );
@@ -40,14 +40,19 @@ const styles = StyleSheet.create({
         marginBottom: 15
     },
     userInfoText:{
-        fontFamily: 'Helvetica-light',
-        fontSize: 20,
+        fontFamily: 'Helvetica',
+        fontSize: 25,
         color: '#393939'
     },
-    userInfoTextContainer:{
+    userNameContainer:{
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: 'auto',
+    },
+    userInfoContainer:{
+        alignItems: 'center',
         justifyContent: 'space-around',
-        width: 200
+        marginTop: 40
     },
     userImageContainer:{
         width: '100%',
