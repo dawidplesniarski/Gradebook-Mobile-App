@@ -51,7 +51,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
         }
         await axios.post(`${API_URL}/grades/addGrade`,
             {
-                studentId: loginReducer.loginData.user._id,
+                studentAlbum: loginReducer.loginData.user.albumNo,
                 grade: gradeToPost,
                 subject: `Test ${testCategory}`,
             });

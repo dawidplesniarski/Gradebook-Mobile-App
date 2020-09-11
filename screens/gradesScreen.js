@@ -14,7 +14,7 @@ const GradesScreen = ({navigation, loginReducer}) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchData = () => {
-        axios.get(`${API_URL}/grades/findByStudentId/${loginReducer.loginData.user._id}`)
+        axios.get(`${API_URL}/grades/findByAlbum/${loginReducer.loginData.user.albumNo}`)
             .then( res =>{
                 setData(res.data)
             })
