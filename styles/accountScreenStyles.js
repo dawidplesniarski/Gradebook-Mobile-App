@@ -45,6 +45,19 @@ export default StyleSheet.create({
         color: '#707070'
     },
     latestGradesContainer:{
+        flexDirection: 'row',
+        width: '100%',
+        borderBottomWidth: 0.25,
+        borderColor: '#676767',
+        justifyContent: 'space-around',
+        alignItems:'center',
+        paddingTop: 13,
+        paddingBottom: 13,
+    },
+    latestGradesLeftContainer:{
+
+    },
+    latestGradesRightContainer:{
 
     }
 });

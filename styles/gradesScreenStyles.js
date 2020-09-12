@@ -12,7 +12,7 @@ export default StyleSheet.create({
     flatList:{
         width:'90%',
         marginTop: 10,
-        height:'78%'
+        height:'80%',
     },
     flatListContainerGreen:{
         borderRadius:12,

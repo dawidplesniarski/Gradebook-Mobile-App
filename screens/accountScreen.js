@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react';
 import {View, Text, Image} from 'react-native';
 import {connect} from 'react-redux';
 import styles from '../styles/accountScreenStyles';
-import TabBar from '../components/TabBar';
+import SmallButton from '../components/SmallButton';
 
 const AccountScreen = ({navigation, loginReducer}) => {
     return(
@@ -27,6 +27,15 @@ const AccountScreen = ({navigation, loginReducer}) => {
                 <Text style={[styles.userInfoText, {margin: 10}]}>Uczelnia: {loginReducer.loginData.user.university}</Text>
                 <Text style={[styles.userInfoText, {margin: 10}]}>Numer albumu: {loginReducer.loginData.user.albumNo}</Text>
                 <Text style={[styles.userInfoText, {margin: 10}]}>Adres e-mail: {loginReducer.loginData.user.email}</Text>
+            </View>
+            <View style={styles.latestGradesContainer}>
+                <View style={styles.latestGradesLeftContainer}>
+                    <Text style={[styles.userInfoText, {padding: 5}]}>Twoje najnowsze oceny:</Text>
+                    <Text style={[styles.userInfoText, {padding: 5}]}>Kryptografia 5.0</Text>
+                </View>
+                <View style={styles.latestGradesRightContainer}>
+                    <SmallButton text={'Oceny'} buttonColor={'#f59292'} onPress={() => {navigation.navigate('GradesScreen')}}/>
+                </View>
             </View>
         </View>
     );

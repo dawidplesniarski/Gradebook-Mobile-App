@@ -59,7 +59,7 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
                             checkPermission(() => navigation.navigate('QuizScreen', {testCategory: selectedItem}))}
                     />
                 </View>
-                <Text style={styles.titleText}>{`${includesAlbum}`}</Text>
+                {includesAlbum ? <Text></Text> : <Text>Nie masz uprawnień do napisania tego testu</Text>}
             </View>
         );
     }
