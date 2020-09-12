@@ -80,7 +80,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
         } else {
             setTestEnded(true);
             postTestGrade().then(r => console.log('Grade post'));
-            //deletePermission().then(r => console.log('Album deleted'));
+            deletePermission().then(r => console.log('Album deleted'));
         }
     };
 
