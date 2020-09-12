@@ -68,5 +68,11 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding:5
+    },
+    searchIcon:{
+        flex:1,
+        width:null,
+        height:null,
+        resizeMode: 'contain',
     }
 });

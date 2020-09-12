@@ -7,17 +7,24 @@ const AccountScreen = ({navigation, loginReducer}) => {
         <View style={styles.container}>
             <View style={styles.userImageContainer}>
                 <Image
-                    source={{uri: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg'}}
+                    source={{uri: loginReducer.loginData.user.imageUrl}}
                     style={styles.userImage}
                 />
                 <View style={styles.userNameContainer}>
                     <Text style={[styles.userInfoText, {marginRight: 20}]}>{loginReducer.loginData.user.name}</Text>
                     <Text style={styles.userInfoText}>{loginReducer.loginData.user.lastName}</Text>
                 </View>
+                <View>
+                    {loginReducer.loginData.user.isAdmin ?
+                        <Text style={styles.userSmallText}>Pracownik</Text> :
+                        <Text style={styles.userSmallText}>Student</Text>
+                    }
+                </View>
             </View>
             <View style={styles.userInfoContainer}>
-                <Text style={{fontFamily: 'Helvetica-bold', fontSize: 40, color: '#393939', letterSpacing: 15, paddingBottom: 20}}>{loginReducer.loginData.user.university}</Text>
-                <Text style={{fontFamily: 'Helvetica-bold', fontSize: 35, color: '#393939', letterSpacing: 12}}>{loginReducer.loginData.user.albumNo}</Text>
+                <Text style={[styles.userInfoText, {margin: 10}]}>Uczelnia: {loginReducer.loginData.user.university}</Text>
+                <Text style={[styles.userInfoText, {margin: 10}]}>Numer albumu: {loginReducer.loginData.user.albumNo}</Text>
+                <Text style={[styles.userInfoText, {margin: 10}]}>Adres e-mail: {loginReducer.loginData.user.email}</Text>
             </View>
         </View>
     );
@@ -41,8 +48,8 @@ const styles = StyleSheet.create({
     },
     userInfoText:{
         fontFamily: 'Helvetica',
-        fontSize: 25,
-        color: '#393939'
+        fontSize: 22,
+        color: '#707070'
     },
     userNameContainer:{
         flexDirection: 'row',
@@ -51,18 +58,26 @@ const styles = StyleSheet.create({
     },
     userInfoContainer:{
         alignItems: 'center',
+        // paddingLeft:20,
         justifyContent: 'space-around',
-        marginTop: 40
+        marginTop: 20,
+        width: '100%',
+        borderTopWidth: 0.25,
+        borderBottomWidth: 0.25,
+        borderColor: '#676767'
     },
     userImageContainer:{
         width: '100%',
         height: '52%',
         alignItems: 'center',
-        backgroundColor: '#cdf5d7',
-        // backgroundColor: '#cdf0fd',
+        backgroundColor: '#b8e4ff',
         paddingTop: '20%',
         borderBottomLeftRadius: 200,
         borderBottomRightRadius: 200
+    },
+    userSmallText:{
+        fontFamily: "Helvetica",
+        color: '#707070'
     }
 });
 
