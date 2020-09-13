@@ -26,6 +26,7 @@ const screens = {
             headerTransparent: true,
             headerBackTitle: ' ',
             title: '',
+            headerTintColor: '#FF5E5B'
         },
     },
     QuizScreen: {
@@ -37,6 +38,7 @@ const screens = {
         navigationOptions: {
             title: 'Ustawienia',
             headerBackTitle: ' ',
+            headerTintColor: '#FF5E5B'
         },
     },
     AccountScreen: {
@@ -45,6 +47,7 @@ const screens = {
             title: '',
             headerBackTitle: ' ',
             headerTransparent: true,
+            headerTintColor: '#FF5E5B'
         },
     },
 };

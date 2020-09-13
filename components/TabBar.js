@@ -1,9 +1,10 @@
 import React from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
-import HomeIcon from '../assets/home.png';
+import UserIcon from '../assets/user.png'
 import ExamIcon from '../assets/exam.png';
 import QuizIcon from '../assets/quiz.png';
 import SettingsIcon from '../assets/settings.png';
+import CircleIcon from '../assets/circle.png'
 import styles from '../styles/gradesScreenStyles'
 
 const TabBar = ({navigation, currentScreen}) => {
@@ -16,17 +17,19 @@ const TabBar = ({navigation, currentScreen}) => {
             >
                 <Image
                     style={styles.tabBarIconNormal}
-                    source={HomeIcon}
+                    source={UserIcon}
                 />
             </TouchableOpacity>
 
             <TouchableOpacity
                 styles={{width:'auto'}}
             >
-                <Image
-                    style={currentScreen === 'Grades' ? styles.tabBarIconCurrent : styles.tabBarIconNormal}
-                    source={ExamIcon}
-                />
+                <View style={{alignItems:'center'}}>
+                    <Image
+                        source={ExamIcon}
+                    />
+                    {currentScreen === 'Grades' ? <Image source={CircleIcon} style={{width: 10, height: 10}}/> : null}
+                </View>
             </TouchableOpacity>
             <TouchableOpacity
                 styles={{width:'auto'}}

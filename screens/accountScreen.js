@@ -48,7 +48,7 @@ const AccountScreen = ({navigation, loginReducer}) => {
             <View style={styles.latestGradesContainer}>
                 <View style={styles.latestGradesLeftContainer}>
                     <Text style={[styles.userInfoText, {padding: 7}]}>Twoje najnowsze oceny:</Text>
-                    <Text style={[styles.userInfoText, {fontSize: 20,padding: 7}]}>
+                    <Text style={[styles.userInfoText, {fontSize: 18,padding: 7}]}>
                         {latestGrade.data && `${latestGrade.data.subject}: ${latestGrade.data.grade}`}
                     </Text>
                 </View>
