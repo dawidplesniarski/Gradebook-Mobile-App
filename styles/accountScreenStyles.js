@@ -33,10 +33,10 @@ export default StyleSheet.create({
     },
     userImageContainer:{
         width: '100%',
-        height: '52%',
+        height: '50%',
         alignItems: 'center',
-        backgroundColor: '#b8e4ff',
-        paddingTop: '20%',
+        backgroundColor: '#cce8f1',
+        paddingTop: '15%',
         borderBottomLeftRadius: 200,
         borderBottomRightRadius: 200
     },
@@ -55,9 +55,10 @@ export default StyleSheet.create({
         paddingBottom: 13,
     },
     latestGradesLeftContainer:{
-
+        marginLeft: 5,
+        width: '70%'
     },
     latestGradesRightContainer:{
-
+        marginRight: 5
     }
 });
