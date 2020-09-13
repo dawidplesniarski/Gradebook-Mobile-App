@@ -6,7 +6,7 @@ import QuizIcon from '../assets/quiz.png';
 import SettingsIcon from '../assets/settings.png';
 import styles from '../styles/gradesScreenStyles'
 
-const TabBar = ({navigation}) => {
+const TabBar = ({navigation, currentScreen}) => {
     return(
         <View style={styles.iconsContainer}>
 
@@ -15,7 +15,7 @@ const TabBar = ({navigation}) => {
                 onPress={() => {navigation.navigate('AccountScreen')}}
             >
                 <Image
-                    style={styles.topBarIcons}
+                    style={styles.tabBarIconNormal}
                     source={HomeIcon}
                 />
             </TouchableOpacity>
@@ -24,7 +24,7 @@ const TabBar = ({navigation}) => {
                 styles={{width:'auto'}}
             >
                 <Image
-                    style={styles.topBarIcons}
+                    style={currentScreen === 'Grades' ? styles.tabBarIconCurrent : styles.tabBarIconNormal}
                     source={ExamIcon}
                 />
             </TouchableOpacity>

@@ -3,8 +3,25 @@ import {View, Text, Image} from 'react-native';
 import {connect} from 'react-redux';
 import styles from '../styles/accountScreenStyles';
 import SmallButton from '../components/SmallButton';
+import axios from 'axios';
+import {API_URL} from '../utils/helpers';
 
 const AccountScreen = ({navigation, loginReducer}) => {
+    const [latestGrade, setLatestGrade] = useState('');
+
+    const fetchLatestGrade = async () => {
+        await axios.get(`${API_URL}/grades/findLatest/${loginReducer.loginData.user.albumNo}`)
+            .then(res => {
+                setLatestGrade(res);
+            }).catch(err => {
+                console.log(err);
+            });
+    };
+
+    useEffect(() => {
+        fetchLatestGrade();
+    },[]);
+
     return(
         <View style={styles.container}>
             <View style={styles.userImageContainer}>
@@ -31,7 +48,9 @@ const AccountScreen = ({navigation, loginReducer}) => {
             <View style={styles.latestGradesContainer}>
                 <View style={styles.latestGradesLeftContainer}>
                     <Text style={[styles.userInfoText, {padding: 7}]}>Twoje najnowsze oceny:</Text>
-                    <Text style={[styles.userInfoText, {padding: 7}]}>Kryptografia 5.0</Text>
+                    <Text style={[styles.userInfoText, {fontSize: 20,padding: 7}]}>
+                        {latestGrade.data && `${latestGrade.data.subject}: ${latestGrade.data.grade}`}
+                    </Text>
                 </View>
                 <View style={styles.latestGradesRightContainer}>
                     <SmallButton text={'Oceny'} buttonColor={'#FF5E5B'} onPress={() => {navigation.navigate('GradesScreen')}}/>

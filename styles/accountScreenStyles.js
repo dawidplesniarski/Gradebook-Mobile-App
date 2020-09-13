@@ -35,7 +35,7 @@ export default StyleSheet.create({
         width: '100%',
         height: '50%',
         alignItems: 'center',
-        backgroundColor: '#cce8f1',
+        // backgroundColor: '#cce8f1',
         paddingTop: '15%',
         borderBottomLeftRadius: 200,
         borderBottomRightRadius: 200

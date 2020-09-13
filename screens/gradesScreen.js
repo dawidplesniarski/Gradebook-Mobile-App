@@ -15,13 +15,13 @@ const GradesScreen = ({navigation, loginReducer}) => {
 
     const fetchData = () => {
         axios.get(`${API_URL}/grades/findByAlbum/${loginReducer.loginData.user.albumNo}`)
-            .then( res =>{
-                setData(res.data)
+            .then(res => {
+                setData(res.data);
             })
-            .catch(err =>{
-                console.log(err)
+            .catch(err => {
+                console.log(err);
             });
-    }
+    };
 
     const updateList = () => {
         try{
@@ -73,7 +73,7 @@ const GradesScreen = ({navigation, loginReducer}) => {
                 <View>
                 </View>
             </View>
-            <TabBar navigation={navigation}/>
+            <TabBar navigation={navigation} currentScreen={'Grades'}/>
         </View>
     );
 }

@@ -52,7 +52,8 @@ export default StyleSheet.create({
     },
     iconsContainer:{
         flexDirection: 'row',
-        backgroundColor: '#dbd9d9',
+        backgroundColor: '#e9e9e9',
+        borderWidth: 0.25,
         paddingTop: 20,
         paddingBottom: 30,
         justifyContent: 'space-around',
@@ -74,5 +75,9 @@ export default StyleSheet.create({
         width:null,
         height:null,
         resizeMode: 'contain',
+    },
+    tabBarIconNormal: {
+    },
+    tabBarIconCurrent:{
     }
 });
