@@ -14,6 +14,7 @@ const Settings = ({navigation, logoutFunction, loginReducer}) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [newImageUri, setNewImageUri] = useState('');
+    const [imageChangeErrorMessage, setImageChangeErrorMessage] = useState(null);
 
     const changePassword = () => {
         axios.put(`${API_URL}/users/changePassword/${loginReducer.loginData.user._id}`,
@@ -29,18 +30,34 @@ const Settings = ({navigation, logoutFunction, loginReducer}) => {
         });
     };
 
+    const changeImage = () => {
+        axios.put(`${API_URL}/users/updateImage`,
+            {
+                albumNo: loginReducer.loginData.user.albumNo,
+                imageUrl: newImageUri,
+            })
+            .then(() => {
+                setImageChangeErrorMessage('Zdjęcie zmienione, zmiany zostaną wprowadzone po ponownym zalogowaniu');
+            }).catch(error => {
+                setImageChangeErrorMessage('Wystąpił błąd podczas zmiany zdjęcia');
+        });
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.changeImageContainer}>
-                <Image source={{uri: loginReducer.loginData.user.imageUrl}} style={styles.userAvatar}/>
+                <Image source={{uri: loginReducer.loginData.user && loginReducer.loginData.user.imageUrl}} style={styles.userAvatar}/>
                 <View style={styles.editImageBar}>
                     <TextInput
                         placeholder={'Link do zdjęcia'}
                         placeholderTextColor={'#858585'}
                         style={{width: '80%'}}
-                        onChangeText={(text) => setTypedSubject(text)}
+                        autoCapitalize='none'
+                        onChangeText={(text) => setNewImageUri(text)}
                     />
-                    <Image source={editIcon} style={styles.searchIcon}/>
+                    <TouchableOpacity onPress={changeImage}>
+                        <Image source={editIcon} style={styles.searchIcon}/>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.changePasswordContainer}>
