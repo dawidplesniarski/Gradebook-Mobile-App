@@ -10,6 +10,7 @@ export default StyleSheet.create({
     questionText:{
         fontSize: 20,
         fontFamily: 'Futura',
+        fontWeight: '500',
         marginLeft: 10,
         marginRight: 10
     },

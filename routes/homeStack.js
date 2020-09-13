@@ -1,44 +1,53 @@
 import {createStackNavigator} from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
+import {createAppContainer} from 'react-navigation';
 import LoginScreen from '../screens/loginScreen';
-import GradesScreen from '../screens/gradesScreen'
+import GradesScreen from '../screens/gradesScreen';
 import ChooseQuiz from '../screens/chooseQuiz';
 import QuizScreen from '../screens/quizScreen';
 import Settings from '../screens/settings';
 import AccountScreen from '../screens/accountScreen';
 
 const screens = {
-    LoginScreen:{
+    LoginScreen: {
         screen: LoginScreen,
-        navigationOptions:{
-            headerShown: false
-        }
+        navigationOptions: {
+            headerShown: false,
+        },
     },
-    GradesScreen:{
+    GradesScreen: {
         screen: GradesScreen,
         navigationOptions: {
-            headerShown: false
-        }
+            headerShown: false,
+        },
     },
-    ChooseQuiz:{
-        screen: ChooseQuiz
+    ChooseQuiz: {
+        screen: ChooseQuiz,
+        navigationOptions: {
+            headerTransparent: true,
+            headerBackTitle: ' ',
+            title: '',
+        },
     },
-    QuizScreen:{
+    QuizScreen: {
         screen: QuizScreen,
-        headerShown: false
+        headerShown: false,
     },
-    Settings:{
-        screen: Settings
+    Settings: {
+        screen: Settings,
+        navigationOptions: {
+            title: 'Ustawienia',
+            headerBackTitle: ' ',
+        },
     },
-    AccountScreen:{
+    AccountScreen: {
         screen: AccountScreen,
-        navigationOptions:{
+        navigationOptions: {
             title: '',
             headerBackTitle: ' ',
-            headerTransparent: true
-        }
-    }
-}
+            headerTransparent: true,
+        },
+    },
+};
 
 const HomeStack = createStackNavigator(screens);
 
