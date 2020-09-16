@@ -1,5 +1,5 @@
 import React, {Component, useEffect, useState} from 'react';
-import {View, Text, ActivityIndicator, StyleSheet, TextInput, Image} from 'react-native';
+import {View, Text, ActivityIndicator, StyleSheet, TextInput} from 'react-native';
 import Button from '../components/Button';
 import { connect } from 'react-redux';
 import {loginFunction, logoutFunction} from '../actions/loginActions';

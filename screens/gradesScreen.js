@@ -48,7 +48,7 @@ const GradesScreen = ({navigation, loginReducer}) => {
                         style={{width: '80%'}}
                         onChangeText={(text) => setTypedSubject(text)}
                     />
-                        <Image source={SearchIcon} style={styles.searchIcon}/>
+                    <Image source={SearchIcon} style={styles.searchIcon}/>
                 </View>
                 <FlatList
                     refreshing={isLoading}
@@ -56,8 +56,9 @@ const GradesScreen = ({navigation, loginReducer}) => {
                     style={styles.flatList}
                     data={data.filter(({subject}) => subject.includes(typedSubject))}
                     keyExtractor={(item, index) => index.toString()}
-                    renderItem={({item})=>(
-                        <View style={item.grade === 3 || item.grade === 3.5 || item.grade === 4  ? styles.flatListContainerYellow : item.grade===4.5 || item.grade === 5 ? styles.flatListContainerGreen : styles.flatListContainerRed}>
+                    renderItem={({item}) => (
+                        <View
+                            style={item.grade === 3 || item.grade === 3.5 || item.grade === 4 ? styles.flatListContainerYellow : item.grade === 4.5 || item.grade === 5 ? styles.flatListContainerGreen : styles.flatListContainerRed}>
                             <View style={styles.flatListView}>
                                 <Text style={styles.flatListText}>Ocena: {item.grade}</Text>
                             </View>
@@ -65,13 +66,11 @@ const GradesScreen = ({navigation, loginReducer}) => {
                                 <Text style={styles.flatListText}>Przedmiot: {item.subject}</Text>
                             </View>
                             <View style={styles.flatListView}>
-                                <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0,10)}</Text>
+                                <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0, 10)}</Text>
                             </View>
                         </View>
                     )}
                 />
-                <View>
-                </View>
             </View>
             <TabBar navigation={navigation} currentScreen={'Grades'}/>
         </View>

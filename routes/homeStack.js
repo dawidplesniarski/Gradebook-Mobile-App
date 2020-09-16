@@ -18,6 +18,7 @@ const screens = {
         screen: GradesScreen,
         navigationOptions: {
             headerShown: false,
+            gestureEnabled: false
         },
     },
     ChooseQuiz: {

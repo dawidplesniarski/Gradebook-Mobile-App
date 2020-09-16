@@ -1,8 +1,13 @@
 import { StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-    container:{
+    mainContainer:{
         flex: 1,
+        justifyContent: 'space-between',
+        marginBottom: 45
+    },
+    container:{
+        //flex: 1,
         alignItems: 'center',
     },
     userImage:{
@@ -10,7 +15,7 @@ export default StyleSheet.create({
         height:300,
         borderRadius: 200,
         borderWidth: 0.25,
-        marginBottom: 15
+        marginBottom: 13
     },
     userInfoText:{
         fontFamily: 'Helvetica',
@@ -38,9 +43,9 @@ export default StyleSheet.create({
         // backgroundColor: '#cce8f1',
         borderWidth: 0.25,
         borderColor: '#888888',
-        paddingTop: '15%',
+        paddingTop: '10%',
         borderBottomLeftRadius: 200,
-        borderBottomRightRadius: 200
+        borderBottomRightRadius: 200,
     },
     userSmallText:{
         fontFamily: "Helvetica",

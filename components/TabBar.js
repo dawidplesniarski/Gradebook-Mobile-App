@@ -15,14 +15,17 @@ const TabBar = ({navigation, currentScreen}) => {
                 styles={{width:'auto'}}
                 onPress={() => {navigation.navigate('AccountScreen')}}
             >
-                <Image
-                    style={styles.tabBarIconNormal}
-                    source={UserIcon}
-                />
+                <View style={{alignItems:'center'}}>
+                    <Image
+                        source={UserIcon}
+                    />
+                    {currentScreen === 'Account' ? <Image source={CircleIcon} style={{width: 10, height: 10}}/> : null}
+                </View>
             </TouchableOpacity>
 
             <TouchableOpacity
                 styles={{width:'auto'}}
+                onPress={() => navigation.navigate('GradesScreen')}
             >
                 <View style={{alignItems:'center'}}>
                     <Image
