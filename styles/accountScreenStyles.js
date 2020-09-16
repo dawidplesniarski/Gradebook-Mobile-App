@@ -4,7 +4,6 @@ export default StyleSheet.create({
     mainContainer:{
         flex: 1,
         justifyContent: 'space-between',
-        marginBottom: 45
     },
     container:{
         //flex: 1,
@@ -15,7 +14,6 @@ export default StyleSheet.create({
         height:300,
         borderRadius: 200,
         borderWidth: 0.25,
-        marginBottom: 13
     },
     userInfoText:{
         fontFamily: 'Helvetica',
@@ -26,19 +24,19 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: 'auto',
+        marginTop: 7
     },
     userInfoContainer:{
         alignItems: 'center',
         // paddingLeft:20,
         justifyContent: 'space-around',
-        marginTop: 20,
         width: '100%',
         borderBottomWidth: 0.25,
         borderColor: '#676767'
     },
     userImageContainer:{
         width: '100%',
-        height: '50%',
+        height: '51%',
         alignItems: 'center',
         // backgroundColor: '#cce8f1',
         borderWidth: 0.25,
@@ -58,8 +56,8 @@ export default StyleSheet.create({
         borderColor: '#676767',
         justifyContent: 'space-around',
         alignItems:'center',
-        paddingTop: 13,
-        paddingBottom: 13,
+        paddingTop: 10,
+        paddingBottom: 10,
     },
     latestGradesLeftContainer:{
         marginLeft: 5,

@@ -10,7 +10,6 @@ import styles from '../styles/gradesScreenStyles'
 const TabBar = ({navigation, currentScreen}) => {
     return(
         <View style={styles.iconsContainer}>
-
             <TouchableOpacity
                 styles={{width:'auto'}}
                 onPress={() => {navigation.navigate('AccountScreen')}}
@@ -38,19 +37,23 @@ const TabBar = ({navigation, currentScreen}) => {
                 styles={{width:'auto'}}
                 onPress={() => {navigation.navigate('ChooseQuiz')}}
             >
-                <Image
-                    style={styles.topBarIcons}
-                    source={QuizIcon}
-                />
+                <View style={{alignItems: 'center'}}>
+                    <Image
+                        source={QuizIcon}
+                    />
+                    {currentScreen === 'ChooseQuiz' ? <Image source={CircleIcon} style={{width: 10, height: 10}}/> : null}
+                </View>
             </TouchableOpacity>
             <TouchableOpacity
                 styles={{width:'auto'}}
                 onPress={() => {navigation.navigate('Settings')}}
             >
-                <Image
-                    style={styles.topBarIcons}
-                    source={SettingsIcon}
-                />
+                <View style={{alignItems: 'center'}}>
+                    <Image
+                        source={SettingsIcon}
+                    />
+                    {currentScreen === 'Settings' ? <Image source={CircleIcon} style={{width: 10, height: 10}}/> : null}
+                </View>
             </TouchableOpacity>
         </View>
     );

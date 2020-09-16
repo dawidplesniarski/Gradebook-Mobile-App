@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {Picker} from '@react-native-community/picker';
 import Button from '../components/Button';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {API_URL} from '../utils/helpers';
+import TabBar from '../components/TabBar';
 
 const ChooseQuiz = ({loginReducer, navigation}) => {
     const [data, setData] = useState([]);
@@ -41,25 +42,31 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
 
     if(data.length === 0){
         return(
-            <View/>
+            <View style={{alignItems: 'center'}}>
+                <ActivityIndicator/>
+            </View>
         )}
     else{
         return (
             <View style={styles.container}>
-                <Text style={styles.titleText}>Wybierz temat testu:</Text>
-                <Picker
-                    style={styles.datePicker}
-                    selectedValue={selectedItem}
-                    onValueChange={value => {setSelectedItem(value)}}>
-                    {data.map((value, index)=><Picker.Item label={`${value}`} value={`${value}`} key={index}/>)}
-                </Picker>
-                <View style={{paddingLeft:'25%'}}>
-                    <Button text={'Start test!'} isButtonDark={true}
-                            onPress={() =>
-                            checkPermission(() => navigation.navigate('QuizScreen', {testCategory: selectedItem}))}
-                    />
+                <View style={{marginTop: '40%'}}>
+                    <Text style={styles.titleText}>Wybierz temat testu:</Text>
+                    <Picker
+                        style={styles.datePicker}
+                        selectedValue={selectedItem}
+                        onValueChange={value => {
+                            setSelectedItem(value);
+                        }}>
+                        {data.map((value, index) => <Picker.Item label={`${value}`} value={`${value}`} key={index}/>)}
+                    </Picker>
+                    <View style={{paddingLeft: '25%'}}>
+                        <Button text={'Start test!'} isButtonDark={true}
+                                onPress={() =>
+                                    checkPermission(() => navigation.navigate('QuizScreen', {testCategory: selectedItem}))}
+                        />
+                    </View>
                 </View>
-                <Text>{}</Text>
+                <TabBar navigation={navigation} currentScreen={'ChooseQuiz'}/>
             </View>
         );
     }
@@ -68,6 +75,10 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
 
 
 const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        justifyContent: 'space-between'
+    },
     titleText:{
         fontSize:20,
         fontFamily: 'Futura',
@@ -77,15 +88,9 @@ const styles = StyleSheet.create({
     datePicker:{
         margin:10,
     },
-    container:{
-        flex:1,
-        paddingTop: 30,
-        justifyContent: 'center'
-    },
     button:{
         justifyContent:'center'
     }
-
 });
 
 const mapStateToProps = ({ loginReducer}) => {

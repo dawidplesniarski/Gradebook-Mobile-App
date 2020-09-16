@@ -29,7 +29,7 @@ const AccountScreen = ({navigation, loginReducer}) => {
                 <View style={styles.userImageContainer}>
                     <Image
                         source={{uri: loginReducer.loginData.user.imageUrl}}
-                        style={styles.userImage}
+                        style={[styles.userImage, {marginTop: 7}]}
                     />
                     <View style={styles.userNameContainer}>
                         <Text style={[styles.userInfoText, {marginRight: 10}]}>{loginReducer.loginData.user.name}</Text>
@@ -43,32 +43,42 @@ const AccountScreen = ({navigation, loginReducer}) => {
                     </View>
                 </View>
                 <View style={styles.userInfoContainer}>
-                    <Text style={[styles.userInfoText, {margin: 10}]}>Uczelnia: {loginReducer.loginData.user.university}</Text>
-                    <Text style={[styles.userInfoText, {margin: 10}]}>Numer albumu: {loginReducer.loginData.user.albumNo}</Text>
-                    <Text style={[styles.userInfoText, {margin: 10, marginBottom: 25}]}>Adres e-mail: {loginReducer.loginData.user.email}</Text>
+                    <Text
+                        style={[styles.userInfoText, {margin: 10}]}>Uczelnia: {loginReducer.loginData.user.university}
+                    </Text>
+                    <Text style={[styles.userInfoText, {margin: 10}]}>Numer
+                        albumu: {loginReducer.loginData.user.albumNo}
+                    </Text>
+                    <Text style={[styles.userInfoText, {margin: 10, marginBottom: 25}]}>Adres
+                        e-mail: {loginReducer.loginData.user.email}
+                    </Text>
                 </View>
                 <View style={styles.latestGradesContainer}>
                     <View style={styles.latestGradesLeftContainer}>
                         <Text style={[styles.userInfoText, {padding: 7}]}>Twoje najnowsze oceny:</Text>
-                        <Text style={[styles.userInfoText, {fontSize: 18,padding: 7}]}>
+                        <Text style={[styles.userInfoText, {fontSize: 18, padding: 7}]}>
                             {latestGrade.data && `${latestGrade.data.subject}: ${latestGrade.data.grade}`}
                         </Text>
                     </View>
                     <View style={styles.latestGradesRightContainer}>
-                        <SmallButton text={'Oceny'} buttonColor={'#FF5E5B'} onPress={() => {navigation.navigate('GradesScreen')}}/>
+                        <SmallButton text={'Oceny'} buttonColor={'#FF5E5B'} onPress={() => {
+                            navigation.navigate('GradesScreen');
+                        }}/>
                     </View>
                 </View>
                 <View style={styles.latestGradesContainer}>
                     <View style={styles.latestGradesLeftContainer}>
                         <Text style={[styles.userInfoText, {padding: 7}]}>Twoje komunikaty:</Text>
-                        <Text style={[styles.userInfoText, {padding: 7,fontSize: 15}]}>Egzamin z kryptografii przeniesiony na wtorek</Text>
+                        <Text style={[styles.userInfoText, {padding: 7, fontSize: 15}]}>Egzamin z kryptografii
+                            przeniesiony na wtorek</Text>
                     </View>
                     <View style={styles.latestGradesRightContainer}>
-                        <SmallButton text={'Komunikaty'} buttonColor={'#FF5E5B'} onPress={() => {}}/>
+                        <SmallButton text={'Komunikaty'} buttonColor={'#FF5E5B'} onPress={() => {
+                        }}/>
                     </View>
                 </View>
             </View>
-                <TabBar navigation={navigation} currentScreen={'Account'}/>
+            <TabBar navigation={navigation} currentScreen={'Account'}/>
         </View>
     );
 };
