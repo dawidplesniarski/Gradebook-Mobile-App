@@ -12,6 +12,7 @@ const screens = {
         screen: LoginScreen,
         navigationOptions: {
             headerShown: false,
+            orientation: 'portrait'
         },
     },
     GradesScreen: {
