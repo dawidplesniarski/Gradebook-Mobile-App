@@ -6,7 +6,6 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
     },
     container:{
-        //flex: 1,
         alignItems: 'center',
     },
     userImage:{

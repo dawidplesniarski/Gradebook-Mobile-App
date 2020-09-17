@@ -13,10 +13,10 @@ const QuizScreen = ({navigation, loginReducer}) => {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [userScore, setUserScore] = useState(0);
     const [answersDisabled, setAnswersDisabled] = useState(false);
-    const [firstAnswerCorrect, setFirstAnswerCorrect] = useState(false);
-    const [secondAnswerCorrect, setSecondAnswerCorrect] = useState(false);
-    const [thirdAnswerCorrect, setThirdAnswerCorrect] = useState(false);
-    const [fourthAnswerCorrect, setFourthAnswerCorrect] = useState(false);
+    const [firstAnswerCorrect, setFirstAnswerCorrect] = useState(null);
+    const [secondAnswerCorrect, setSecondAnswerCorrect] = useState(null);
+    const [thirdAnswerCorrect, setThirdAnswerCorrect] = useState(null);
+    const [fourthAnswerCorrect, setFourthAnswerCorrect] = useState(null);
     const [testStarted, setTestStarted] = useState(false);
     const [testEnded, setTestEnded] = useState(false);
 
@@ -71,10 +71,10 @@ const QuizScreen = ({navigation, loginReducer}) => {
 
     const incrementIndex = () => {
         setAnswersDisabled(false);
-        setFirstAnswerCorrect(false);
-        setSecondAnswerCorrect(false);
-        setThirdAnswerCorrect(false);
-        setFourthAnswerCorrect(false);
+        setFirstAnswerCorrect(null);
+        setSecondAnswerCorrect(null);
+        setThirdAnswerCorrect(null);
+        setFourthAnswerCorrect(null);
         if (questionIndex < data.length - 1) {
             setQuestionIndex(questionIndex + 1);
         } else {
@@ -97,6 +97,16 @@ const QuizScreen = ({navigation, loginReducer}) => {
                 setFourthAnswerCorrect(true);
             }
             setUserScore(userScore + 1);
+        } else {
+            if (answerIndex === 0) {
+                setFirstAnswerCorrect(false);
+            } else if (answerIndex === 1) {
+                setSecondAnswerCorrect(false);
+            } else if (answerIndex === 2) {
+                setThirdAnswerCorrect(false);
+            } else {
+                setFourthAnswerCorrect(false);
+            }
         }
     };
 
@@ -153,14 +163,14 @@ const QuizScreen = ({navigation, loginReducer}) => {
                         <Text style={styles.questionText}>Odpowiedzi:</Text>
                         <TouchableOpacity
                             disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(0)}
-                            style={firstAnswerCorrect ? styles.correctAnswerButton : styles.none}
+                            style={firstAnswerCorrect === true ? styles.correctAnswerButton : firstAnswerCorrect === false ? styles.wrongAnswerButton : styles.none}
                         >
                             <Text style={styles.answersText}>A: {data[questionIndex].answers[0]}</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
                             disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(1)}
-                            style={secondAnswerCorrect ? styles.correctAnswerButton : styles.none}
+                            style={secondAnswerCorrect === true ? styles.correctAnswerButton : secondAnswerCorrect === false ? styles.wrongAnswerButton : styles.none}
                         >
                             <Text style={styles.answersText}>B: {data[questionIndex].answers[1]}</Text>
                         </TouchableOpacity>
@@ -168,7 +178,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
                         {data && data[questionIndex].answers[2] &&
                         <TouchableOpacity
                             disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(2)}
-                            style={thirdAnswerCorrect ? styles.correctAnswerButton : styles.none}
+                            style={thirdAnswerCorrect === true ? styles.correctAnswerButton : thirdAnswerCorrect === false ? styles.wrongAnswerButton : styles.none}
                         >
                             <Text style={styles.answersText}>C: {data[questionIndex].answers[2]}</Text>
                         </TouchableOpacity>
@@ -177,7 +187,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
                         {data && data[questionIndex].answers[3] &&
                         <TouchableOpacity
                             disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(3)}
-                            style={fourthAnswerCorrect ? styles.correctAnswerButton : styles.none}
+                            style={fourthAnswerCorrect ? styles.correctAnswerButton : fourthAnswerCorrect === false ? styles.wrongAnswerButton : styles.none}
                         >
                             <Text style={styles.answersText}>D: {data[questionIndex].answers[3]}</Text>
                         </TouchableOpacity>

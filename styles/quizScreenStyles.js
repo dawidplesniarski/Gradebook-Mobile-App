@@ -33,6 +33,15 @@ export default StyleSheet.create({
         paddingTop: 7,
         paddingBottom: 7,
     },
+    wrongAnswerButton:{
+        backgroundColor : '#EC8686',
+        borderRadius: 20,
+        justifyContent: 'center',
+        paddingLeft: 10,
+        marginTop: 20,
+        paddingTop: 7,
+        paddingBottom: 7,
+    },
     none:{
         backgroundColor: '#E5E5E5',
         borderRadius: 20,
