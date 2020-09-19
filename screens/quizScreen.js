@@ -7,7 +7,6 @@ import styles from '../styles/quizScreenStyles';
 import {connect} from 'react-redux';
 import {API_URL} from '../utils/helpers';
 
-
 const QuizScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
     const [questionIndex, setQuestionIndex] = useState(0);
@@ -22,7 +21,6 @@ const QuizScreen = ({navigation, loginReducer}) => {
 
     const testCategory = navigation.getParam('testCategory');
     let userPercentage = eval(`${userScore} / ${data.length} * 100`).toFixed(2);
-
 
     async function fetchQuiz() {
         await axios.get(`${API_URL}/test/findByCategory/${testCategory}`)
@@ -65,7 +63,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
                     album: loginReducer.loginData.user.albumNo,
                 });
         } catch (err) {
-            console.log('Error while album delete');
+            console.log('An error occurred while deleting the album');
         }
     }
 
@@ -79,7 +77,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
             setQuestionIndex(questionIndex + 1);
         } else {
             setTestEnded(true);
-            postTestGrade().then(r => console.log('Grade post'));
+            postTestGrade().then(r => console.log('Grade posted'));
             deletePermission().then(r => console.log('Album deleted'));
         }
     };
@@ -150,7 +148,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
                             sections={[
                                 {
                                     percentage: (userScore / data.length) * 100,
-                                    color: '#7FF97C',
+                                    color: '#90ff8e',
                                 },
                             ]}
                             backgroundColor="#ddd"

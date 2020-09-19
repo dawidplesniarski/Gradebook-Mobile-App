@@ -32,16 +32,18 @@ const Settings = ({navigation, logoutFunction, loginReducer}) => {
     };
 
     const changeImage = () => {
-        axios.put(`${API_URL}/users/updateImage`,
-            {
-                albumNo: loginReducer.loginData.user.albumNo,
-                imageUrl: newImageUri,
-            })
-            .then(() => {
-                setImageChangeErrorMessage('Zdjęcie zmienione, zmiany zostaną wprowadzone po ponownym zalogowaniu');
-            }).catch(error => {
+        if (newImageUri !== '' && newImageUri != null) {
+            axios.put(`${API_URL}/users/updateImage`,
+                {
+                    albumNo: loginReducer.loginData.user.albumNo,
+                    imageUrl: newImageUri,
+                })
+                .then(() => {
+                    setImageChangeErrorMessage('Zdjęcie zmienione, zmiany zostaną wprowadzone po ponownym zalogowaniu');
+                }).catch(error => {
                 setImageChangeErrorMessage('Wystąpił błąd podczas zmiany zdjęcia');
-        });
+            });
+        }
     };
 
     return (

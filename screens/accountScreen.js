@@ -44,12 +44,15 @@ const AccountScreen = ({navigation, loginReducer}) => {
                 </View>
                 <View style={styles.userInfoContainer}>
                     <Text
-                        style={[styles.userInfoText, {margin: 10}]}>Uczelnia: {loginReducer.loginData.user.university}
+                        style={[styles.userInfoText, {margin: 5}]}>Uczelnia: {loginReducer.loginData.university.universityName}
                     </Text>
-                    <Text style={[styles.userInfoText, {margin: 10}]}>Numer
+                    <Text
+                        style={[styles.userInfoText, {margin: 5}]}>Kierunek: {loginReducer.loginData.course.courseName}
+                    </Text>
+                    <Text style={[styles.userInfoText, {margin: 5}]}>Numer
                         albumu: {loginReducer.loginData.user.albumNo}
                     </Text>
-                    <Text style={[styles.userInfoText, {margin: 10, marginBottom: 25}]}>Adres
+                    <Text style={[styles.userInfoText, {margin: 5, marginBottom: 20}]}>Adres
                         e-mail: {loginReducer.loginData.user.email}
                     </Text>
                 </View>
