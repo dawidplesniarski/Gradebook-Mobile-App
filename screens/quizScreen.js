@@ -47,11 +47,11 @@ const QuizScreen = ({navigation, loginReducer}) => {
         } else {
             gradeToPost = '5.0';
         }
-        await axios.post(`${API_URL}/grades/addGrade`,
+        await axios.post(`${API_URL}/grades/addTestGrade`,
             {
                 studentAlbum: loginReducer.loginData.user.albumNo,
                 grade: gradeToPost,
-                subject: `Test ${testCategory}`,
+                subject: testCategory,
             });
     }
 
@@ -78,7 +78,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
         } else {
             setTestEnded(true);
             postTestGrade().then(r => console.log('Grade posted'));
-            deletePermission().then(r => console.log('Album deleted'));
+            //deletePermission().then(r => console.log('Album deleted'));
         }
     };
 

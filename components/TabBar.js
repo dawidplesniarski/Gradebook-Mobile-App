@@ -24,7 +24,7 @@ const TabBar = ({navigation, currentScreen}) => {
 
             <TouchableOpacity
                 styles={{width:'auto'}}
-                onPress={() => navigation.navigate('GradesScreen')}
+                onPress={() => navigation.navigate('GradesCategories')}
             >
                 <View style={{alignItems:'center'}}>
                     <Image
