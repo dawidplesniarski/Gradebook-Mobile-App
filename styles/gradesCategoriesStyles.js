@@ -46,7 +46,7 @@ export default StyleSheet.create({
         borderRadius: 15,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding:5
+        padding: 5,
     },
     searchIcon:{
         flex:1,

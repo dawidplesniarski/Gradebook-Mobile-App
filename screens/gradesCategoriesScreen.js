@@ -54,11 +54,12 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
                     refreshing={isLoading}
                     onRefresh={() => updateList()}
                     style={styles.flatList}
-                    // data={data.filter(({subject}) => subject.includes(typedSubject))}
-                    data={data}
+                    data={data.filter(data => data.includes(typedSubject))}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({item}) => (
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => console.log(item)}
+                        >
                             <View style={styles.flatListElemContainer}>
                                 <Text style={styles.flatListElemText}>{item}</Text>
                             </View>
