@@ -50,6 +50,14 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
                     />
                     <Image source={SearchIcon} style={styles.searchIcon}/>
                 </View>
+                <TouchableOpacity
+                    style={{width: '90%', marginTop: 10}}
+                    onPress={() => navigation.navigate('GradesScreen', {subject: ''})}
+                >
+                    <View style={[styles.flatListElemContainer, {backgroundColor: '#c0ddfc'}]}>
+                        <Text style={styles.flatListElemText}>Wszystkie oceny</Text>
+                    </View>
+                </TouchableOpacity>
                 <FlatList
                     refreshing={isLoading}
                     onRefresh={() => updateList()}
