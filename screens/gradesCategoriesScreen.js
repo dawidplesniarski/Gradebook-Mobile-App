@@ -58,7 +58,7 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({item}) => (
                         <TouchableOpacity
-                            onPress={() => console.log(item)}
+                            onPress={() => navigation.navigate('GradesScreen', {subject: item})}
                         >
                             <View style={styles.flatListElemContainer}>
                                 <Text style={styles.flatListElemText}>{item}</Text>

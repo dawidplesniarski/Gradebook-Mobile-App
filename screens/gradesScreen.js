@@ -12,6 +12,7 @@ const GradesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
     const [typedSubject, setTypedSubject] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const subjectName = navigation.getParam('subject');
 
     const fetchData = () => {
         axios.get(`${API_URL}/grades/findByAlbum/${loginReducer.loginData.user.albumNo}`)
@@ -54,7 +55,7 @@ const GradesScreen = ({navigation, loginReducer}) => {
                     refreshing={isLoading}
                     onRefresh={() => updateList()}
                     style={styles.flatList}
-                    data={data.filter(({subject}) => subject.subjectName.includes(typedSubject))}
+                    data={data.filter(({subject}) => subject.subjectName.includes(subjectName))}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({item}) => (
                         <View
