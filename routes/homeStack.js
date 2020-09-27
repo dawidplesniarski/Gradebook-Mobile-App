@@ -6,6 +6,7 @@ import ChooseQuiz from '../screens/chooseQuiz';
 import QuizScreen from '../screens/quizScreen';
 import Settings from '../screens/settings';
 import AccountScreen from '../screens/accountScreen';
+import GradesCategoriesScreen from '../screens/gradesCategoriesScreen';
 
 const screens = {
     LoginScreen: {
@@ -52,6 +53,13 @@ const screens = {
             headerTintColor: '#FF5E5B'
         },
     },
+    GradesCategories: {
+        screen: GradesCategoriesScreen,
+        navigationOptions: {
+            headerShown: false,
+            gestureEnabled: false
+        },
+    }
 };
 
 const HomeStack = createStackNavigator(screens);

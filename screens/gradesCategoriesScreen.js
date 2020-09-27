@@ -3,18 +3,18 @@ import {View, Text, FlatList, TouchableOpacity, Image, TextInput} from 'react-na
 import axios from 'axios';
 import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
-import styles from '../styles/gradesScreenStyles';
+import styles from '../styles/gradesCategoriesStyles';
 import { API_URL } from '../utils/helpers';
 import SearchIcon from '../assets/search.png'
 import TabBar from '../components/TabBar';
 
-const GradesScreen = ({navigation, loginReducer}) => {
+const GradesCategoriesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
     const [typedSubject, setTypedSubject] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchData = () => {
-        axios.get(`${API_URL}/grades/findByAlbum/${loginReducer.loginData.user.albumNo}`)
+        axios.get(`${API_URL}/courseSubjects/findBySemester/${loginReducer.loginData.course.courseName}/4`)
             .then(res => {
                 setData(res.data);
             })
@@ -54,21 +54,15 @@ const GradesScreen = ({navigation, loginReducer}) => {
                     refreshing={isLoading}
                     onRefresh={() => updateList()}
                     style={styles.flatList}
-                    data={data.filter(({subject}) => subject.subjectName.includes(typedSubject))}
+                    // data={data.filter(({subject}) => subject.includes(typedSubject))}
+                    data={data}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({item}) => (
-                        <View
-                            style={item.grade === 3 || item.grade === 3.5 || item.grade === 4 ? styles.flatListContainerYellow : item.grade === 4.5 || item.grade === 5 ? styles.flatListContainerGreen : styles.flatListContainerRed}>
-                            <View style={styles.flatListView}>
-                                <Text style={styles.flatListText}>Ocena: {item.grade}</Text>
+                        <TouchableOpacity>
+                            <View style={styles.flatListElemContainer}>
+                                <Text style={styles.flatListElemText}>{item}</Text>
                             </View>
-                            <View style={styles.flatListView}>
-                                <Text style={styles.flatListText}>Przedmiot: {item.subject.subjectName}</Text>
-                            </View>
-                            <View style={styles.flatListView}>
-                                <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0, 10)}</Text>
-                            </View>
-                        </View>
+                        </TouchableOpacity>
                     )}
                 />
             </View>
@@ -87,4 +81,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GradesScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(GradesCategoriesScreen);
