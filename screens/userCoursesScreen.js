@@ -3,19 +3,16 @@ import {View, Text, FlatList, TouchableOpacity, Image, TextInput} from 'react-na
 import axios from 'axios';
 import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
-import styles from '../styles/gradesCategoriesStyles';
+import styles from '../styles/userCoursesStyles';
 import { API_URL } from '../utils/helpers';
-import SearchIcon from '../assets/search.png'
 import TabBar from '../components/TabBar';
 
-const GradesCategoriesScreen = ({navigation, loginReducer}) => {
+const UserCoursesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
-    const [typedSubject, setTypedSubject] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const courseName = navigation.getParam('course');
 
     const fetchData = () => {
-        axios.get(`${API_URL}/courseSubjects/findBySemester/${courseName}/4`)
+        axios.get(`${API_URL}/users/findUserCourses/${loginReducer.loginData.user._id}`)
             .then(res => {
                 setData(res.data);
             })
@@ -42,35 +39,19 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
     return(
         <View style={styles.mainContainer}>
             <View style={styles.container}>
-                <View style={styles.searchBarContainer}>
-                    <TextInput
-                        placeholder={'Wyszukaj przedmiot'}
-                        placeholderTextColor={'#25221E'}
-                        style={{width: '80%'}}
-                        onChangeText={(text) => setTypedSubject(text)}
-                    />
-                    <Image source={SearchIcon} style={styles.searchIcon}/>
-                </View>
-                <TouchableOpacity
-                    style={{width: '90%', marginTop: 10}}
-                    onPress={() => navigation.navigate('GradesScreen', {subject: ''})}
-                >
-                    <View style={[styles.flatListElemContainer, {backgroundColor: '#c0ddfc'}]}>
-                        <Text style={styles.flatListElemText}>Wszystkie oceny</Text>
-                    </View>
-                </TouchableOpacity>
+                <Text style={styles.headerText}>Twoje kierunki studiów:</Text>
                 <FlatList
                     refreshing={isLoading}
                     onRefresh={() => updateList()}
                     style={styles.flatList}
-                    data={data.filter(data => data.includes(typedSubject))}
+                    data={data}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({item}) => (
                         <TouchableOpacity
-                            onPress={() => navigation.navigate('GradesScreen', {subject: item})}
+                            onPress={() => navigation.navigate('GradesCategories', {course: item.courseName})}
                         >
                             <View style={styles.flatListElemContainer}>
-                                <Text style={styles.flatListElemText}>{item}</Text>
+                                <Text style={styles.flatListElemText}>{item.courseName}</Text>
                             </View>
                         </TouchableOpacity>
                     )}
@@ -91,4 +72,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GradesCategoriesScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(UserCoursesScreen);

@@ -7,6 +7,7 @@ import QuizScreen from '../screens/quizScreen';
 import Settings from '../screens/settings';
 import AccountScreen from '../screens/accountScreen';
 import GradesCategoriesScreen from '../screens/gradesCategoriesScreen';
+import UserCoursesScreen from '../screens/userCoursesScreen';
 
 const screens = {
     LoginScreen: {
@@ -19,8 +20,10 @@ const screens = {
     GradesScreen: {
         screen: GradesScreen,
         navigationOptions: {
-            headerShown: false,
-            gestureEnabled: false
+            title: 'Oceny',
+            headerBackTitle: 'Wróć',
+            headerTransparent: true,
+            headerTintColor: '#FF5E5B'
         },
     },
     ChooseQuiz: {
@@ -55,6 +58,15 @@ const screens = {
     },
     GradesCategories: {
         screen: GradesCategoriesScreen,
+        navigationOptions: {
+            title: 'Przedmioty',
+            headerBackTitle: 'Wróć',
+            headerTransparent: true,
+            headerTintColor: '#FF5E5B'
+        },
+    },
+    UserCourses: {
+        screen: UserCoursesScreen,
         navigationOptions: {
             headerShown: false,
             gestureEnabled: false
