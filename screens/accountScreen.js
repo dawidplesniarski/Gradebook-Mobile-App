@@ -9,6 +9,7 @@ import TabBar from '../components/TabBar'
 
 const AccountScreen = ({navigation, loginReducer}) => {
     const [latestGrade, setLatestGrade] = useState('');
+    const [userCourses, setUserCourses] = useState('');
 
     const fetchLatestGrade = async () => {
         await axios.get(`${API_URL}/grades/findLatest/${loginReducer.loginData.user.albumNo}`)
@@ -19,8 +20,31 @@ const AccountScreen = ({navigation, loginReducer}) => {
             });
     };
 
+    // function courseNamesString(){
+    //     var courses = [];
+    //     for(let i = 0; i < loginReducer.loginData.user.courseId.length; i++){
+    //         courses.push(loginReducer.loginData.user.courseId.courseName[i]);
+    //     }
+    //     courses.join("");
+    //     setUserCourses(courses);
+    // }
+
+    const setCourseNames = () => {
+        var courses = [];
+        let length = loginReducer.loginData.user.courseId.length;
+        for (let i = 0; i < length; i++) {
+            courses.push(loginReducer.loginData.user.courseId[i].courseName);
+            if(i < length - 1){
+                courses.push(', ');
+            }
+        }
+        courses.join('');
+        setUserCourses(courses);
+    };
+
     useEffect(() => {
         fetchLatestGrade();
+        setCourseNames();
     },[]);
 
     return(
@@ -40,6 +64,9 @@ const AccountScreen = ({navigation, loginReducer}) => {
                     </View>
                 </View>
                 <View style={styles.userInfoContainer}>
+                    <Text
+                        style={[styles.userInfoText, {margin: 5, textAlign: 'center', fontSize: 20}]}>Kierunki: {userCourses}
+                    </Text>
                     <Text
                         style={[styles.userInfoText, {margin: 5}]}>Uczelnia: {loginReducer.loginData.user.universityId.universityName}
                     </Text>
