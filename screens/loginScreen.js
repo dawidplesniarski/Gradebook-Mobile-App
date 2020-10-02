@@ -18,7 +18,7 @@ const LoginScreen = ({ navigation, loginFunction, loginReducer, logoutFunction }
                 <TextInput style={styles.textInput} placeholder={'Login'} autoCapitalize = 'none' onChangeText={text=> setLogin(text)}/>
                 <TextInput style={styles.textInput} placeholder={'Password'} autoCapitalize= 'none' secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button disabled={login==='' || password ===''} text={'Login'} isButtonDark={true} onPress={()=>{
-                    loginFunction(login, password,()=>{navigation.navigate('GradesCategories')})}
+                    loginFunction(login, password,()=>{navigation.navigate('UserCourses')})}
                 }
                 />
             </View>

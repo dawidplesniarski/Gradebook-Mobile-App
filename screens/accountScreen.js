@@ -36,18 +36,12 @@ const AccountScreen = ({navigation, loginReducer}) => {
                         <Text style={styles.userInfoText}>{loginReducer.loginData.user.lastName}</Text>
                     </View>
                     <View>
-                        {loginReducer.loginData.user.isAdmin ?
-                            <Text style={styles.userSmallText}>Pracownik</Text> :
-                            <Text style={styles.userSmallText}>Student</Text>
-                        }
+                        <Text style={styles.userSmallText}>Student</Text>
                     </View>
                 </View>
                 <View style={styles.userInfoContainer}>
                     <Text
-                        style={[styles.userInfoText, {margin: 5}]}>Uczelnia: {loginReducer.loginData.university.universityName}
-                    </Text>
-                    <Text
-                        style={[styles.userInfoText, {margin: 5}]}>Kierunek: {loginReducer.loginData.course.courseName}
+                        style={[styles.userInfoText, {margin: 5}]}>Uczelnia: {loginReducer.loginData.user.universityId.universityName}
                     </Text>
                     <Text style={[styles.userInfoText, {margin: 5}]}>Numer
                         albumu: {loginReducer.loginData.user.albumNo}
