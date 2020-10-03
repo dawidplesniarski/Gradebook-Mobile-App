@@ -8,6 +8,7 @@ import {API_URL} from '../utils/helpers';
 import SearchIcon from '../assets/search.png';
 import TabBar from '../components/TabBar';
 import LinearGradient from 'react-native-linear-gradient';
+import SearchBar from '../components/SearchBar/SearchBar';
 
 const GradesCategoriesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
@@ -48,15 +49,7 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
     return (
         <View style={styles.mainContainer}>
             <View style={styles.container}>
-                <View style={styles.searchBarContainer}>
-                    <TextInput
-                        placeholder={'Wyszukaj przedmiot'}
-                        placeholderTextColor={'#25221E'}
-                        style={{width: '80%'}}
-                        onChangeText={(text) => setTypedSubject(text)}
-                    />
-                    <Image source={SearchIcon} style={styles.searchIcon}/>
-                </View>
+                <SearchBar action={(text) => setTypedSubject(text)} placeholder={'Wyszukaj po przedmiocie'}/>
                 <TouchableOpacity
                     style={{width: '90%', marginTop: 10}}
                     onPress={() => navigation.navigate('GradesScreen', {subject: ''})}

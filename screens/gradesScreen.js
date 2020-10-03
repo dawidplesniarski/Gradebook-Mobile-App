@@ -5,7 +5,6 @@ import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import styles from '../styles/gradesScreenStyles';
 import { API_URL } from '../utils/helpers';
-import SearchIcon from '../assets/search.png'
 import TabBar from '../components/TabBar';
 
 const GradesScreen = ({navigation, loginReducer}) => {
@@ -42,15 +41,6 @@ const GradesScreen = ({navigation, loginReducer}) => {
     return(
         <View style={styles.mainContainer}>
             <View style={styles.container}>
-                {/*<View style={styles.searchBarContainer}>*/}
-                {/*    <TextInput*/}
-                {/*        placeholder={'Wyszukaj przedmiot'}*/}
-                {/*        placeholderTextColor={'#25221E'}*/}
-                {/*        style={{width: '80%'}}*/}
-                {/*        onChangeText={(text) => setTypedSubject(text)}*/}
-                {/*    />*/}
-                {/*    <Image source={SearchIcon} style={styles.searchIcon}/>*/}
-                {/*</View>*/}
                 <FlatList
                     refreshing={isLoading}
                     onRefresh={() => updateList()}
