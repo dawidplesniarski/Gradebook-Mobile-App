@@ -16,7 +16,7 @@ export default StyleSheet.create({
     },
     userInfoText:{
         fontFamily: 'Helvetica',
-        fontSize: 22,
+        fontSize: 20,
         color: '#707070'
     },
     userNameContainer:{

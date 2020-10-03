@@ -42,15 +42,15 @@ const GradesScreen = ({navigation, loginReducer}) => {
     return(
         <View style={styles.mainContainer}>
             <View style={styles.container}>
-                <View style={styles.searchBarContainer}>
-                    <TextInput
-                        placeholder={'Wyszukaj przedmiot'}
-                        placeholderTextColor={'#25221E'}
-                        style={{width: '80%'}}
-                        onChangeText={(text) => setTypedSubject(text)}
-                    />
-                    <Image source={SearchIcon} style={styles.searchIcon}/>
-                </View>
+                {/*<View style={styles.searchBarContainer}>*/}
+                {/*    <TextInput*/}
+                {/*        placeholder={'Wyszukaj przedmiot'}*/}
+                {/*        placeholderTextColor={'#25221E'}*/}
+                {/*        style={{width: '80%'}}*/}
+                {/*        onChangeText={(text) => setTypedSubject(text)}*/}
+                {/*    />*/}
+                {/*    <Image source={SearchIcon} style={styles.searchIcon}/>*/}
+                {/*</View>*/}
                 <FlatList
                     refreshing={isLoading}
                     onRefresh={() => updateList()}

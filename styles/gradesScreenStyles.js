@@ -36,9 +36,11 @@ export default StyleSheet.create({
         marginLeft: 5,
     },
     flatListText:{
-        fontSize:14,
-        fontFamily: 'Futura',
+        fontSize:20,
+        fontFamily: 'Helvetica',
         paddingRight: 20,
+        fontWeight: '200',
+        color: '#454545'
     },
     userInfoBox:{
         width:'100%',

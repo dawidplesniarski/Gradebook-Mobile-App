@@ -77,8 +77,8 @@ const QuizScreen = ({navigation, loginReducer}) => {
             setQuestionIndex(questionIndex + 1);
         } else {
             setTestEnded(true);
-            postTestGrade().then(r => console.log('Grade posted'));
-            //deletePermission().then(r => console.log('Album deleted'));
+            postTestGrade().then(r => console.log('Grade posted')); // this method post grade to the serwer
+            deletePermission().then(r => console.log('Album deleted')); // this method delete user album from permissions, user can't re write same quiz
         }
     };
 

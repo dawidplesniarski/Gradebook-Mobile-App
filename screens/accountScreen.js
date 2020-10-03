@@ -20,15 +20,6 @@ const AccountScreen = ({navigation, loginReducer}) => {
             });
     };
 
-    // function courseNamesString(){
-    //     var courses = [];
-    //     for(let i = 0; i < loginReducer.loginData.user.courseId.length; i++){
-    //         courses.push(loginReducer.loginData.user.courseId.courseName[i]);
-    //     }
-    //     courses.join("");
-    //     setUserCourses(courses);
-    // }
-
     const setCourseNames = () => {
         var courses = [];
         let length = loginReducer.loginData.user.courseId.length;
@@ -65,7 +56,7 @@ const AccountScreen = ({navigation, loginReducer}) => {
                 </View>
                 <View style={styles.userInfoContainer}>
                     <Text
-                        style={[styles.userInfoText, {margin: 5, textAlign: 'center', fontSize: 20}]}>Kierunki: {userCourses}
+                        style={[styles.userInfoText, {margin: 5, textAlign: 'center'}]}>Kierunki: {userCourses}
                     </Text>
                     <Text
                         style={[styles.userInfoText, {margin: 5}]}>Uczelnia: {loginReducer.loginData.user.universityId.universityName}
@@ -86,7 +77,7 @@ const AccountScreen = ({navigation, loginReducer}) => {
                     </View>
                     <View style={styles.latestGradesRightContainer}>
                         <SmallButton text={'Oceny'} buttonColor={'#FF5E5B'} onPress={() => {
-                            navigation.navigate('GradesScreen');
+                            navigation.navigate('GradesScreen', {subject: latestGrade.data.subject.subjectName});
                         }}/>
                     </View>
                 </View>

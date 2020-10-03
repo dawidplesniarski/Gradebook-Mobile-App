@@ -1,21 +1,27 @@
-import React,{useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, TouchableOpacity, Image, TextInput} from 'react-native';
 import axios from 'axios';
 import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import styles from '../styles/gradesCategoriesStyles';
-import { API_URL } from '../utils/helpers';
-import SearchIcon from '../assets/search.png'
+import {API_URL} from '../utils/helpers';
+import SearchIcon from '../assets/search.png';
 import TabBar from '../components/TabBar';
+import LinearGradient from 'react-native-linear-gradient';
 
 const GradesCategoriesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
     const [typedSubject, setTypedSubject] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const courseName = navigation.getParam('course');
+    const courseIndex = navigation.getParam('index');
+    let semester = loginReducer.loginData.user.semesters[courseIndex];
 
     const fetchData = () => {
-        axios.get(`${API_URL}/courseSubjects/findBySemester/${courseName}/4`)
+        if(!semester){
+            semester = 1;
+        }
+        axios.get(`${API_URL}/courseSubjects/findBySemester/${courseName}/${semester}`)
             .then(res => {
                 setData(res.data);
             })
@@ -25,21 +31,21 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
     };
 
     const updateList = () => {
-        try{
+        try {
             setIsLoading(true);
             fetchData();
-        } catch(err){
+        } catch (err) {
             console.log(err);
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         fetchData();
-    },[]);
+    }, []);
 
-    return(
+    return (
         <View style={styles.mainContainer}>
             <View style={styles.container}>
                 <View style={styles.searchBarContainer}>
@@ -55,9 +61,11 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
                     style={{width: '90%', marginTop: 10}}
                     onPress={() => navigation.navigate('GradesScreen', {subject: ''})}
                 >
-                    <View style={[styles.flatListElemContainer, {backgroundColor: '#c0ddfc'}]}>
-                        <Text style={styles.flatListElemText}>Wszystkie oceny</Text>
-                    </View>
+                    <LinearGradient colors={['#bee3ec', '#e3f8fc', '#bee3ec']} style={styles.flatListElemContainer}>
+                        <View>
+                            <Text style={styles.flatListElemText}>Wszystkie oceny</Text>
+                        </View>
+                    </LinearGradient>
                 </TouchableOpacity>
                 <FlatList
                     refreshing={isLoading}
@@ -69,9 +77,12 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
                         <TouchableOpacity
                             onPress={() => navigation.navigate('GradesScreen', {subject: item})}
                         >
-                            <View style={styles.flatListElemContainer}>
-                                <Text style={styles.flatListElemText}>{item}</Text>
-                            </View>
+                            <LinearGradient colors={['#e0e0e0', '#f1f1f1', '#e0e0e0']}
+                                            style={styles.flatListElemContainer}>
+                                <View>
+                                    <Text style={styles.flatListElemText}>{item}</Text>
+                                </View>
+                            </LinearGradient>
                         </TouchableOpacity>
                     )}
                 />
@@ -79,15 +90,15 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
             <TabBar navigation={navigation} currentScreen={'Grades'}/>
         </View>
     );
-}
+};
 
-const mapStateToProps = ({ loginReducer}) => {
-    return { loginReducer };
+const mapStateToProps = ({loginReducer}) => {
+    return {loginReducer};
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginFunction: (login, password) => dispatch(loginFunction(login, password))
+        loginFunction: (login, password) => dispatch(loginFunction(login, password)),
     };
 };
 

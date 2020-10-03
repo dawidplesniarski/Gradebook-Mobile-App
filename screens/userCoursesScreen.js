@@ -1,11 +1,12 @@
-import React,{useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, TouchableOpacity, Image, TextInput} from 'react-native';
 import axios from 'axios';
 import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import styles from '../styles/userCoursesStyles';
-import { API_URL } from '../utils/helpers';
+import {API_URL} from '../utils/helpers';
 import TabBar from '../components/TabBar';
+import LinearGradient from 'react-native-linear-gradient';
 
 const UserCoursesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
@@ -22,21 +23,21 @@ const UserCoursesScreen = ({navigation, loginReducer}) => {
     };
 
     const updateList = () => {
-        try{
+        try {
             setIsLoading(true);
             fetchData();
-        } catch(err){
+        } catch (err) {
             console.log(err);
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         fetchData();
-    },[]);
+    }, []);
 
-    return(
+    return (
         <View style={styles.mainContainer}>
             <View style={styles.container}>
                 <Text style={styles.headerText}>Twoje kierunki studiów:</Text>
@@ -46,13 +47,15 @@ const UserCoursesScreen = ({navigation, loginReducer}) => {
                     style={styles.flatList}
                     data={data}
                     keyExtractor={(item, index) => index.toString()}
-                    renderItem={({item}) => (
+                    renderItem={({item, index}) => (
                         <TouchableOpacity
-                            onPress={() => navigation.navigate('GradesCategories', {course: item.courseName})}
+                            onPress={() => navigation.navigate('GradesCategories', {course: item.courseName, index: index})}
                         >
-                            <View style={styles.flatListElemContainer}>
-                                <Text style={styles.flatListElemText}>{item.courseName}</Text>
-                            </View>
+                            <LinearGradient colors={['#e0e0e0', '#f1f1f1', '#e0e0e0']} style={styles.flatListElemContainer}>
+                                <View>
+                                    <Text style={styles.flatListElemText}>{item.courseName}</Text>
+                                </View>
+                            </LinearGradient>
                         </TouchableOpacity>
                     )}
                 />
@@ -60,15 +63,15 @@ const UserCoursesScreen = ({navigation, loginReducer}) => {
             <TabBar navigation={navigation} currentScreen={'Grades'}/>
         </View>
     );
-}
+};
 
-const mapStateToProps = ({ loginReducer}) => {
-    return { loginReducer };
+const mapStateToProps = ({loginReducer}) => {
+    return {loginReducer};
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginFunction: (login, password) => dispatch(loginFunction(login, password))
+        loginFunction: (login, password) => dispatch(loginFunction(login, password)),
     };
 };
 
