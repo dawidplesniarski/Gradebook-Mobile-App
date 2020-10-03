@@ -28,28 +28,28 @@ export default StyleSheet.create({
         fontFamily: 'Futura',
         fontSize: 15,
     },
-    changeImageContainer:{
+    changeImageContainer: {
         flexDirection: 'row',
         width: '90%',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    userAvatar:{
+    userAvatar: {
         width: 100,
         height: 100,
         borderRadius: 20,
-        borderWidth: 0.25
+        borderWidth: 0.25,
     },
-    editImageBar:{
+    editImageBar: {
         flexDirection: 'row',
         width: '70%',
         justifyContent: 'space-between',
         backgroundColor: '#e9e9e9',
         height: 40,
         margin: 8,
-        marginTop:10,
+        marginTop: 10,
         borderRadius: 15,
-        padding:5,
-        alignItems: 'center'
-    }
+        padding: 5,
+        alignItems: 'center',
+    },
 });

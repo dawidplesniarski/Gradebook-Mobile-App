@@ -5,7 +5,7 @@ import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import styles from '../styles/userCoursesStyles';
 import {API_URL} from '../utils/helpers';
-import TabBar from '../components/TabBar';
+import TabBar from '../components/TabBar/TabBar';
 import LinearGradient from 'react-native-linear-gradient';
 
 const UserCoursesScreen = ({navigation, loginReducer}) => {

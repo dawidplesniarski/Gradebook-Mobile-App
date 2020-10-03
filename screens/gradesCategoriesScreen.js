@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import styles from '../styles/gradesCategoriesStyles';
 import {API_URL} from '../utils/helpers';
 import SearchIcon from '../assets/search.png';
-import TabBar from '../components/TabBar';
+import TabBar from '../components/TabBar/TabBar';
 import LinearGradient from 'react-native-linear-gradient';
 import SearchBar from '../components/SearchBar/SearchBar';
 

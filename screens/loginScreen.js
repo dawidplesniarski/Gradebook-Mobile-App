@@ -3,7 +3,6 @@ import {View, Text, ActivityIndicator, StyleSheet, TextInput} from 'react-native
 import Button from '../components/Button';
 import { connect } from 'react-redux';
 import {loginFunction, logoutFunction} from '../actions/loginActions';
-import Logo from '../assets/logo.png'
 
 
 const LoginScreen = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {

@@ -5,7 +5,7 @@ import styles from '../styles/accountScreenStyles';
 import SmallButton from '../components/SmallButton';
 import axios from 'axios';
 import {API_URL} from '../utils/helpers';
-import TabBar from '../components/TabBar'
+import TabBar from '../components/TabBar/TabBar'
 
 const AccountScreen = ({navigation, loginReducer}) => {
     const [latestGrade, setLatestGrade] = useState('');
