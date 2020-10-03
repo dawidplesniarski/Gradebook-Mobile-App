@@ -43,8 +43,9 @@ const screens = {
         screen: Settings,
         navigationOptions: {
             title: 'Ustawienia',
-            headerBackTitle: ' ',
-            headerTintColor: '#FF5E5B'
+            headerBackTitle: 'Wróć',
+            headerTintColor: '#FF5E5B',
+            headerTransparent: true
         },
     },
     AccountScreen: {

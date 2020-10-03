@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {API_URL} from '../utils/helpers';
-import TabBar from '../components/TabBar';
+import TabBar from '../components/TabBar/TabBar';
 
 const ChooseQuiz = ({loginReducer, navigation}) => {
     const [data, setData] = useState([]);

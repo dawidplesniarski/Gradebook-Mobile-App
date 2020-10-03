@@ -1,11 +1,11 @@
 import React from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
-import UserIcon from '../assets/user.png'
-import ExamIcon from '../assets/exam.png';
-import QuizIcon from '../assets/quiz.png';
-import SettingsIcon from '../assets/settings.png';
-import CircleIcon from '../assets/circle.png'
-import styles from '../styles/gradesScreenStyles'
+import UserIcon from '../../assets/user.png'
+import ExamIcon from '../../assets/exam.png';
+import QuizIcon from '../../assets/quiz.png';
+import SettingsIcon from '../../assets/settings.png';
+import CircleIcon from '../../assets/circle.png'
+import styles from './tabBarStyles'
 
 const TabBar = ({navigation, currentScreen}) => {
     return(

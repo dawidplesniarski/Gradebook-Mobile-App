@@ -1,12 +1,11 @@
-import React,{useEffect, useState} from 'react';
-import {View, Text, FlatList, TouchableOpacity, Image, TextInput} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, FlatList} from 'react-native';
 import axios from 'axios';
 import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import styles from '../styles/gradesScreenStyles';
-import { API_URL } from '../utils/helpers';
-import SearchIcon from '../assets/search.png'
-import TabBar from '../components/TabBar';
+import {API_URL} from '../utils/helpers';
+import TabBar from '../components/TabBar/TabBar';
 
 const GradesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
@@ -25,32 +24,23 @@ const GradesScreen = ({navigation, loginReducer}) => {
     };
 
     const updateList = () => {
-        try{
+        try {
             setIsLoading(true);
             fetchData();
-        } catch(err){
+        } catch (err) {
             console.log(err);
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         fetchData();
-    },[]);
+    }, []);
 
-    return(
+    return (
         <View style={styles.mainContainer}>
             <View style={styles.container}>
-                <View style={styles.searchBarContainer}>
-                    <TextInput
-                        placeholder={'Wyszukaj przedmiot'}
-                        placeholderTextColor={'#25221E'}
-                        style={{width: '80%'}}
-                        onChangeText={(text) => setTypedSubject(text)}
-                    />
-                    <Image source={SearchIcon} style={styles.searchIcon}/>
-                </View>
                 <FlatList
                     refreshing={isLoading}
                     onRefresh={() => updateList()}
@@ -76,15 +66,15 @@ const GradesScreen = ({navigation, loginReducer}) => {
             <TabBar navigation={navigation} currentScreen={'Grades'}/>
         </View>
     );
-}
+};
 
-const mapStateToProps = ({ loginReducer}) => {
-    return { loginReducer };
+const mapStateToProps = ({loginReducer}) => {
+    return {loginReducer};
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginFunction: (login, password) => dispatch(loginFunction(login, password))
+        loginFunction: (login, password) => dispatch(loginFunction(login, password)),
     };
 };
 
