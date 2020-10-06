@@ -26,4 +26,17 @@ export default StyleSheet.create({
         fontSize: 22,
         color: '#707070',
     },
+    miniChartsContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '90%'
+    },
+    miniChart: {
+        alignItems: 'center'
+    },
+    miniChartText: {
+        fontFamily: 'Helvetica',
+        fontWeight: '200'
+    }
 });

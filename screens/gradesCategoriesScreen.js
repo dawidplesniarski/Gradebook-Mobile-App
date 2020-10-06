@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList, TouchableOpacity, Image, TextInput} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import axios from 'axios';
 import {loginFunction} from '../actions/loginActions';
 import {connect} from 'react-redux';
 import styles from '../styles/gradesCategoriesStyles';
 import {API_URL} from '../utils/helpers';
-import SearchIcon from '../assets/search.png';
 import TabBar from '../components/TabBar/TabBar';
 import LinearGradient from 'react-native-linear-gradient';
 import SearchBar from '../components/SearchBar/SearchBar';
+import PieChart from '../components/PieChart';
 
 const GradesCategoriesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
@@ -19,7 +19,7 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
     let semester = loginReducer.loginData.user.semesters[courseIndex];
 
     const fetchData = () => {
-        if(!semester){
+        if (!semester) {
             semester = 1;
         }
         axios.get(`${API_URL}/courseSubjects/findBySemester/${courseName}/${semester}`)
@@ -49,7 +49,24 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
     return (
         <View style={styles.mainContainer}>
             <View style={styles.container}>
+
+                <View style={styles.miniChartsContainer}>
+                    <View style={styles.miniChart}>
+                        <Text style={styles.miniChartText}>Semestr 5/7</Text>
+                        <PieChart radius={25} innerRadius={20} percentage={80} color={'#FF5E5B'} backgroundColor={'#ddd'}/>
+                    </View>
+                    <View style={styles.miniChart}>
+                        <Text style={styles.miniChartText}>Rok 3/4</Text>
+                        <PieChart radius={25} innerRadius={20} percentage={80} color={'#FF5E5B'} backgroundColor={'#ddd'}/>
+                    </View>
+                    <View style={styles.miniChart}>
+                        <Text style={styles.miniChartText}>ECTS 24/30</Text>
+                        <PieChart radius={25} innerRadius={20} percentage={80} color={'#FF5E5B'} backgroundColor={'#ddd'}/>
+                    </View>
+                </View>
+
                 <SearchBar action={(text) => setTypedSubject(text)} placeholder={'Wyszukaj po przedmiocie'}/>
+
                 <TouchableOpacity
                     style={{width: '90%', marginTop: 10}}
                     onPress={() => navigation.navigate('GradesScreen', {subject: ''})}
