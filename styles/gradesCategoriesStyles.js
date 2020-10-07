@@ -12,6 +12,7 @@ export default StyleSheet.create({
     flatList: {
         width: '90%',
         marginTop: 10,
+        height: 450
     },
     flatListElemContainer: {
         borderRadius: 12,
@@ -30,7 +31,8 @@ export default StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        width: '90%'
+        width: '90%',
+        padding: 10
     },
     miniChart: {
         alignItems: 'center'

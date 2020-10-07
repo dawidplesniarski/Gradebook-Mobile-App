@@ -14,6 +14,8 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
     const [typedSubject, setTypedSubject] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [studentEcts, setStudentEcts] = useState('');
+    const [totalEcts, setTotalEcts] = useState('');
     const courseName = navigation.getParam('course');
     const courseIndex = navigation.getParam('index');
     let semester = loginReducer.loginData.user.semesters[courseIndex];
@@ -31,6 +33,16 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
             });
     };
 
+    async function fetchEcts() {
+        await axios.get(`${API_URL}/subject/totalEcts/${courseName}/${semester}/${loginReducer.loginData.user.albumNo}`)
+            .then(res => {
+            setStudentEcts(res.data.ects);
+            setTotalEcts(res.data.totalEcts);
+        }).catch(err => {
+            console.log(err);
+        });
+    };
+
     const updateList = () => {
         try {
             setIsLoading(true);
@@ -44,6 +56,7 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
 
     useEffect(() => {
         fetchData();
+        fetchEcts();
     }, []);
 
     return (
@@ -60,7 +73,7 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
                         <PieChart radius={25} innerRadius={20} percentage={80} color={'#FF5E5B'} backgroundColor={'#ddd'}/>
                     </View>
                     <View style={styles.miniChart}>
-                        <Text style={styles.miniChartText}>ECTS 24/30</Text>
+                        <Text style={styles.miniChartText}>ECTS {studentEcts}/{totalEcts}</Text>
                         <PieChart radius={25} innerRadius={20} percentage={80} color={'#FF5E5B'} backgroundColor={'#ddd'}/>
                     </View>
                 </View>
