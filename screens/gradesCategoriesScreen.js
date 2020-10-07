@@ -18,6 +18,7 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
     const [totalEcts, setTotalEcts] = useState('');
     const courseName = navigation.getParam('course');
     const courseIndex = navigation.getParam('index');
+    const [percentage, setPercentage] = useState('50');
     let semester = loginReducer.loginData.user.semesters[courseIndex];
 
     const fetchData = () => {
@@ -38,6 +39,7 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
             .then(res => {
             setStudentEcts(res.data.ects);
             setTotalEcts(res.data.totalEcts);
+            setPercentage(studentEcts / totalEcts * 100)
         }).catch(err => {
             console.log(err);
         });
@@ -66,7 +68,7 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
                 <View style={styles.miniChartsContainer}>
                     <View style={styles.miniChart}>
                         <Text style={styles.miniChartText}>Semestr 5/7</Text>
-                        <PieChart radius={25} innerRadius={20} percentage={80} color={'#FF5E5B'} backgroundColor={'#ddd'}/>
+                        <PieChart radius={25} innerRadius={20} percentage={(semester / 7) * 100} color={'#FF5E5B'} backgroundColor={'#ddd'}/>
                     </View>
                     <View style={styles.miniChart}>
                         <Text style={styles.miniChartText}>Rok 3/4</Text>
@@ -74,7 +76,11 @@ const GradesCategoriesScreen = ({navigation, loginReducer}) => {
                     </View>
                     <View style={styles.miniChart}>
                         <Text style={styles.miniChartText}>ECTS {studentEcts}/{totalEcts}</Text>
-                        <PieChart radius={25} innerRadius={20} percentage={80} color={'#FF5E5B'} backgroundColor={'#ddd'}/>
+                        {studentEcts !== '' && totalEcts !== '' ?
+                            <PieChart radius={25} innerRadius={20} percentage={(studentEcts / totalEcts) * 100} color={'#FF5E5B'} backgroundColor={'#ddd'}/>
+                            :
+                            <PieChart radius={25} innerRadius={20} percentage={50} color={'#FF5E5B'} backgroundColor={'#ddd'}/>
+                        }
                     </View>
                 </View>
 
