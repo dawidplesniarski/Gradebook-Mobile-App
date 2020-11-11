@@ -9,14 +9,14 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     userImage: {
-        width: 300,
-        height: 300,
+        width: 250,
+        height: 250,
         borderRadius: 200,
         borderWidth: 0.25,
     },
     userInfoText: {
         fontFamily: 'Helvetica',
-        fontSize: 20,
+        fontSize: 22,
         color: '#707070',
     },
     userNameContainer: {

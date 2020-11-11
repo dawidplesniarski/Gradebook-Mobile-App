@@ -23,7 +23,7 @@ const screens = {
             title: 'Oceny',
             headerBackTitle: 'Wróć',
             headerTransparent: true,
-            headerTintColor: '#FF5E5B'
+            headerTintColor: '#0D99FF'
         },
     },
     ChooseQuiz: {
@@ -32,7 +32,7 @@ const screens = {
             headerTransparent: true,
             headerBackTitle: ' ',
             title: '',
-            headerTintColor: '#FF5E5B'
+            headerTintColor: '#0D99FF'
         },
     },
     QuizScreen: {
@@ -44,7 +44,7 @@ const screens = {
         navigationOptions: {
             title: 'Ustawienia',
             headerBackTitle: 'Wróć',
-            headerTintColor: '#FF5E5B',
+            headerTintColor: '#0D99FF',
             headerTransparent: true
         },
     },
@@ -54,7 +54,7 @@ const screens = {
             title: '',
             headerBackTitle: ' ',
             headerTransparent: true,
-            headerTintColor: '#FF5E5B'
+            headerTintColor: '#0D99FF'
         },
     },
     GradesCategories: {
@@ -63,7 +63,7 @@ const screens = {
             title: 'Przedmioty',
             headerBackTitle: 'Wróć',
             headerTransparent: true,
-            headerTintColor: '#FF5E5B'
+            headerTintColor: '#0D99FF'
         },
     },
     UserCourses: {

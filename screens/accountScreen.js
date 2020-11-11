@@ -21,7 +21,7 @@ const AccountScreen = ({navigation, loginReducer}) => {
     };
 
     const setCourseNames = () => {
-        var courses = [];
+        let courses = [];
         let length = loginReducer.loginData.user.courseId.length;
         for (let i = 0; i < length; i++) {
             courses.push(loginReducer.loginData.user.courseId[i].courseName);
@@ -32,6 +32,18 @@ const AccountScreen = ({navigation, loginReducer}) => {
         courses.join('');
         setUserCourses(courses);
     };
+
+    // const renderCourses = () => {
+    //     var courses = [];
+    //     loginReducer.loginData.user.courseId.forEach(el => {
+    //         courses.push(el.courseName);
+    //     });
+    //     render() (
+    //         <View>
+    //             courses.map((item, index) => <Text key={index}>{item}</Text>);
+    //         </View>
+    //     )
+    // }
 
     useEffect(() => {
         fetchLatestGrade();
@@ -56,8 +68,17 @@ const AccountScreen = ({navigation, loginReducer}) => {
                 </View>
                 <View style={styles.userInfoContainer}>
                     <Text
-                        style={[styles.userInfoText, {margin: 5, textAlign: 'center'}]}>Kierunki: {userCourses}
+                        style={[styles.userInfoText, {margin: 5, textAlign: 'center'}]}>Kierunki:
                     </Text>
+                    <View style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 20, marginTop: 10}}>
+                        {loginReducer.loginData && loginReducer.loginData.user.courseId.map((value, index) =>{
+                            return(
+                                <Text style={styles.userInfoText}>
+                                    {value.courseName}
+                                </Text>
+                            )
+                        })}
+                    </View>
                     <Text
                         style={[styles.userInfoText, {margin: 5}]}>Uczelnia: {loginReducer.loginData.user.universityId.universityName}
                     </Text>
@@ -76,19 +97,8 @@ const AccountScreen = ({navigation, loginReducer}) => {
                         </Text>
                     </View>
                     <View style={styles.latestGradesRightContainer}>
-                        <SmallButton text={'Oceny'} buttonColor={'#FF5E5B'} onPress={() => {
+                        <SmallButton text={'Oceny'} buttonColor={'#0D99FF'} onPress={() => {
                             navigation.navigate('GradesScreen', {subject: latestGrade.data.subject.subjectName});
-                        }}/>
-                    </View>
-                </View>
-                <View style={styles.latestGradesContainer}>
-                    <View style={styles.latestGradesLeftContainer}>
-                        <Text style={[styles.userInfoText, {padding: 7}]}>Twoje komunikaty:</Text>
-                        <Text style={[styles.userInfoText, {padding: 7, fontSize: 15}]}>Egzamin z kryptografii
-                            przeniesiony na wtorek</Text>
-                    </View>
-                    <View style={styles.latestGradesRightContainer}>
-                        <SmallButton text={'Komunikaty'} buttonColor={'#FF5E5B'} onPress={() => {
                         }}/>
                     </View>
                 </View>
