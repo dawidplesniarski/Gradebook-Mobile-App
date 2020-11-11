@@ -5,7 +5,11 @@ import styles from '../styles/accountScreenStyles';
 import SmallButton from '../components/SmallButton';
 import axios from 'axios';
 import {API_URL} from '../utils/helpers';
-import TabBar from '../components/TabBar/TabBar'
+import TabBar from '../components/TabBar/TabBar';
+import CoursesIcon from '../assets/reading-book.png';
+import UniversityIcon from '../assets/university.png';
+import StudentsCap from '../assets/students-cap.png';
+import EmailIcon from '../assets/email.png';
 
 const AccountScreen = ({navigation, loginReducer}) => {
     const [latestGrade, setLatestGrade] = useState('');
@@ -20,34 +24,10 @@ const AccountScreen = ({navigation, loginReducer}) => {
             });
     };
 
-    const setCourseNames = () => {
-        let courses = [];
-        let length = loginReducer.loginData.user.courseId.length;
-        for (let i = 0; i < length; i++) {
-            courses.push(loginReducer.loginData.user.courseId[i].courseName);
-            if(i < length - 1){
-                courses.push(', ');
-            }
-        }
-        courses.join('');
-        setUserCourses(courses);
-    };
 
-    // const renderCourses = () => {
-    //     var courses = [];
-    //     loginReducer.loginData.user.courseId.forEach(el => {
-    //         courses.push(el.courseName);
-    //     });
-    //     render() (
-    //         <View>
-    //             courses.map((item, index) => <Text key={index}>{item}</Text>);
-    //         </View>
-    //     )
-    // }
 
     useEffect(() => {
         fetchLatestGrade();
-        setCourseNames();
     },[]);
 
     return(
@@ -67,33 +47,47 @@ const AccountScreen = ({navigation, loginReducer}) => {
                     </View>
                 </View>
                 <View style={styles.userInfoContainer}>
-                    <Text
-                        style={[styles.userInfoText, {margin: 5, textAlign: 'center'}]}>Kierunki:
-                    </Text>
-                    <View style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 20, marginTop: 10}}>
-                        {loginReducer.loginData && loginReducer.loginData.user.courseId.map((value, index) =>{
-                            return(
-                                <Text style={styles.userInfoText}>
-                                    {value.courseName}
-                                </Text>
-                            )
-                        })}
+                    <View style={styles.userInfoItemWrapper}>
+                        <Image source={CoursesIcon} style={styles.userInfoItemIcon}/>
+                        <View>
+                            <Text
+                                style={[styles.userInfoText, {margin: 5, textAlign: 'center'}]}>Kierunki:
+                            </Text>
+                            <View style={styles.userCoursesContainer}>
+                                {loginReducer.loginData && loginReducer.loginData.user.courseId.map((value, index) =>{
+                                    return(
+                                        <Text style={styles.userCoursesText}>
+                                            {value.courseName}: semestr {loginReducer.loginData.user.semesters[index]}
+                                        </Text>
+                                    )
+                                })}
+                            </View>
+                        </View>
                     </View>
-                    <Text
-                        style={[styles.userInfoText, {margin: 5}]}>Uczelnia: {loginReducer.loginData.user.universityId.universityName}
-                    </Text>
-                    <Text style={[styles.userInfoText, {margin: 5}]}>Numer
-                        albumu: {loginReducer.loginData.user.albumNo}
-                    </Text>
-                    <Text style={[styles.userInfoText, {margin: 5, marginBottom: 20}]}>Adres
-                        e-mail: {loginReducer.loginData.user.email}
-                    </Text>
+                    <View style={[styles.userInfoItemWrapper, {marginBottom: 10}]}>
+                        <Image source={UniversityIcon} style={styles.userInfoItemIcon}/>
+                        <Text
+                            style={[styles.userInfoText, {margin: 5}]}>Uczelnia: {loginReducer.loginData.user.universityId.universityName}
+                        </Text>
+                    </View>
+                    <View style={[styles.userInfoItemWrapper, {marginBottom: 10}]}>
+                        <Image source={StudentsCap} style={styles.userInfoItemIcon}/>
+                        <Text style={[styles.userInfoText, {margin: 5}]}>
+                            Numer albumu: {loginReducer.loginData.user.albumNo}
+                        </Text>
+                    </View>
+                    <View style={styles.userInfoItemWrapper}>
+                        <Image source={EmailIcon} style={styles.userInfoItemIcon}/>
+                        <Text style={[styles.userInfoText, {margin: 5, marginBottom: 20}]}>Adres
+                            e-mail: {loginReducer.loginData.user.email}
+                        </Text>
+                    </View>
                 </View>
                 <View style={styles.latestGradesContainer}>
                     <View style={styles.latestGradesLeftContainer}>
                         <Text style={[styles.userInfoText, {padding: 7}]}>Twoje najnowsze oceny:</Text>
                         <Text style={[styles.userInfoText, {fontSize: 18, padding: 7}]}>
-                            {latestGrade.data && `${latestGrade.data.subject.subjectName}: ${latestGrade.data.grade}`}
+                            {latestGrade.data && `${latestGrade.data.subject.subjectName}: ${latestGrade.data.grade.toFixed(1)}`}
                         </Text>
                     </View>
                     <View style={styles.latestGradesRightContainer}>
