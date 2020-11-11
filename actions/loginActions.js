@@ -26,6 +26,13 @@ const loginFailed = error => {
     }
 }
 
+export const loginFailedReset = () => {
+    return {
+        type: LOGIN_ERROR,
+        payload: null
+    }
+}
+
 const logout = () => {
     return{
         type: LOGIN_LOGOUT,

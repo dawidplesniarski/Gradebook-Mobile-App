@@ -7,6 +7,7 @@ import styles from '../styles/userCoursesStyles';
 import {API_URL} from '../utils/helpers';
 import TabBar from '../components/TabBar/TabBar';
 import LinearGradient from 'react-native-linear-gradient';
+import CourseImage from '../assets/courses.png';
 
 const UserCoursesScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
@@ -40,7 +41,8 @@ const UserCoursesScreen = ({navigation, loginReducer}) => {
     return (
         <View style={styles.mainContainer}>
             <View style={styles.container}>
-                <Text style={styles.headerText}>Twoje kierunki studiów:</Text>
+                <Image source={CourseImage} style={{width: '60%', height: 150}}/>
+                <Text style={styles.headerText}>Wybierz kierunek</Text>
                 <FlatList
                     refreshing={isLoading}
                     onRefresh={() => updateList()}
@@ -51,7 +53,7 @@ const UserCoursesScreen = ({navigation, loginReducer}) => {
                         <TouchableOpacity
                             onPress={() => navigation.navigate('GradesCategories', {course: item.courseName, index: index})}
                         >
-                            <LinearGradient colors={['#e0e0e0', '#f1f1f1', '#e0e0e0']} style={styles.flatListElemContainer}>
+                            <LinearGradient colors={['#e9e9e9', '#f1f1f1', '#e0e0e0']} style={styles.flatListElemContainer}>
                                 <View>
                                     <Text style={styles.flatListElemText}>{item.courseName}</Text>
                                 </View>

@@ -4,7 +4,7 @@ export default StyleSheet.create({
     mainContainer: {
         flex: 1,
         justifyContent: 'space-between',
-        paddingTop: 40,
+        paddingTop: 50,
     },
     container: {
         alignItems: 'center',
@@ -24,13 +24,15 @@ export default StyleSheet.create({
     },
     flatListElemText: {
         fontFamily: 'Helvetica',
-        fontSize: 22,
-        color: '#707070',
+        fontSize: 25,
+        fontWeight: '400',
+        color: '#8c8c8c',
     },
     headerText: {
         fontFamily: 'Helvetica',
         fontSize: 30,
-        color: '#707070',
+        fontWeight: '500',
+        color: '#0e8ae5',
         marginTop: 20,
         marginBottom: 20,
     },
