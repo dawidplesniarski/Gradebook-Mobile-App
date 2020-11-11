@@ -47,12 +47,9 @@ const AccountScreen = ({navigation, loginReducer}) => {
                     </View>
                 </View>
                 <View style={styles.userInfoContainer}>
-                    <View style={styles.userInfoItemWrapper}>
+                    <View style={[styles.userInfoItemWrapper, {marginBottom: 10}]}>
                         <Image source={CoursesIcon} style={styles.userInfoItemIcon}/>
                         <View>
-                            <Text
-                                style={[styles.userInfoText, {margin: 5, textAlign: 'center'}]}>Kierunki:
-                            </Text>
                             <View style={styles.userCoursesContainer}>
                                 {loginReducer.loginData && loginReducer.loginData.user.courseId.map((value, index) =>{
                                     return(
@@ -67,19 +64,19 @@ const AccountScreen = ({navigation, loginReducer}) => {
                     <View style={[styles.userInfoItemWrapper, {marginBottom: 10}]}>
                         <Image source={UniversityIcon} style={styles.userInfoItemIcon}/>
                         <Text
-                            style={[styles.userInfoText, {margin: 5}]}>Uczelnia: {loginReducer.loginData.user.universityId.universityName}
+                            style={[styles.userInfoText, {margin: 5}]}>{loginReducer.loginData.user.universityId.universityName}
                         </Text>
                     </View>
                     <View style={[styles.userInfoItemWrapper, {marginBottom: 10}]}>
                         <Image source={StudentsCap} style={styles.userInfoItemIcon}/>
                         <Text style={[styles.userInfoText, {margin: 5}]}>
-                            Numer albumu: {loginReducer.loginData.user.albumNo}
+                            {loginReducer.loginData.user.albumNo}
                         </Text>
                     </View>
                     <View style={styles.userInfoItemWrapper}>
                         <Image source={EmailIcon} style={styles.userInfoItemIcon}/>
-                        <Text style={[styles.userInfoText, {margin: 5, marginBottom: 20}]}>Adres
-                            e-mail: {loginReducer.loginData.user.email}
+                        <Text style={styles.userInfoText}>
+                            {loginReducer.loginData.user.email}
                         </Text>
                     </View>
                 </View>

@@ -16,7 +16,7 @@ export default StyleSheet.create({
     userInfoText: {
         fontFamily: 'Helvetica',
         fontSize: 22,
-        color: '#707070',
+        color: '#707070'
     },
     userCoursesText: {
       fontFamily: 'Helvetica',
@@ -33,7 +33,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
         width: '100%',
-        paddingBottom: 10,
+        paddingBottom: 30,
         borderColor: '#676767',
     },
     userImageContainer: {
@@ -59,6 +59,8 @@ export default StyleSheet.create({
         alignItems: 'center',
         paddingTop: 10,
         paddingBottom: 10,
+        borderTopWidth: 0.25,
+        borderBottomWidth: 0.25
     },
     latestGradesLeftContainer: {
         marginLeft: 5,
@@ -70,7 +72,7 @@ export default StyleSheet.create({
     userCoursesContainer: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         marginBottom: 20,
         marginTop: 10
     },
@@ -78,10 +80,12 @@ export default StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        marginLeft: -50
+        width: '90%',
+        justifyContent: 'flex-start'
     },
     userInfoItemIcon: {
         width: 50,
-        height: 50
+        height: 50,
+        marginRight: 15
     }
 });
