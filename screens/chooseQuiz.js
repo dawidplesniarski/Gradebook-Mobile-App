@@ -6,11 +6,13 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {API_URL} from '../utils/helpers';
 import TabBar from '../components/TabBar/TabBar';
+import AlertComponent from '../components/Alert/AlertComponent';
 
 const ChooseQuiz = ({loginReducer, navigation}) => {
     const [data, setData] = useState([]);
     const [selectedItem, setSelectedItem] = useState('matematyka');
     const [includesAlbum, setIncludesAlbum] = useState(false);
+    const [alertVisible, setAlertVisible] = useState(false);
 
 
     const getCategories = async () => {
@@ -31,6 +33,7 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
                 setIncludesAlbum(true);
                 successCallback();
             } else {
+                setAlertVisible(true);
             }
         } catch (err) {
         }
@@ -48,26 +51,29 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
         )}
     else{
         return (
-            <View style={styles.container}>
-                <View style={{marginTop: '40%'}}>
-                    <Text style={styles.titleText}>Wybierz temat testu:</Text>
-                    <Picker
-                        style={styles.datePicker}
-                        selectedValue={selectedItem}
-                        onValueChange={value => {
-                            setSelectedItem(value);
-                        }}>
-                        {data.map((value, index) => <Picker.Item label={`${value}`} value={`${value}`} key={index}/>)}
-                    </Picker>
-                    <View style={{paddingLeft: '25%'}}>
-                        <Button text={'Start test!'} isButtonDark={true}
-                                onPress={() =>
-                                    checkPermission(() => navigation.navigate('QuizScreen', {testCategory: selectedItem}))}
-                        />
+            <>
+                {alertVisible && <AlertComponent type={'error'} message={`Brak dostępu do testu ${selectedItem}`} onClick={() => setAlertVisible(false)}/>}
+                <View style={styles.container}>
+                    <View style={{marginTop: '40%'}}>
+                        <Text style={styles.titleText}>Wybierz temat testu:</Text>
+                        <Picker
+                            style={styles.datePicker}
+                            selectedValue={selectedItem}
+                            onValueChange={value => {
+                                setSelectedItem(value);
+                            }}>
+                            {data.map((value, index) => <Picker.Item label={`${value}`} value={`${value}`} key={index}/>)}
+                        </Picker>
+                        <View style={{paddingLeft: '25%'}}>
+                            <Button text={'Start test!'} isButtonDark={true}
+                                    onPress={() =>
+                                        checkPermission(() => navigation.navigate('QuizScreen', {testCategory: selectedItem}))}
+                            />
+                        </View>
                     </View>
+                    <TabBar navigation={navigation} currentScreen={'ChooseQuiz'}/>
                 </View>
-                <TabBar navigation={navigation} currentScreen={'ChooseQuiz'}/>
-            </View>
+            </>
         );
     }
 }

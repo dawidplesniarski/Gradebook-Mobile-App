@@ -8,7 +8,8 @@ const SearchBar = ({placeholder, action}) => {
         <View style={styles.searchBarContainer}>
         <TextInput
             placeholder={placeholder}
-            placeholderTextColor={'#25221E'}
+            placeholderTextColor={'#3b3835'}
+            placeHolderTextFamily={'Helvetica'}
             style={{width: '80%'}}
             onChangeText={action}
         />

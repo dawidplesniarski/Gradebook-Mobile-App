@@ -1,28 +1,38 @@
 import React, {Component, useEffect, useState} from 'react';
-import {View, Text, ActivityIndicator, StyleSheet, TextInput} from 'react-native';
+import {View, Text, ActivityIndicator, StyleSheet, TextInput, Image} from 'react-native';
 import Button from '../components/Button';
 import { connect } from 'react-redux';
-import {loginFunction, logoutFunction} from '../actions/loginActions';
+import {loginFailedReset, loginFunction} from '../actions/loginActions';
+import MaleAvatar from '../assets/male-avatar.png';
+import AlertComponent from '../components/Alert/AlertComponent';
 
-
-const LoginScreen = ({ navigation, loginFunction, loginReducer, logoutFunction }) => {
+const LoginScreen = ({ navigation, loginFunction, loginReducer, loginFailedReset }) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+    const [alertVisible, setAlertVisible] = useState(false);
+
+    useEffect(() => {
+        if(loginReducer.loginFailed) {
+            setAlertVisible(true);
+        }
+    },[])
 
     return(
-        <View navigation={navigation} style={styles.container}>
-            <Text style={styles.title}>Gradebook</Text>
-            <View style={styles.loginArea}>
-                {loginReducer.isLoading && <ActivityIndicator/>}
-                <TextInput style={styles.textInput} placeholder={'Login'} autoCapitalize = 'none' onChangeText={text=> setLogin(text)}/>
-                <TextInput style={styles.textInput} placeholder={'Password'} autoCapitalize= 'none' secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
-                <Button disabled={login==='' || password ===''} text={'Login'} isButtonDark={true} onPress={()=>{
-                    loginFunction(login, password,()=>{navigation.navigate('UserCourses')})}
-                }
-                />
+        <>
+            {loginReducer.loginFailed && <AlertComponent type={'error'} message={'Nieprawidłowe dane logowania'} onClick={() => loginFailedReset()}/>}
+            <View navigation={navigation} style={styles.container}>
+                <Image source={MaleAvatar} style={{width: 200, height: 200, borderRadius: 100}}/>
+                <View style={styles.loginArea}>
+                    {loginReducer.isLoading && <ActivityIndicator/>}
+                    <TextInput style={styles.textInput} placeholder={'Login'} autoCapitalize = 'none' onChangeText={text=> setLogin(text)}/>
+                    <TextInput style={styles.textInput} placeholder={'Hasło'} autoCapitalize= 'none' secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
+                    <Button disabled={login==='' || password ===''} text={'Login'} isButtonDark={true} onPress={()=>{
+                        loginFunction(login, password,()=>{navigation.navigate('UserCourses')})}
+                    }
+                    />
+                </View>
             </View>
-            {loginReducer.loginFailed && <Text style={{fontFamily:'Futura', fontSize: 20, color: 'red'}}>{'Login or password incorrect!'}</Text>}
-        </View>
+        </>
     )
 }
 
@@ -34,7 +44,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     textInput:{
-        backgroundColor: '#dadada',
+        backgroundColor: '#e3e3e3',
         height: 50,
         width: '90%',
         marginBottom: 15,
@@ -79,6 +89,7 @@ const mapStateToProps = ({ loginReducer}) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         loginFunction: (login, password, successCallback) => dispatch(loginFunction(login, password, successCallback)),
+        loginFailedReset: () => dispatch(loginFailedReset())
     };
 };
 
