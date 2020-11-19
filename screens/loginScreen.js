@@ -12,7 +12,7 @@ const LoginScreen = ({ navigation, loginFunction, loginReducer, loginFailedReset
 
     return(
         <>
-            {loginReducer.loginFailed && <AlertComponent type={'error'} message={'Nieprawidłowe dane logowania'} onClick={() => loginFailedReset()}/>}
+            {loginReducer.loginFailed && <AlertComponent type={'error'} title={'Nie udało się zalogować'} message={'Nieprawidłowe dane logowania'} onClick={() => loginFailedReset()}/>}
             <View navigation={navigation} style={styles.container}>
                 <Image source={MaleAvatar} style={{width: 200, height: 200, borderRadius: 100}}/>
                 <View style={styles.loginArea}>

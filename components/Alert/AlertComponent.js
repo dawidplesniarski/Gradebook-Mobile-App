@@ -15,7 +15,7 @@ const AlertComponent = ({type, message, onClick, title}) => {
                     </View>
                     {title ?
                         <Text style={styles.alertTitleText}>{title}</Text>:
-                        <Text style={styles.alertTitleText}> Operacja powiodła się</Text>
+                        <Text style={styles.alertTitleText}>Operacja powiodła się</Text>
                     }
                     <Text style={styles.alertMessageText}>{message}</Text>
                     <SmallButton text={'Zamknij'} onPress={onClick} buttonColor={'#9cd4ae'}/>
@@ -26,7 +26,7 @@ const AlertComponent = ({type, message, onClick, title}) => {
                     </View>
                     {title ?
                         <Text style={styles.alertTitleText}>{title}</Text>:
-                        <Text style={styles.alertTitleText}> Operacja powiodła się</Text>
+                        <Text style={styles.alertTitleText}>Operacja nie powiodła się</Text>
                     }
                     <Text style={styles.alertMessageText}>{message}</Text>
                     <SmallButton text={'Zamknij'} onPress={onClick} buttonColor={'#e54053'}/>

@@ -8,6 +8,7 @@ import {API_URL} from '../utils/helpers';
 import editIcon from '../assets/edit.png';
 import styles from '../styles/settingsStyles';
 import AlertComponent from '../components/Alert/AlertComponent';
+import ColorButton from '../components/ColorButton';
 
 
 const Settings = ({navigation, logoutFunction, loginReducer}) => {
@@ -83,17 +84,19 @@ const Settings = ({navigation, logoutFunction, loginReducer}) => {
                     </View>
                 </View>
                 <View style={styles.changePasswordContainer}>
+                    <Text style={styles.changePasswordText}>Zmień hasło</Text>
                     <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true}
                                onChangeText={(text) => setOldPassword(text)} placeholder={'Stare hasło'}/>
                     <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true}
                                onChangeText={(text) => setNewPassword(text)} placeholder={'Nowe hasło'}/>
                     <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true}
                                onChangeText={(text) => setConfirmPassword(text)} placeholder={'Potwierdź nowe hasło'}/>
-                    <Button text={'Zmień hasło'}
+                    <ColorButton text={'Zmień hasło'}
+                            buttonColor={'#0e8ae5'}
                             disabled={oldPassword === '' || newPassword === '' || confirmPassword === ''}
-                            isButtonDark={true} onPress={changePassword}/>
+                            onPress={changePassword}/>
                 </View>
-                <Button isButtonDark={true} text={'Wyloguj'} onPress={() => {
+                <ColorButton buttonColor={'#0e8ae5'} text={'Wyloguj'} onPress={() => {
                     logoutFunction(() => {
                         navigation.navigate('LoginScreen');
                     });
