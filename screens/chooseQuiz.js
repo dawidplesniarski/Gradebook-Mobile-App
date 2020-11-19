@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator, Image} from 'react-native';
 import {Picker} from '@react-native-community/picker';
-import Button from '../components/Button';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {API_URL} from '../utils/helpers';
 import TabBar from '../components/TabBar/TabBar';
 import AlertComponent from '../components/Alert/AlertComponent';
+import QuizImage from '../assets/choose-quiz.png';
+import ColorButton from '../components/ColorButton';
 
 const ChooseQuiz = ({loginReducer, navigation}) => {
     const [data, setData] = useState([]);
@@ -54,8 +55,11 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
             <>
                 {alertVisible && <AlertComponent type={'error'} message={`Brak dostępu do testu ${selectedItem}`} onClick={() => setAlertVisible(false)}/>}
                 <View style={styles.container}>
-                    <View style={{marginTop: '40%'}}>
-                        <Text style={styles.titleText}>Wybierz temat testu:</Text>
+                    <View style={{marginTop: '25%'}}>
+                        <View style={styles.contentWrapper}>
+                            <Image source={QuizImage} style={{width: 250, height: 150}}/>
+                            <Text style={styles.headerText}>Wybierz temat testu</Text>
+                        </View>
                         <Picker
                             style={styles.datePicker}
                             selectedValue={selectedItem}
@@ -64,8 +68,8 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
                             }}>
                             {data.map((value, index) => <Picker.Item label={`${value}`} value={`${value}`} key={index}/>)}
                         </Picker>
-                        <View style={{paddingLeft: '25%'}}>
-                            <Button text={'Start test!'} isButtonDark={true}
+                        <View style={[styles.contentWrapper, {marginTop: 20}]}>
+                            <ColorButton buttonColor={'#0e8ae5'} text={'Zacznij test'}
                                     onPress={() =>
                                         checkPermission(() => navigation.navigate('QuizScreen', {testCategory: selectedItem}))}
                             />
@@ -85,6 +89,11 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent: 'space-between'
     },
+    contentWrapper: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
     titleText:{
         fontSize:20,
         fontFamily: 'Futura',
@@ -92,10 +101,24 @@ const styles = StyleSheet.create({
         paddingTop:10,
     },
     datePicker:{
-        margin:10,
+        marginTop: 25,
+        marginBottom: 25,
+        width: '85%',
+        alignSelf: 'center',
+        borderWidth: 0.25,
+        borderColor: '#0e8ae5',
+        borderRadius: 15
     },
     button:{
         justifyContent:'center'
+    },
+    headerText: {
+        fontFamily: 'Helvetica',
+        fontSize: 30,
+        fontWeight: '500',
+        color: '#0e8ae5',
+        marginTop: 20,
+        marginBottom: 20
     }
 });
 

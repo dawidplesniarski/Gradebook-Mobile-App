@@ -1,32 +1,25 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import {View, Text, ActivityIndicator, StyleSheet, TextInput, Image} from 'react-native';
-import Button from '../components/Button';
 import { connect } from 'react-redux';
 import {loginFailedReset, loginFunction} from '../actions/loginActions';
 import MaleAvatar from '../assets/male-avatar.png';
 import AlertComponent from '../components/Alert/AlertComponent';
+import ColorButton from '../components/ColorButton';
 
 const LoginScreen = ({ navigation, loginFunction, loginReducer, loginFailedReset }) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
-    const [alertVisible, setAlertVisible] = useState(false);
-
-    useEffect(() => {
-        if(loginReducer.loginFailed) {
-            setAlertVisible(true);
-        }
-    },[])
 
     return(
         <>
-            {loginReducer.loginFailed && <AlertComponent type={'error'} message={'Nieprawidłowe dane logowania'} onClick={() => loginFailedReset()}/>}
+            {loginReducer.loginFailed && <AlertComponent type={'error'} title={'Nie udało się zalogować'} message={'Nieprawidłowe dane logowania'} onClick={() => loginFailedReset()}/>}
             <View navigation={navigation} style={styles.container}>
                 <Image source={MaleAvatar} style={{width: 200, height: 200, borderRadius: 100}}/>
                 <View style={styles.loginArea}>
                     {loginReducer.isLoading && <ActivityIndicator/>}
                     <TextInput style={styles.textInput} placeholder={'Login'} autoCapitalize = 'none' onChangeText={text=> setLogin(text)}/>
                     <TextInput style={styles.textInput} placeholder={'Hasło'} autoCapitalize= 'none' secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
-                    <Button disabled={login==='' || password ===''} text={'Login'} isButtonDark={true} onPress={()=>{
+                    <ColorButton disabled={login==='' || password ===''} buttonColor={'#0f90ee'} text={'Login'} onPress={()=>{
                         loginFunction(login, password,()=>{navigation.navigate('UserCourses')})}
                     }
                     />

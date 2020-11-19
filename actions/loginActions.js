@@ -5,6 +5,7 @@ import{
     LOGIN_ERROR,
     LOGIN_LOGOUT
 } from '../reducers/loginReducer';
+import {API_URL} from '../utils/helpers';
 
 const loginStart = () => {
     return{
@@ -42,7 +43,7 @@ const logout = () => {
 export const loginFunction = (login, password, successCallback) => async dispatch => {
     dispatch(loginStart());
     try{
-        const { data } = await axios.post('https://node-app-4fun.herokuapp.com/users/login',{login, password});
+        const { data } = await axios.post(`${API_URL}/users/login`,{login, password});
         dispatch(loginSuccess(data));
         successCallback();
     }catch(error){

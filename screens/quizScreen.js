@@ -6,6 +6,8 @@ import Pie from 'react-native-pie';
 import styles from '../styles/quizScreenStyles';
 import {connect} from 'react-redux';
 import {API_URL} from '../utils/helpers';
+import ColorButton from '../components/ColorButton';
+import AlertComponent from '../components/Alert/AlertComponent';
 
 const QuizScreen = ({navigation, loginReducer}) => {
     const [data, setData] = useState([]);
@@ -120,9 +122,9 @@ const QuizScreen = ({navigation, loginReducer}) => {
         if (!testStarted) {
             return (
                 <View style={styles.startTestContainer}>
-                    <Text style={styles.answersText}>{`Kategoria: ${testCategory}`}</Text>
-                    <Text style={styles.answersText}>{`Ilość pytań: ${data.length}`}</Text>
-                    <Button text={'Rozpocznij test'} isButtonDark={true} onPress={() => {
+                    <Text style={styles.headerText}>{`Kategoria: ${testCategory}`}</Text>
+                    <Text style={[styles.headerText,{marginBottom: 40}]}>{`Ilość pytań: ${data.length}`}</Text>
+                    <ColorButton text={'Rozpocznij test'} buttonColor={'#0e8ae5'} onPress={() => {
                         setTestStarted(true);
                     }}/>
                 </View>
@@ -130,12 +132,11 @@ const QuizScreen = ({navigation, loginReducer}) => {
         } else if (testEnded) {
             return (
                 <View style={styles.container}>
-                    <View style={styles.resultBox}>
-                        <Text style={styles.answersText}>{`Twój wynik to ${userPercentage} %`}</Text>
-                        {userPercentage > 50 ?
-                            <Text style={styles.testPassedText}>Test zaliczony</Text> :
-                            <Text style={styles.testFailedText}>Test nie zaliczony</Text>}
-                    </View>
+
+                    {userPercentage > 50 ?
+                        <AlertComponent type={'success'} onClick={() => navigation.navigate('ChooseQuiz')} message={`Zaliczyłeś test z wynikiem ${userPercentage}`} title={'Test zaliczony'}/> :
+                        <AlertComponent type={'error'} onClick={() => navigation.navigate('ChooseQuiz')} message={`Twój wynik testu to ${userPercentage}`} title={'Test nie zaliczony'}/>
+                    }
                 </View>
             );
         } else {

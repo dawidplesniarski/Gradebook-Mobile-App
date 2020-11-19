@@ -13,6 +13,7 @@ export default StyleSheet.create({
         height: '40%',
         justifyContent: 'space-around',
         alignItems: 'center',
+        marginTop: -150
     },
     textInput: {
         backgroundColor: '#dadada',
@@ -52,4 +53,11 @@ export default StyleSheet.create({
         padding: 5,
         alignItems: 'center',
     },
+    changePasswordText: {
+        fontFamily: 'Helvetica',
+        fontSize: 30,
+        color: '#0e8ae5',
+        fontWeight: 'bold',
+        marginBottom: 20
+    }
 });

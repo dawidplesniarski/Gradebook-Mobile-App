@@ -5,7 +5,7 @@ import VerifiedIcon from '../../assets/verified.png';
 import SmallButton from '../SmallButton';
 import ErrorIcon from '../../assets/error.png';
 
-const AlertComponent = ({type, message, onClick}) => {
+const AlertComponent = ({type, message, onClick, title}) => {
     return(
         <>
             {type === 'success' ?
@@ -13,7 +13,10 @@ const AlertComponent = ({type, message, onClick}) => {
                     <View style={styles.alertIconWrapper}>
                         <Image source={VerifiedIcon} style={styles.alertIcon}/>
                     </View>
-                    <Text style={styles.alertTitleText}> Operacja powiodła się</Text>
+                    {title ?
+                        <Text style={styles.alertTitleText}>{title}</Text>:
+                        <Text style={styles.alertTitleText}>Operacja powiodła się</Text>
+                    }
                     <Text style={styles.alertMessageText}>{message}</Text>
                     <SmallButton text={'Zamknij'} onPress={onClick} buttonColor={'#9cd4ae'}/>
                 </View> :
@@ -21,7 +24,10 @@ const AlertComponent = ({type, message, onClick}) => {
                     <View style={styles.errorAlertIconWrapper}>
                         <Image source={ErrorIcon} style={styles.alertIcon}/>
                     </View>
-                    <Text style={styles.alertTitleText}> Operacja nie powiodła się</Text>
+                    {title ?
+                        <Text style={styles.alertTitleText}>{title}</Text>:
+                        <Text style={styles.alertTitleText}>Operacja nie powiodła się</Text>
+                    }
                     <Text style={styles.alertMessageText}>{message}</Text>
                     <SmallButton text={'Zamknij'} onPress={onClick} buttonColor={'#e54053'}/>
                 </View>}

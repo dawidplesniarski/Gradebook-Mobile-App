@@ -53,7 +53,7 @@ const AccountScreen = ({navigation, loginReducer}) => {
                             <View style={styles.userCoursesContainer}>
                                 {loginReducer.loginData && loginReducer.loginData.user.courseId.map((value, index) =>{
                                     return(
-                                        <Text style={styles.userCoursesText}>
+                                        <Text style={styles.userCoursesText} key={index}>
                                             {value.courseName}: semestr {loginReducer.loginData.user.semesters[index]}
                                         </Text>
                                     )

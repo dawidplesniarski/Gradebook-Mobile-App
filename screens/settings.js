@@ -6,16 +6,21 @@ import {logoutFunction} from '../actions/loginActions';
 import axios from 'axios';
 import {API_URL} from '../utils/helpers';
 import editIcon from '../assets/edit.png';
-import styles from '../styles/settingsStyles'
+import styles from '../styles/settingsStyles';
+import AlertComponent from '../components/Alert/AlertComponent';
+import ColorButton from '../components/ColorButton';
 
 
 const Settings = ({navigation, logoutFunction, loginReducer}) => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [imageUri, setImageUri] = useState(null);
     const [newImageUri, setNewImageUri] = useState('');
-    const [imageChangeErrorMessage, setImageChangeErrorMessage] = useState(null);
+    const [passwordAlertVisible, setPasswordAlertVisible] = useState(false);
+    const [passwordErrorAlertVisible, setErrorPasswordAlertVisible] = useState(false);
+    const [imageAlertVisible, setImageAlertVisible] = useState(false);
+    const [errorImageAlertVisible, setErrorImageAlertVisible] = useState(false);
 
     const changePassword = () => {
         axios.put(`${API_URL}/users/changePassword/${loginReducer.loginData.user._id}`,
@@ -25,62 +30,79 @@ const Settings = ({navigation, logoutFunction, loginReducer}) => {
                 confirmPassword: confirmPassword,
             })
             .then(() => {
-                setErrorMessage('Hasło zostało pomyślnie zaktualizowane');
+                setPasswordAlertVisible(true);
             }).catch(error => {
-            setErrorMessage('Wystąpił błąd podczas zmiany hasła');
+            if (error) {
+                setErrorPasswordAlertVisible(true);
+            }
         });
     };
 
     const changeImage = () => {
         if (newImageUri !== '' && newImageUri != null) {
+            setImageUri(newImageUri);
             axios.put(`${API_URL}/users/updateImage`,
                 {
                     albumNo: loginReducer.loginData.user.albumNo,
                     imageUrl: newImageUri,
                 })
                 .then(() => {
-                    setImageChangeErrorMessage('Zdjęcie zmienione, zmiany zostaną wprowadzone po ponownym zalogowaniu');
+                    setImageAlertVisible(true);
                 }).catch(error => {
-                setImageChangeErrorMessage('Wystąpił błąd podczas zmiany zdjęcia');
+                    if(error) {
+                        setErrorImageAlertVisible(true);
+                    }
             });
         }
     };
 
+    useEffect(() => {
+        setImageUri(loginReducer.loginData.user.imageUrl)
+    },[])
+
     return (
-        <View style={styles.container}>
-            <View style={styles.changeImageContainer}>
-                <Image source={{uri: loginReducer.loginData.user && loginReducer.loginData.user.imageUrl}} style={styles.userAvatar}/>
-                <View style={styles.editImageBar}>
-                    <TextInput
-                        placeholder={'Link do zdjęcia'}
-                        placeholderTextColor={'#858585'}
-                        style={{width: '80%'}}
-                        autoCapitalize='none'
-                        onChangeText={(text) => setNewImageUri(text)}
-                    />
-                    <TouchableOpacity onPress={changeImage}>
-                        <Image source={editIcon} style={styles.searchIcon}/>
-                    </TouchableOpacity>
+        <>
+            {passwordAlertVisible && <AlertComponent type={'success'} message={'Hasło zostało zaktualizowane'} onClick={() => setPasswordAlertVisible(false)}/>}
+            {passwordErrorAlertVisible && <AlertComponent type={'error'} message={'Nie udało się zaktualizować hasła'} onClick={() => setErrorPasswordAlertVisible(false)}/>}
+            {imageAlertVisible && <AlertComponent type={'success'} message={'Zdjęcie zostało zmienione'} onClick={() => setImageAlertVisible(false)}/>}
+            {errorImageAlertVisible && <AlertComponent type={'error'} message={'Nie udało się zaktualizować zdjęcia'} onClick={() => setImageAlertVisible(false)}/>}
+            <View style={styles.container}>
+                <View style={styles.changeImageContainer}>
+                    {imageUri && <Image source={{uri: imageUri}}
+                                        style={styles.userAvatar}/>}
+                    <View style={styles.editImageBar}>
+                        <TextInput
+                            placeholder={'Link do zdjęcia'}
+                            placeholderTextColor={'#858585'}
+                            style={{width: '80%'}}
+                            autoCapitalize='none'
+                            onChangeText={(text) => setNewImageUri(text)}
+                        />
+                        <TouchableOpacity onPress={changeImage}>
+                            <Image source={editIcon} style={styles.searchIcon}/>
+                        </TouchableOpacity>
+                    </View>
                 </View>
+                <View style={styles.changePasswordContainer}>
+                    <Text style={styles.changePasswordText}>Zmień hasło</Text>
+                    <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true}
+                               onChangeText={(text) => setOldPassword(text)} placeholder={'Stare hasło'}/>
+                    <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true}
+                               onChangeText={(text) => setNewPassword(text)} placeholder={'Nowe hasło'}/>
+                    <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true}
+                               onChangeText={(text) => setConfirmPassword(text)} placeholder={'Potwierdź nowe hasło'}/>
+                    <ColorButton text={'Zmień hasło'}
+                            buttonColor={'#0e8ae5'}
+                            disabled={oldPassword === '' || newPassword === '' || confirmPassword === ''}
+                            onPress={changePassword}/>
+                </View>
+                <ColorButton buttonColor={'#0e8ae5'} text={'Wyloguj'} onPress={() => {
+                    logoutFunction(() => {
+                        navigation.navigate('LoginScreen');
+                    });
+                }}/>
             </View>
-            <View style={styles.changePasswordContainer}>
-                <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true}
-                           onChangeText={(text) => setOldPassword(text)} placeholder={'Stare hasło'}/>
-                <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true}
-                           onChangeText={(text) => setNewPassword(text)} placeholder={'Nowe hasło'}/>
-                <TextInput style={styles.textInput} autoCapitalize='none' secureTextEntry={true}
-                           onChangeText={(text) => setConfirmPassword(text)} placeholder={'Potwierdź nowe hasło'}/>
-                <Button text={'Zmień hasło'}
-                        disabled={oldPassword === '' || newPassword === '' || confirmPassword === ''}
-                        isButtonDark={true} onPress={changePassword}/>
-                <Text style={styles.errorMessage}>{errorMessage}</Text>
-            </View>
-            <Button isButtonDark={true} text={'Wyloguj'} onPress={() => {
-                logoutFunction(() => {
-                    navigation.navigate('LoginScreen');
-                });
-            }}/>
-        </View>
+        </>
     );
 };
 

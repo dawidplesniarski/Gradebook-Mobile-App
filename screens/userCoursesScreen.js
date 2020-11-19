@@ -41,7 +41,7 @@ const UserCoursesScreen = ({navigation, loginReducer}) => {
     return (
         <View style={styles.mainContainer}>
             <View style={styles.container}>
-                <Image source={CourseImage} style={{width: '60%', height: 150}}/>
+                <Image source={CourseImage} style={{width: 250, height: 150}}/>
                 <Text style={styles.headerText}>Wybierz kierunek</Text>
                 <FlatList
                     refreshing={isLoading}
