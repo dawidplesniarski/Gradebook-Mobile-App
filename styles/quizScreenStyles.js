@@ -54,7 +54,8 @@ export default StyleSheet.create({
     startTestContainer:{
         flex:1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: -100
     },
     resultBox:{
         backgroundColor: '#ccecf8',
@@ -73,5 +74,13 @@ export default StyleSheet.create({
         fontSize: 20,
         fontFamily:'Futura',
         color:'#f54545'
-    }
+    },
+    headerText: {
+        fontFamily: 'Helvetica',
+        fontSize: 30,
+        fontWeight: '500',
+        color: '#0e8ae5',
+        marginTop: 20,
+        marginBottom: 20,
+    },
 });

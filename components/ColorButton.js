@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Helvetica',
         letterSpacing: 1,
         fontWeight: '500',
-        color: '#FFF'
+        color: '#FFF',
+        fontSize: 18
     },
     lightThemeText: {
         color: '#f1f1f1'

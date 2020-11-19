@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, ActivityIndicator, Image} from 'react-native';
 import {Picker} from '@react-native-community/picker';
-import Button from '../components/Button';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {API_URL} from '../utils/helpers';
@@ -70,7 +69,7 @@ const ChooseQuiz = ({loginReducer, navigation}) => {
                             {data.map((value, index) => <Picker.Item label={`${value}`} value={`${value}`} key={index}/>)}
                         </Picker>
                         <View style={[styles.contentWrapper, {marginTop: 20}]}>
-                            <ColorButton buttonColor={'#0e8ae5'} text={'Zacznij test'} isButtonDark={true}
+                            <ColorButton buttonColor={'#0e8ae5'} text={'Zacznij test'}
                                     onPress={() =>
                                         checkPermission(() => navigation.navigate('QuizScreen', {testCategory: selectedItem}))}
                             />
