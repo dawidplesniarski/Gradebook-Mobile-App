@@ -37,7 +37,9 @@ const screens = {
     },
     QuizScreen: {
         screen: QuizScreen,
-        headerShown: false,
+        navigationOptions: {
+            headerShown: false
+        }
     },
     Settings: {
         screen: Settings,

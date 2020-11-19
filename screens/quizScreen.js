@@ -156,10 +156,9 @@ const QuizScreen = ({navigation, loginReducer}) => {
                         />
                     </View>
 
-                    <Text>Punkty: {userScore}</Text>
+                    <Text style={styles.headerText}>Punkty: {userScore}</Text>
                     <Text style={styles.questionText}>Pytanie: {data[questionIndex].question}</Text>
                     <View style={styles.answersContainer}>
-                        <Text style={styles.questionText}>Odpowiedzi:</Text>
                         <TouchableOpacity
                             disabled={answersDisabled} onPress={() => checkIfCorrectAnswer(0)}
                             style={firstAnswerCorrect === true ? styles.correctAnswerButton : firstAnswerCorrect === false ? styles.wrongAnswerButton : styles.none}
@@ -192,7 +191,7 @@ const QuizScreen = ({navigation, loginReducer}) => {
                         </TouchableOpacity>
                         }
                     </View>
-                    <Button text={'Następne pytanie'} disabled={!answersDisabled} isButtonDark={true}
+                    <ColorButton text={'Następne pytanie'} disabled={!answersDisabled} buttonColor={'#0e8ae5'}
                             onPress={() => incrementIndex()}/>
                 </View>
             );

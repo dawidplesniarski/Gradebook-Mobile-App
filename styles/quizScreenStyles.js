@@ -4,15 +4,17 @@ export default StyleSheet.create({
     container: {
         flex:1,
         paddingBottom:'20%',
+        paddingTop: 50,
         alignItems: 'center',
         justifyContent: 'space-around'
     },
     questionText:{
-        fontSize: 20,
-        fontFamily: 'Futura',
-        fontWeight: '500',
+        fontSize: 25,
+        fontFamily: 'Helvetica',
+        fontWeight: 'bold',
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
+        color: '#0e8ae5'
     },
     answersContainer:{
         borderRadius:10,
@@ -22,7 +24,8 @@ export default StyleSheet.create({
     },
     answersText:{
         fontSize:20,
-        fontFamily:'Futura'
+        fontFamily:'Helvetica',
+        fontWeight: 'normal'
     },
     correctAnswerButton:{
         backgroundColor : '#CAF5C6',
@@ -32,6 +35,7 @@ export default StyleSheet.create({
         marginTop: 20,
         paddingTop: 7,
         paddingBottom: 7,
+        height: 50
     },
     wrongAnswerButton:{
         backgroundColor : '#e99595',
@@ -41,10 +45,12 @@ export default StyleSheet.create({
         marginTop: 20,
         paddingTop: 7,
         paddingBottom: 7,
+        height: 50
     },
     none:{
         backgroundColor: '#E5E5E5',
         borderRadius: 20,
+        height: 50,
         justifyContent: 'center',
         paddingLeft: 10,
         marginTop: 20,
