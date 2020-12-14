@@ -51,10 +51,10 @@ const GradesScreen = ({navigation, loginReducer}) => {
                         <View
                             style={item.grade === 3 || item.grade === 3.5 || item.grade === 4 ? styles.flatListContainerYellow : item.grade === 4.5 || item.grade === 5 ? styles.flatListContainerGreen : styles.flatListContainerRed}>
                             <View style={styles.flatListView}>
-                                <Text style={styles.flatListText}>Ocena: {item.grade}</Text>
+                                <Text style={styles.flatListSubjectText}>Przedmiot: {item.subject.subjectName}</Text>
                             </View>
                             <View style={styles.flatListView}>
-                                <Text style={styles.flatListText}>Przedmiot: {item.subject.subjectName}</Text>
+                                <Text style={styles.flatListText}>Ocena: {item.grade.toFixed(1)}</Text>
                             </View>
                             <View style={styles.flatListView}>
                                 <Text style={styles.flatListText}>Data wystawienia: {item.date.substring(0, 10)}</Text>

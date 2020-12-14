@@ -12,7 +12,7 @@ export default StyleSheet.create({
     flatList:{
         width:'90%',
         marginTop: 10,
-        height:'80%',
+        height:'85%',
     },
     flatListContainerGreen:{
         borderRadius:12,
@@ -33,13 +33,20 @@ export default StyleSheet.create({
         flexDirection: 'row',
         paddingTop:10,
         paddingBottom:10,
-        marginLeft: 5,
+        marginLeft: 15,
     },
     flatListText:{
         fontSize:20,
         fontFamily: 'Helvetica',
         paddingRight: 20,
         fontWeight: '200',
+        color: '#454545'
+    },
+    flatListSubjectText:{
+        fontSize:20,
+        fontFamily: 'Helvetica',
+        paddingRight: 20,
+        fontWeight: '400',
         color: '#454545'
     },
     userInfoBox:{
